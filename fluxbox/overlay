@@ -1,0 +1,5 @@
+menu.title.font: sans-8:bold
+toolbar.clock.font: sans-8:bold
+toolbar.workspace.font: sans-8:bold
+*font: sans-9
+

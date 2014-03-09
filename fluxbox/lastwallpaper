@@ -1,0 +1,9 @@
+!/bin/sh
+#
+# ~/.xinitrc
+#
+# Executed by startx (run your window manager fro
+$center 
+#/home/antoras/Bilder/Wallpaper/Light_Symphonia_15_by_love1008.jpg
+#/home/antoras/Bilder/Wallpaper/dual_screen_bird.jpg
+$full|/home/antoras/Bilder/Warrior_Dragon_by_cuatrod_large2.jpg||:0.0
