@@ -5,7 +5,7 @@
 	user = sschaef
 	#token = 90f72cf6a50e3d0b9226de2229a1e769
 [core]
-	editor = nano
+	editor = vim
 	fileMode = false
 [merge]
 	tool = diff
