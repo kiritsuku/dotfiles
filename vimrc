@@ -15,6 +15,8 @@ Bundle 'scrooloose/syntastic'
 Bundle 'lsdr/monokai'
 Bundle 'Townk/vim-autoclose'
 Bundle 'vim-scripts/AutoComplPop'
+Bundle 'zah/nimrod.vim'
+Bundle 'Shougo/neocomplete.vim'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 "Bundle 'tpope/vim-fugitive'
@@ -46,6 +48,10 @@ Bundle 'vim-scripts/AutoComplPop'
 " Put your stuff after this line
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" config                                                            "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 set t_Co=256
 set term=screen-256color
 colorscheme github
@@ -74,5 +80,27 @@ noremap <C-S> :update<CR>
 vnoremap <C-S> <C-C>:update<CR>
 inoremap <C-S> <C-O>:update<CR>
 
-" keys:
+" enable C++11 support for syntastic
+let g:syntastic_cpp_compiler_options = ' -std=c++11'
+
+" Nimrod support
+fun! JumpToDef()
+  if exists("*GotoDefinition_" . &filetype)
+    call GotoDefinition_{&filetype}()
+  else
+    exe "norm! \<C-]>"
+  endif
+endf
+
+" Jump to tag
+nn <M-g> :call JumpToDef()<cr>
+ino <M-g> <esc>:call JumpToDef()<cr>i
+
+" enable neocomplcache
+let g:neocomplcache_enable_at_startup = 1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" key combinations                                                  "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " UMSCHALT+d - delete all after cursor
