@@ -213,21 +213,34 @@ alias vim="stty stop '' -ixoff ; vim"
 # `Frozing' tty, so after any command terminal settings will be restored
 ttyctl -f
 
-export PATH=$HOME/bin:$PATH                     # bin folder
-export PATH=$PATH:$HOME/.cabal/bin              # haskell executables
-export PATH=$PATH:$HOME/.gem/ruby/1.9.1/bin     # ruby executables
-export PATH=$PATH:$HOME/Software/play-2.2.0/    # play executables
-export PATH=$PATH:$HOME/Software/scala-2.10.2/bin/     # scala executables
-export PATH=$PATH:$HOME/.rvm/bin                # Add RVM to PATH for scripting
+# bin folder
+export PATH=$HOME/bin:$PATH
+# haskell executables
+export PATH=$PATH:$HOME/.cabal/bin
+# ruby executables
+export PATH=$PATH:$HOME/.gem/ruby/1.9.1/bin
+export PATH=$PATH:$HOME/.rvm/bin
+# play executables
+export PATH=$PATH:$HOME/Software/play-2.2.0/
+# scala executables
+export PATH=$PATH:$HOME/Software/scala-2.10.2/bin/
 
+# common aliases
 alias -g cp='$HOME/bin/cp -B'
 alias -g mv='$HOME/bin/mv -B'
 alias -g rm='$HOME/bin/rm -B'
-#alias -g cat='pygmentize -g'
 alias -g g='git'
 alias -g p='sudo pacman'
 alias -g y='yaourt'
 alias -g nano='~/bin/nano-sh'
 
+# Scala partest
 alias pt='test/partest'
 alias pta='tools/partest-ack'
+
+# Vim
+alias -g v='vim'
+alias -g vn='vim "+NERDTree ."'
+
+# autojump
+#autoload -U compinit && compinit
