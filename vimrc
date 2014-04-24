@@ -94,6 +94,12 @@ ino <M-g> <esc>:call JumpToDef()<cr>i
 noremap <F2> :NERDTree .<return>
 inoremap <F2> <C-O>:NERDTree .<return>
 
+" remove trailing whitespace from file
+function! RemoveTrailingWhitespace()
+  :%s/\s\+$//e
+endfunction()
+:autocmd BufWritePost * :call RemoveTrailingWhitespace()
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " key combinations                                                  "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
