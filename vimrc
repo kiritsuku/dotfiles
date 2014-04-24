@@ -18,11 +18,10 @@ Bundle 'lsdr/monokai'
 Bundle 'Townk/vim-autoclose'
 Bundle 'vim-scripts/AutoComplPop'
 Bundle 'zah/nimrod.vim'
-"Bundle 'Shougo/neocomplete.vim'
 Bundle 'Valloric/YouCompleteMe'
+"Bundle 'altercation/vim-colors-solarized'
 
 " scripts from http://vim-scripts.org/vim/scripts.html
-"Bundle 'L9'
 "Bundle 'FuzzyFinder'
 " scripts not on GitHub
 "Bundle 'git://git.wincent.com/command-t.git'
@@ -44,9 +43,11 @@ Bundle 'Valloric/YouCompleteMe'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set t_Co=256
 set term=screen-256color
+"set background=dark
+"colorscheme solarized
+syntax on
 colorscheme github
 hi Normal ctermbg=black |"ctermfg=grey
-syntax on
 filetype on
 filetype plugin indent on     " required
 
@@ -102,3 +103,14 @@ inoremap <F2> <C-O>:NERDTree .<return>
 " SHIFT+Z+Z - save and close window
 " CTRL+D - open completion menu in command mode
 " CTRL+X - decrement number
+" M,H,L - place cursor at middle, top or bottom of screen
+
+" gi - switches to insertion mode and set cursor to the same location it was
+"      previously
+
+" V - select line wise
+" V+y - copy lines
+" V+d - cut lines
+" d+d - cut current line
+
+" n>>, n<< - indent n lines to right and left
