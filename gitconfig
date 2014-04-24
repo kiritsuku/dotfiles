@@ -107,9 +107,10 @@
 	r = reset
 	r1 = reset HEAD^
 	r2 = reset HEAD^^
-	rh = reset --hard
-	rh1 = reset HEAD^ --hard
-	rh2 = reset HEAD^^ --hard
+	rh = reset @
+	rhard = reset --hard
+	rhard1 = reset HEAD^ --hard
+	rhard2 = reset HEAD^^ --hard
 
 	rs = reset HEAD^ --soft
 
