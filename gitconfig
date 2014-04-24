@@ -58,6 +58,9 @@
 	sh = show
 	shs = show --shortstat --pretty=format:'%Cred%h%Creset - %Cgreen%an%Creset - %ad%C(yellow)%d%Creset%n    %s%n' --date=local
 
+	# show removed commits in gitk to restore them
+	restore = !sh -c "gitk --all $(git fsck --no-reflogs | awk '/dangling commit/ {print $3}')" -
+
 	c = commit
 	ca = commit --amend
 
@@ -125,7 +128,7 @@
 	unassume = update-index --no-assume-unchanged
 	assumed = "!git ls-files -v | grep ^h | cut -c 3-"
 	unassumeall = "!git assumed | xargs git update-index --no-assume-unchanged"
-	
+
 	snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
 [color "branch"]
 	current = yellow bold
