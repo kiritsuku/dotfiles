@@ -39,7 +39,11 @@
 	rba = rebase --abort
 	rbs = rebase --skip
 	rbi = rebase -i
-	rbrt = rebase -s recursive -Xtheirs
+  rbrt = rebase -s recursive -Xtheirs
+  # example call: g rbom abcdef^ b
+  # this rebases branch `b` onto master by applying all commits starting with commit `abcdef` inclusive
+  # if branch `b` is already checked out, the `b` must not be specified
+  rbom = rebase --onto master
 
 	l = log
 	# shows the log in a nicer format
@@ -105,14 +109,12 @@
 	sts = stash show
 
 	r = reset
-	r1 = reset HEAD^
-	r2 = reset HEAD^^
+	r1 = reset @^
+	r2 = reset @^^
 	rh = reset @
 	rhard = reset --hard
-	rhard1 = reset HEAD^ --hard
-	rhard2 = reset HEAD^^ --hard
-
-	rs = reset HEAD^ --soft
+	rhard1 = reset @^ --hard
+	rhard2 = reset @^^ --hard
 
 	cl = clean -fd
 
