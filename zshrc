@@ -6,7 +6,6 @@ source $HOME/.antigen.zsh
 antigen use oh-my-zsh
 antigen bundle git
 antigen bundle scala
-antigen bundle sharat87/autoenv
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
 antigen apply
@@ -38,8 +37,9 @@ ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[red]%} ??"
 return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
 
 # adding background job test doesn't work correctly
-#RPROMPT="$symbols $return_code$(git_prompt_status)%{$reset_color%}"
-RPROMPT="$return_code$(git_prompt_status)%{$reset_color%}"
+#RPROMPT='$symbols $return_code$(git_prompt_status)%{$reset_color%}'
+RPROMPT='$return_code$(git_prompt_status)%{$reset_color%}'
+
 
 ##############################################################################
 # zsh config                                                                 #
