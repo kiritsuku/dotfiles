@@ -60,6 +60,8 @@ else
   source ~/.ssh-env
 fi
 
+export EDITOR="vim"
+
 # bin folder
 export PATH=$HOME/bin:$PATH
 # haskell executables
@@ -70,7 +72,7 @@ export PATH=$PATH:$HOME/.rvm/bin
 # play executables
 export PATH=$PATH:$HOME/Software/play-2.2.0/
 # scala executables
-export PATH=$PATH:$HOME/Software/scala-2.10.2/bin/
+export PATH=$PATH:$HOME/Software/scala-2.11.0/bin/
 
 ##### common aliases
 alias -g cp='$HOME/bin/cp -B'
@@ -95,3 +97,17 @@ ttyctl -f
 
 ##### autojump
 #autoload -U compinit && compinit
+
+##### ranger
+# Automatically jump to the directory ranger is located to when one leaves ranger
+function ranger-cd {
+  tempfile='/tmp/ranger-chosendir'
+  /usr/bin/ranger --choosedir="$tempfile" "${@:-$(pwd)}"
+  test -f "$tempfile" &&
+  if [ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]; then
+  cd -- "$(cat "$tempfile")"
+  fi
+  rm -f -- "$tempfile"
+}
+
+alias -g rn='ranger-cd'
