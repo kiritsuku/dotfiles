@@ -27,6 +27,7 @@
 [submenu] (Menu)
 	[submenu] (Terminals)
 	      [exec]   (xterm) {xterm}
+        [exec]   (urxvt) {urxvt}
 	[end]
 	[submenu] (Internet)
 		[submenu] (Browsers)
