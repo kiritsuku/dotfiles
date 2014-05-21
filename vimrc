@@ -64,12 +64,24 @@ set expandtab
 set smarttab
 set autoindent
 set ruler
+" highlight search
+set incsearch
 
 " Use CTRL-S for saving, also in Insert mode
 " see: http://vim.wikia.com/wiki/Map_Ctrl-S_to_save_current_or_new_files
 noremap <C-S> :update<CR>
 vnoremap <C-S> <C-C>:update<CR>
 inoremap <C-S> <C-O>:update<CR>
+
+" Use navigation between soft wrapped lines by default
+map <silent> <Up> gk
+imap <silent> <Up> <C-o>gk
+map <silent> <Down> gj
+imap <silent> <Down> <C-o>gj
+map <silent> <home> g<home>
+imap <silent> <home> <C-o>g<home>
+map <silent> <End> g<End>
+imap <silent> <End> <C-o>g<End>
 
 " enable C++11 support for syntastic
 let g:syntastic_cpp_compiler_options = ' -std=c++11'
@@ -99,6 +111,36 @@ function! RemoveTrailingWhitespace()
   :%s/\s\+$//e
 endfunction()
 :autocmd BufWritePost * :call RemoveTrailingWhitespace()
+
+" ranger support
+" run ranger from within vim
+function! RangeChooser()
+    let temp = tempname()
+    " The option "--choosefiles" was added in ranger 1.5.1. Use the next line
+    " with ranger 1.4.2 through 1.5.0 instead.
+    "exec 'silent !ranger --choosefile=' . shellescape(temp)
+    exec 'silent !ranger --choosefiles=' . shellescape(temp)
+    if !filereadable(temp)
+        " Nothing to read.
+        return
+    endif
+    let names = readfile(temp)
+    if empty(names)
+        " Nothing to open.
+        return
+    endif
+    " Edit the first item.
+    exec 'edit ' . fnameescape(names[0])
+    " Add any remaning items to the arg list/buffer list.
+    for name in names[1:]
+        exec 'argadd ' . fnameescape(name)
+    endfor
+    redraw!
+endfunction
+
+command! -bar RangerChooser call RangeChooser()
+nnoremap <leader>r :<C-U>RangerChooser<CR>
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " key combinations                                                  "
