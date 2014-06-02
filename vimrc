@@ -53,6 +53,7 @@ filetype plugin indent on     " required
 
 " enable line numbers
 set number
+set relativenumber
 " print margin
 "set cc=80
 " size of tabs
@@ -162,3 +163,6 @@ nnoremap <leader>r :<C-U>RangerChooser<CR>
 " d+d - cut current line
 
 " n>>, n<< - indent n lines to right and left
+
+" ciw - change inner word (replace entire word)
+" cw - change word (replace word starting at cursor position)
