@@ -49,6 +49,8 @@ RPROMPT='$return_code$(git_prompt_status)%{$reset_color%}'
 setopt extendedglob
 # ...but when pattern matching fails, simply use the command as is
 setopt no_nomatch
+# interpret lines starting with '#' as comments
+setopt interactive_comments
 
 # start ssh agent if not started yet
 if [ -z $SSH_AGENT_PID ]; then
