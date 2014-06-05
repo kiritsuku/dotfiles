@@ -19,6 +19,7 @@ Bundle 'Townk/vim-autoclose'
 Bundle 'vim-scripts/AutoComplPop'
 Bundle 'zah/nimrod.vim'
 Bundle 'Valloric/YouCompleteMe'
+Bundle 'tpope/vim-fugitive'
 "Bundle 'altercation/vim-colors-solarized'
 
 " scripts from http://vim-scripts.org/vim/scripts.html
@@ -156,6 +157,10 @@ nnoremap <leader>r :<C-U>RangerChooser<CR>
 
 " gi - switches to insertion mode and set cursor to the same location it was
 "      previously
+" g<x> - change case of text, where <x> is one of
+"        - ~: toggle text case
+"        - u: convert to lowercase
+"        - U: convert to uppercase
 
 " V - select line wise
 " V+y - copy lines
