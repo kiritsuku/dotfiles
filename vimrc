@@ -20,6 +20,7 @@ Bundle 'vim-scripts/AutoComplPop'
 Bundle 'zah/nimrod.vim'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-abolish'
 "Bundle 'altercation/vim-colors-solarized'
 
 " scripts from http://vim-scripts.org/vim/scripts.html
@@ -37,7 +38,6 @@ Bundle 'tpope/vim-fugitive'
 " :BundleInstall(!)    - install (update) bundles
 " :BundleSearch(!) foo - search (or refresh cache first) for foo
 " :BundleClean(!)      - confirm (or auto-approve) removal of unused bundles
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " config                                                            "
@@ -113,6 +113,18 @@ function! RemoveTrailingWhitespace()
   :%s/\s\+$//e
 endfunction()
 :autocmd BufWritePost * :call RemoveTrailingWhitespace()
+
+" automatically reloads .vimrc whenever it has changed
+augroup reload_myvimrc
+  au!
+  autocmd BufWritePost .vimrc source $MYVIMRC
+augroup END
+
+" convert this_is_a_string to ThisIsAString
+function! ConvertCamel()
+  :s#\(\%(\<\l\+\)\%(_\)\@=\)\|_\(\l\)#\u\1\2#g
+endfunction
+nn <C-T> :call ConvertCamel()<cr>
 
 " ranger support
 " run ranger from within vim
