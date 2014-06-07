@@ -70,9 +70,9 @@
 
 	a = add
 	# add all and commit
-	ac = !sh -c 'git add -A && git commit' -
+	ac = !sh -c 'git add -A :/ && git commit' -
 	# add all and commit amend
-	aca = !sh -c 'git add -A && git commit --amend' -
+	aca = !sh -c 'git add -A :/ && git commit --amend' -
 	ai = add -i
 	an = add -A -n
 	aa = add -A :/
