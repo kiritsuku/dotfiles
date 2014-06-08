@@ -55,6 +55,9 @@ filetype plugin indent on     " required
 " enable line numbers
 set number
 set relativenumber
+" enable line wrapping of full words
+set wrap
+set linebreak
 " print margin
 "set cc=80
 " size of tabs
@@ -84,6 +87,10 @@ map <silent> <home> g<home>
 imap <silent> <home> <C-o>g<home>
 map <silent> <End> g<End>
 imap <silent> <End> <C-o>g<End>
+
+" enable spell checking toggle
+map <F5> :setlocal spell! spelllang=en_us<cr>
+imap <F5> <C-O>:setlocal spell! spelllang=en_us<cr>
 
 " enable C++11 support for syntastic
 let g:syntastic_cpp_compiler_options = ' -std=c++11'
