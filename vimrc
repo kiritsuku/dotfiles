@@ -92,6 +92,9 @@ imap <silent> <End> <C-o>g<End>
 map <F5> :setlocal spell! spelllang=en_us<cr>
 imap <F5> <C-O>:setlocal spell! spelllang=en_us<cr>
 
+" leave insert mode with C-D
+imap <C-D> <C-C>
+
 " enable C++11 support for syntastic
 let g:syntastic_cpp_compiler_options = ' -std=c++11'
 

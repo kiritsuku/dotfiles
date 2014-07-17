@@ -1,1 +1,10 @@
 set incsearch
+
+set tabstop=2
+set shiftwidth=2
+
+" leave insert mode with C-D
+imap <C-D> <Esc>
+
+" insert single char in normal mode
+nmap <Space> i_<Esc>r
