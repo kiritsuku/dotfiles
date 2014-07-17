@@ -79,14 +79,34 @@ vnoremap <C-S> <C-C>:update<CR>
 inoremap <C-S> <C-O>:update<CR>
 
 " Use navigation between soft wrapped lines by default
-map <silent> <Up> gk
-imap <silent> <Up> <C-o>gk
-map <silent> <Down> gj
-imap <silent> <Down> <C-o>gj
-map <silent> <home> g<home>
+nmap <silent> <Up> :<C-U>call MoveUp(v:count)<CR>
+imap <silent> <Up> :<C-U>call MoveUp(v:count)<CR>
+nmap <silent> <Down> :<C-U>call MoveDown(v:count)<CR>
+imap <silent> <Down> :<C-U>call MoveDown(v:count)<CR>
+nmap <silent> <home> g<home>
 imap <silent> <home> <C-o>g<home>
-map <silent> <End> g<End>
+nmap <silent> <End> g<End>
 imap <silent> <End> <C-o>g<End>
+
+" Move `vcount` lines down and move cursor to beginning of line if more
+" than one line should be moved down.
+function! MoveDown(vcount)
+  if a:vcount == 0
+    exe "normal! gj"
+  else
+    exe "normal! ". a:vcount ."j|"
+  endif
+endfunction
+
+" Move `vcount` lines up and move cursor to beginning of line if more
+" than one line should be moved up.
+function! MoveUp(vcount)
+  if a:vcount == 0
+    exe "normal! gk"
+  else
+    exe "normal! ". a:vcount ."k|"
+  endif
+endfunction
 
 " enable spell checking toggle
 map <F5> :setlocal spell! spelllang=en_us<cr>
