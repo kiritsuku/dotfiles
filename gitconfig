@@ -100,7 +100,7 @@
 
     sl = shortlog -sn
 
-    st = stash -u
+    st = stash -k -u
     sp = stash -p
     stl = stash list
     sta = stash apply
