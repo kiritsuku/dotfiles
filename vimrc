@@ -80,9 +80,9 @@ inoremap <C-S> <C-O>:update<CR>
 
 " Use navigation between soft wrapped lines by default
 nmap <silent> <Up> :<C-U>call MoveUp(v:count)<CR>
-imap <silent> <Up> :<C-U>call MoveUp(v:count)<CR>
+imap <silent> <Up> <C-O>:<C-U>call MoveUp(v:count)<CR>
 nmap <silent> <Down> :<C-U>call MoveDown(v:count)<CR>
-imap <silent> <Down> :<C-U>call MoveDown(v:count)<CR>
+imap <silent> <Down> <C-O>:<C-U>call MoveDown(v:count)<CR>
 nmap <silent> <home> g<home>
 imap <silent> <home> <C-o>g<home>
 nmap <silent> <End> g<End>
@@ -185,6 +185,12 @@ endfunction
 command! -bar RangerChooser call RangeChooser()
 nnoremap <leader>r :<C-U>RangerChooser<CR>
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim docu                                                          "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" C-O - leave insert mode temporarily
+" C-U - remove visual mode selection
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " key combinations                                                  "
@@ -213,3 +219,6 @@ nnoremap <leader>r :<C-U>RangerChooser<CR>
 
 " ciw - change inner word (replace entire word)
 " cw - change word (replace word starting at cursor position)
+
+" gg - jump to first line of a file
+" G - jump to last line of a file
