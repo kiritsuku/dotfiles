@@ -8,7 +8,7 @@
     editor = vim
     fileMode = false
 [merge]
-    tool = diff
+    tool = vimdiff
     conflictstyle = diff3
 [diff]
 #   algorithm = patience
@@ -27,6 +27,8 @@
     m = merge --no-ff
     mu = merge upstream/master
     mo = merge origin/master
+    ma = merege --abort
+    mt = mergetool
 
     pu = push
     po = push origin
@@ -119,6 +121,7 @@
     cl = clean -fd
 
     d = diff
+    dw = diff --word-diff=color
 
     ns = notes show
     nc = notes add -m
@@ -149,3 +152,6 @@
     untracked = red bold
 [color]
     ui = always
+[mergetool]
+    prompt = false
+    keepBackup = false
