@@ -27,7 +27,7 @@
     m = merge --no-ff
     mu = merge upstream/master
     mo = merge origin/master
-    ma = merege --abort
+    ma = merge --abort
     mt = mergetool
 
     pu = push
