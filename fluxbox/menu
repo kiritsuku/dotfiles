@@ -17,7 +17,7 @@
 [begin] (Arch)
 [encoding] {UTF-8}
       [exec]   (Firefox) {firefox}
-      [exec]   (Chromium) {chromium}
+      [exec]   (Chromium) {/usr/bin/chromium}
       [exec]   (Mail) {thunderbird}
       [exec]   (Filemanager) {thunar}
       [exec]   (Bildbetrachter) {gqview}
