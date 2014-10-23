@@ -1,3 +1,4 @@
+" Vundle config {{{
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -7,10 +8,9 @@ call vundle#rc()
 " alternatively, pass a path where Vundle should install bundles
 "let path = '~/some/path/here'
 "call vundle#rc(path)
+"}}}
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Bundle config                                                     "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Bundle config {{{
 Bundle 'gmarik/vundle'
 Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdtree'
@@ -21,7 +21,11 @@ Bundle 'zah/nimrod.vim'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-abolish'
-"Bundle 'altercation/vim-colors-solarized'
+Bundle 'mileszs/ack.vim'
+Bundle 'drewfradette/Conque-Shell'
+Bundle 'octol/vim-cpp-enhanced-highlight'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'majutsushi/tagbar'
 
 " scripts from http://vim-scripts.org/vim/scripts.html
 "Bundle 'FuzzyFinder'
@@ -38,17 +42,20 @@ Bundle 'tpope/vim-abolish'
 " :BundleInstall(!)    - install (update) bundles
 " :BundleSearch(!) foo - search (or refresh cache first) for foo
 " :BundleClean(!)      - confirm (or auto-approve) removal of unused bundles
+" }}}
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" config                                                            "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set t_Co=256
-set term=screen-256color
-"set background=dark
-"colorscheme solarized
-syntax on
-colorscheme github
-hi Normal ctermbg=black |"ctermfg=grey
+" Vim config {{{
+if !has("gui_running")
+  set t_Co=256
+  set term=screen-256color
+  syntax on
+  colorscheme github
+  hi Normal ctermbg=black |"ctermfg=grey
+else
+  syntax on
+  colorscheme solarized
+endif
+
 filetype on
 filetype plugin indent on     " required
 
@@ -71,23 +78,22 @@ set autoindent
 set ruler
 " highlight search
 set incsearch
+set hlsearch
+" open new splits to the right and below of the current window
+set splitbelow
+set splitright
+" show completion menu in command mode
+set wildmenu
+" redraw only when necessary
+set lazyredraw
 
-" Use CTRL-S for saving, also in Insert mode
-" see: http://vim.wikia.com/wiki/Map_Ctrl-S_to_save_current_or_new_files
-noremap <C-S> :update<CR>
-vnoremap <C-S> <C-C>:update<CR>
-inoremap <C-S> <C-O>:update<CR>
+set foldmethod=marker
+set foldlevel=0
 
-" Use navigation between soft wrapped lines by default
-nmap <silent> <Up> :<C-U>call MoveUp(v:count)<CR>
-imap <silent> <Up> <C-O>:<C-U>call MoveUp(v:count)<CR>
-nmap <silent> <Down> :<C-U>call MoveDown(v:count)<CR>
-imap <silent> <Down> <C-O>:<C-U>call MoveDown(v:count)<CR>
-nmap <silent> <home> g<home>
-imap <silent> <home> <C-o>g<home>
-nmap <silent> <End> g<End>
-imap <silent> <End> <C-o>g<End>
+let mapleader=","
+"}}}
 
+" Function definitions {{{
 " Move `vcount` lines down and move cursor to beginning of line if more
 " than one line should be moved down.
 function! MoveDown(vcount)
@@ -107,56 +113,77 @@ function! MoveUp(vcount)
     exe "normal! ". a:vcount ."k|"
   endif
 endfunction
+"}}}
 
-" enable spell checking toggle
-map <F5> :setlocal spell! spelllang=en_us<cr>
-imap <F5> <C-O>:setlocal spell! spelllang=en_us<cr>
+" Key combinations {{{
+
+" Use CTRL-S for saving, also in Insert mode
+" see: http://vim.wikia.com/wiki/Map_Ctrl-S_to_save_current_or_new_files
+nmap <C-S> :update<CR>
+vmap <C-S> <C-C>:update<CR>
+imap <C-S> <C-O>:update<CR>
+
+" Used in vimdiff
+" nn <S-F1> :diffget LO<CR>
+" ino <C-F1> <C-0>:diffget LO<CR>
+" nn <C-F2> :diffget BA<CR>
+" ino <C-F2> <C-0>:diffget BA<CR>
+" nn <C-F3> :diffget RE<CR>
+" ino <C-F3> <C-0>:diffget RE<CR>
+
+" Use navigation between soft wrapped lines by default
+nmap <silent> <Up> :<C-U>call MoveUp(v:count)<CR>
+imap <silent> <Up> <C-O>:<C-U>call MoveUp(v:count)<CR>
+nmap <silent> <Down> :<C-U>call MoveDown(v:count)<CR>
+imap <silent> <Down> <C-O>:<C-U>call MoveDown(v:count)<CR>
+nmap <silent> <home> g<home>
+imap <silent> <home> <C-o>g<home>
+nmap <silent> <End> g<End>
+imap <silent> <End> <C-o>g<End>
+
+" toggle nerdtree
+nmap <F2> :NERDTreeToggle .<CR>
+imap <F2> <C-O>:NERDTreeToggle .<CR>
+
+" toggle tagbar
+nmap <F3> :TagbarToggle<CR>
+imap <F3> <C-O>:TagbarToggle<CR>
+
+" toggle spell checking
+nmap <F5> :setlocal spell! spelllang=en_us<CR>
+imap <F5> <C-O>:setlocal spell! spelllang=en_us<CR>
 
 " leave insert mode with C-D
 imap <C-D> <C-C>
 
+" highlight last inserted text
+nmap gV `[v`]
+" remove search highlighting
+nmap <leader><space> :nohlsearch<CR>
+
+" vertical split with |
+nmap <C-W><Bar> :vsplit<cr>
+" horizontal split with -
+nmap <C-W>- :split<cr>
+
+"}}}
+
+" NERDTree config {{{
+
+"let g:NERDTreeShowLineNumbers = 1
+let g:NERDTreeShowHidden = 1
+
+" }}}
+
+" Other config {{{
+
 " enable C++11 support for syntastic
 let g:syntastic_cpp_compiler_options = ' -std=c++11'
 
-" Nimrod support
-fun! JumpToDef()
-  if exists("*GotoDefinition_" . &filetype)
-    call GotoDefinition_{&filetype}()
-  else
-    exe "norm! \<C-]>"
-  endif
-endf
+"}}}
 
-" Jump to tag
-nn <M-g> :call JumpToDef()<cr>
-ino <M-g> <esc>:call JumpToDef()<cr>i
+" Ranger config {{{
 
-" enable neocomplcache
-"let g:neocomplcache_enable_at_startup = 1
-
-" open nerdtree in current directory
-noremap <F2> :NERDTree .<return>
-inoremap <F2> <C-O>:NERDTree .<return>
-
-" remove trailing whitespace from file
-function! RemoveTrailingWhitespace()
-  :%s/\s\+$//e
-endfunction()
-:autocmd BufWritePost * :call RemoveTrailingWhitespace()
-
-" automatically reloads .vimrc whenever it has changed
-augroup reload_myvimrc
-  au!
-  autocmd BufWritePost .vimrc source $MYVIMRC
-augroup END
-
-" convert this_is_a_string to ThisIsAString
-function! ConvertCamel()
-  :s#\(\%(\<\l\+\)\%(_\)\@=\)\|_\(\l\)#\u\1\2#g
-endfunction
-nn <C-T> :call ConvertCamel()<cr>
-
-" ranger support
 " run ranger from within vim
 function! RangeChooser()
     let temp = tempname()
@@ -183,18 +210,64 @@ function! RangeChooser()
 endfunction
 
 command! -bar RangerChooser call RangeChooser()
-nnoremap <leader>r :<C-U>RangerChooser<CR>
+noremap <leader>r :<C-U>RangerChooser<CR>
+"}}}
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim docu                                                          "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" gVim config {{{
+
+" Remove menubar
+set go-=m
+" Remove toolbar
+set go-=T
+" Remove scrollbars
+set go-=r
+set go-=R
+set go-=l
+set go-=L
+set go-=b
+" Use console dialogs
+set go+=c
+
+" }}}
+
+" Nimrod config {{{
+
+fun! JumpToDef()
+  if exists("*GotoDefinition_" . &filetype)
+    call GotoDefinition_{&filetype}()
+  else
+    exe "norm! \<C-]>"
+  endif
+endf
+
+" Jump to tag
+nn <M-g> :call JumpToDef()<cr>
+ino <M-g> <esc>:call JumpToDef()<cr>i
+"}}}
+
+" Save actions {{{
+" remove trailing whitespace from file
+function! RemoveTrailingWhitespace()
+  :%s/\s\+$//e
+endfunction()
+:autocmd BufWritePost * :call RemoveTrailingWhitespace()
+
+" automatically reloads .vimrc whenever it has changed
+augroup reload_myvimrc
+  au!
+  autocmd BufWritePost .vimrc source $MYVIMRC
+augroup END
+"}}}
+
+" vim command docs {{{
 
 " C-O - leave insert mode temporarily
 " C-U - remove visual mode selection
+" go - guioptions
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" key combinations                                                  "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"}}}
+
+" Key combinations docs {{{
 
 " UMSCHALT+d - delete all after cursor
 " CTRL+W+direction - move between windows
@@ -222,3 +295,25 @@ nnoremap <leader>r :<C-U>RangerChooser<CR>
 
 " gg - jump to first line of a file
 " G - jump to last line of a file
+
+" :%y+ - copy entire file to clipboard
+
+" z. - put line under cursor to screen center
+" zt - put line under cursor to screen top
+" zb - put line under cursor to screen bottom
+
+" '' - jump to beginning of line of last cursor location
+" `` - jump to last cursor location
+
+" Coercions:
+"
+" crs - snake_case
+" crm - MixedCase
+" crc - camelCase
+" cru - UPPER_CASE
+
+" Folding:
+" v{motion}zf - Surround with fold markers
+" za - toggle fold
+
+"}}}
