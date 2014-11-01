@@ -1,7 +1,4 @@
-##############################################################################
-# antigen config                                                             #
-##############################################################################
-
+# Antigen config {{{
 source $HOME/.antigen.zsh
 antigen use oh-my-zsh
 antigen bundle git
@@ -11,11 +8,9 @@ antigen bundle zsh-users/zsh-completions
 antigen bundle hchbaw/opp.zsh
 antigen bundle history-substring-search
 antigen apply
+# }}}
 
-##############################################################################
-# zsh prompt/theme                                                           #
-##############################################################################
-
+# Zsh prompt {{{
 PROMPT='[%{$fg[red]%}%n%{$reset_color%}@%{$fg[magenta]%}%m%{$reset_color%} → %{$fg[blue]%}%~%{$reset_color%}$(git_prompt_info)]
 %# '
 
@@ -47,11 +42,6 @@ function add-git-prompt {
 #RPROMPT='$symbols $return_code$(git_prompt_status)%{$reset_color%}'
 add-git-prompt RPROMPT
 
-
-##############################################################################
-# zsh config                                                                 #
-##############################################################################
-
 # enable vi mode
 bindkey -v
 # smart search with up and down arrows (needs to be enabled in vi mode)
@@ -65,6 +55,9 @@ bindkey '^W' backward-kill-word
 # ctrl-i searches history backwards
 bindkey '^R' history-incremental-search-backward
 
+# }}}
+
+# Vi mode {{{
 # show active vim mode in zsh
 function zle-line-init zle-keymap-select {
   add-git-prompt RPROMPT
@@ -74,6 +67,9 @@ function zle-line-init zle-keymap-select {
 # register the above function in zsh
 zle -N zle-line-init
 zle -N zle-keymap-select
+# }}}
+
+# Zsh config {{{
 
 # weird & wacky pattern matching...
 setopt extendedglob
@@ -81,6 +77,9 @@ setopt extendedglob
 setopt no_nomatch
 # interpret lines starting with '#' as comments
 setopt interactive_comments
+
+# `Frozing' tty, so after any command terminal settings will be restored
+ttyctl -f
 
 # start ssh agent if not started yet
 if [ -z $SSH_AGENT_PID ]; then
@@ -91,7 +90,9 @@ if [ -z $SSH_AGENT_PID ]; then
 else
   source ~/.ssh-env
 fi
+# }}}
 
+# Exports {{{
 export EDITOR="vim"
 
 # bin folder
@@ -105,8 +106,9 @@ export PATH=$PATH:$HOME/.rvm/bin
 export PATH=$PATH:$HOME/Software/play-2.2.0/
 # scala executables
 export PATH=$PATH:$HOME/Software/scala-2.11.0/bin/
+# }}}
 
-##### common aliases
+# Aliase {{{
 alias -g cp='$HOME/bin/cp -B'
 alias -g mv='$HOME/bin/mv -B'
 alias -g rm='$HOME/bin/rm -B'
@@ -123,14 +125,10 @@ alias pta='tools/partest-ack'
 # needed to enable save on CTRL-S
 alias -g vim="stty stop '' -ixoff ; vim"
 alias -g v="vim"
-alias -g vn='vim "+NERDTree ."'
-# `Frozing' tty, so after any command terminal settings will be restored
-ttyctl -f
+alias -g gv="gvim"
+# }}}
 
-##### autojump
-#autoload -U compinit && compinit
-
-##### ranger
+# Ranger {{{
 # Automatically jump to the directory ranger is located to when one leaves ranger
 function ranger-cd {
   tempfile='/tmp/ranger-chosendir'
@@ -143,3 +141,4 @@ function ranger-cd {
 }
 
 alias -g rn='ranger-cd'
+# }}}
