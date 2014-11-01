@@ -5,8 +5,8 @@ antigen bundle git
 antigen bundle scala
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
-antigen bundle hchbaw/opp.zsh
-antigen bundle history-substring-search
+#antigen bundle hchbaw/opp.zsh # needed for vi mode
+#antigen bundle history-substring-search # needed for vi mode
 antigen bundle autojump
 antigen apply
 # }}}
@@ -42,32 +42,37 @@ function add-git-prompt {
 # adding background job test doesn't work correctly
 #RPROMPT='$symbols $return_code$(git_prompt_status)%{$reset_color%}'
 add-git-prompt RPROMPT
-
-# enable vi mode
-bindkey -v
-# smart search with up and down arrows (needs to be enabled in vi mode)
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-# backspace and ^h working even after returning from command mode
-bindkey '^?' backward-delete-char
-bindkey '^H' backward-delete-char
-# ctrl-w removes word backwards
-bindkey '^W' backward-kill-word
-# ctrl-i searches history backwards
-bindkey '^R' history-incremental-search-backward
-
 # }}}
 
 # Vi mode {{{
+#
+## enable vi mode
+#bindkey -v
+## smart search with up and down arrows (needs to be enabled in vi mode)
+#bindkey '^[[A' history-substring-search-up
+#bindkey '^[[B' history-substring-search-down
+## backspace and ^h working even after returning from command mode
+#bindkey '^?' backward-delete-char
+#bindkey '^H' backward-delete-char
+## ctrl-w removes word backwards
+#bindkey '^W' backward-kill-word
+## ctrl-i searches history backwards
+#bindkey '^R' history-incremental-search-backward
+## pos1 key
+#bindkey '\e[1~' beginning-of-line
+## end key
+#bindkey '\e[4~' end-of-line
+## See http://stackoverflow.com/questions/161676/home-end-keys-in-zsh-dont-work-with-putty for more key bindings
+#
 # show active vim mode in zsh
-function zle-line-init zle-keymap-select {
-  add-git-prompt RPROMPT
-  RPROMPT="$RPROMPT ${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
-  zle reset-prompt
-}
-# register the above function in zsh
-zle -N zle-line-init
-zle -N zle-keymap-select
+#function zle-line-init zle-keymap-select {
+#  add-git-prompt RPROMPT
+#  #RPROMPT="$RPROMPT ${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
+#  zle reset-prompt
+#}
+## register the above function in zsh
+#zle -N zle-line-init
+#zle -N zle-keymap-select
 # }}}
 
 # Zsh config {{{
