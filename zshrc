@@ -37,7 +37,7 @@ return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
 # adds the git prompt to the passed argument $1
 # call with: add-git-prompt myvar
 function add-git-prompt {
-  eval "$1='$return_code$(git_prompt_status)%{$reset_color%}'"
+  eval "$1='"'$return_code$(git_prompt_status)%{$reset_color%}'"'"
 }
 # adding background job test doesn't work correctly
 #RPROMPT='$symbols $return_code$(git_prompt_status)%{$reset_color%}'
