@@ -7,6 +7,7 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
 antigen bundle hchbaw/opp.zsh
 antigen bundle history-substring-search
+antigen bundle autojump
 antigen apply
 # }}}
 
@@ -105,7 +106,7 @@ export PATH=$PATH:$HOME/.rvm/bin
 # play executables
 export PATH=$PATH:$HOME/Software/play-2.2.0/
 # scala executables
-export PATH=$PATH:$HOME/Software/scala-2.11.0/bin/
+export PATH=$PATH:$HOME/Software/scala-2.11.4/bin/
 # }}}
 
 # Aliase {{{
