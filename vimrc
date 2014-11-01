@@ -26,6 +26,8 @@ Bundle 'drewfradette/Conque-Shell'
 Bundle 'octol/vim-cpp-enhanced-highlight'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'majutsushi/tagbar'
+Bundle 'rking/ag.vim'
+Bundle 'kien/ctrlp.vim'
 
 " scripts from http://vim-scripts.org/vim/scripts.html
 "Bundle 'FuzzyFinder'
@@ -87,10 +89,17 @@ set wildmenu
 " redraw only when necessary
 set lazyredraw
 
+" enable folding
+set foldenable
+" fold by markers
 set foldmethod=marker
+" fold most outer level
 set foldlevel=0
 
 let mapleader=","
+
+" Store .swp files in /tmp by their full path
+set dir=/tmp//,.
 "}}}
 
 " Function definitions {{{
@@ -159,7 +168,9 @@ imap <C-D> <C-C>
 " highlight last inserted text
 nmap gV `[v`]
 " remove search highlighting
-nmap <leader><space> :nohlsearch<CR>
+nmap <leader><space> :nohlsearch<cr>
+nmap <leader>a :Ag
+nmap <leader>p :CtrlP<cr>
 
 " vertical split with |
 nmap <C-W><Bar> :vsplit<cr>
@@ -245,21 +256,40 @@ nn <M-g> :call JumpToDef()<cr>
 ino <M-g> <esc>:call JumpToDef()<cr>i
 "}}}
 
-" Save actions {{{
-" remove trailing whitespace from file
-function! RemoveTrailingWhitespace()
-  :%s/\s\+$//e
-endfunction()
-:autocmd BufWritePost * :call RemoveTrailingWhitespace()
+" CtrlP config {{{
 
-" automatically reloads .vimrc whenever it has changed
-augroup reload_myvimrc
+" List files top to bottom
+let g:ctrlp_match_window='bottom,order:ttb'
+" Open files in new buffers
+let g:ctrlp_switch_buffer=0
+" Grabs a change to the working directory
+let g:ctrlp_working_path_mode=0
+" Use 'ag' as search tool
+let g:ctrlp_user_command='ag %s -l --nocolor -g ""'
+"}}}
+
+" Save actions {{{
+
+function! RemoveTrailingWhitespace()
+  " save last search & cursor position befre trailing whitespace is removed
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  %s/\s\+$//e
+  let @/=_s
+  call cursor(l, c)
+endfunction()
+
+augroup configgroup
   au!
+  " remove trailing whitespace from file
+  autocmd BufWritePre * :call RemoveTrailingWhitespace()
+  " automatically reloads .vimrc whenever it has changed
   autocmd BufWritePost .vimrc source $MYVIMRC
 augroup END
 "}}}
 
-" vim command docs {{{
+" Vim command docs {{{
 
 " C-O - leave insert mode temporarily
 " C-U - remove visual mode selection
