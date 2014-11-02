@@ -25,7 +25,6 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'majutsushi/tagbar'
 Plugin 'rking/ag.vim'
 Plugin 'kien/ctrlp.vim'
-Plugin 'vim-scripts/taglist.vim'
 
 call vundle#end()
 " }}}
