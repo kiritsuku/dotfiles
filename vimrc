@@ -3,47 +3,31 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-" alternatively, pass a path where Vundle should install bundles
-"let path = '~/some/path/here'
-"call vundle#rc(path)
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 "}}}
 
-" Bundle config {{{
-Bundle 'gmarik/vundle'
-Bundle 'scrooloose/syntastic'
-Bundle 'scrooloose/nerdtree'
-Bundle 'lsdr/monokai'
-Bundle 'Townk/vim-autoclose'
-Bundle 'vim-scripts/AutoComplPop'
-Bundle 'zah/nimrod.vim'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-abolish'
-Bundle 'mileszs/ack.vim'
-Bundle 'drewfradette/Conque-Shell'
-Bundle 'octol/vim-cpp-enhanced-highlight'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'majutsushi/tagbar'
-Bundle 'rking/ag.vim'
-Bundle 'kien/ctrlp.vim'
+" Plugin config {{{
+Plugin 'gmarik/Vundle.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/nerdtree'
+Plugin 'lsdr/monokai'
+Plugin 'Townk/vim-autoclose'
+Plugin 'vim-scripts/AutoComplPop'
+Plugin 'zah/nimrod.vim'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-abolish'
+Plugin 'mileszs/ack.vim'
+Plugin 'drewfradette/Conque-Shell'
+Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'majutsushi/tagbar'
+Plugin 'rking/ag.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'vim-scripts/taglist.vim'
 
-" scripts from http://vim-scripts.org/vim/scripts.html
-"Bundle 'FuzzyFinder'
-" scripts not on GitHub
-"Bundle 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-"Bundle 'file:///home/gmarik/path/to/plugin'
-
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :BundleList          - list configured bundles
-" :BundleInstall(!)    - install (update) bundles
-" :BundleSearch(!) foo - search (or refresh cache first) for foo
-" :BundleClean(!)      - confirm (or auto-approve) removal of unused bundles
+call vundle#end()
 " }}}
 
 " Vim config {{{
@@ -59,7 +43,7 @@ else
 endif
 
 filetype on
-filetype plugin indent on     " required
+filetype plugin indent on     " required for Vundle
 
 " enable line numbers
 set number
