@@ -12,8 +12,6 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
 Plugin 'lsdr/monokai'
-Plugin 'Townk/vim-autoclose'
-Plugin 'vim-scripts/AutoComplPop'
 Plugin 'zah/nimrod.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-fugitive'
@@ -25,6 +23,8 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'majutsushi/tagbar'
 Plugin 'rking/ag.vim'
 Plugin 'kien/ctrlp.vim'
+Plugin 'vim-scripts/TagHighlight'
+Plugin 'jiangmiao/auto-pairs'
 
 call vundle#end()
 " }}}
@@ -152,8 +152,11 @@ imap <C-D> <C-C>
 nmap gV `[v`]
 " remove search highlighting
 nmap <leader><space> :nohlsearch<cr>
-nmap <leader>a :Ag
-nmap <leader>p :CtrlP<cr>
+nmap <leader>r :CtrlP<cr>
+nmap <leader>t :CtrlPTag<cr>
+nmap <leader>s :setlocal spell! spelllang=en_us<cr>
+nmap <leader>o :TagbarToggle<cr>
+nmap <leader>n :NERDTreeToggle .<cr>
 
 " vertical split with |
 nmap <C-W><Bar> :vsplit<cr>
@@ -161,6 +164,10 @@ nmap <C-W><Bar> :vsplit<cr>
 nmap <C-W>- :split<cr>
 
 "}}}
+
+" Auto-Pairs config {{{
+let g:AutoPairsFlyMode=1
+" }}}
 
 " NERDTree config {{{
 
@@ -204,7 +211,7 @@ function! RangeChooser()
 endfunction
 
 command! -bar RangerChooser call RangeChooser()
-noremap <leader>r :<C-U>RangerChooser<CR>
+" nmap <leader>r :<C-U>RangerChooser<CR>
 "}}}
 
 " gVim config {{{
