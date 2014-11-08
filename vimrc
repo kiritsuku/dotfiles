@@ -11,8 +11,6 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
-Plugin 'lsdr/monokai'
-Plugin 'zah/nimrod.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-abolish'
@@ -25,6 +23,8 @@ Plugin 'rking/ag.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'vim-scripts/TagHighlight'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'lervag/vim-latex'
+Plugin 'bling/vim-airline'
 
 call vundle#end()
 " }}}
@@ -39,7 +39,13 @@ if !has("gui_running")
 else
   syntax on
   colorscheme solarized
+  set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10
 endif
+
+" Enable patched fonts for *line
+" see https://powerline.readthedocs.org/en/master/installation/linux.html#fonts-installation
+" on how to get patched fonts
+let g:airline_powerline_fonts=1
 
 filetype on
 filetype plugin indent on     " required for Vundle
@@ -71,6 +77,8 @@ set splitright
 set wildmenu
 " redraw only when necessary
 set lazyredraw
+" Always show statusline
+set laststatus=2
 
 " enable folding
 set foldenable
@@ -183,6 +191,17 @@ let g:syntastic_cpp_compiler_options = ' -std=c++11'
 
 "}}}
 
+" YouCompleMe config {{{
+
+let g:ycm_autoclose_preview_window_after_insertion=1
+let g:ycm_complete_in_comments=1
+let g:ycm_collect_identifiers_from_comments_and_strings=1
+let g:ycm_collect_identifiers_from_tags_files=1
+let g:ycm_seed_identifiers_with_syntax=1
+let g:ycm_key_detailed_diagnostics='<leader>d'
+let g:ycm_confirm_extra_conf=0
+" }}}
+
 " Ranger config {{{
 
 " run ranger from within vim
@@ -231,21 +250,6 @@ set go+=c
 
 " }}}
 
-" Nimrod config {{{
-
-fun! JumpToDef()
-  if exists("*GotoDefinition_" . &filetype)
-    call GotoDefinition_{&filetype}()
-  else
-    exe "norm! \<C-]>"
-  endif
-endf
-
-" Jump to tag
-nn <M-g> :call JumpToDef()<cr>
-ino <M-g> <esc>:call JumpToDef()<cr>i
-"}}}
-
 " CtrlP config {{{
 
 " List files top to bottom
@@ -256,6 +260,14 @@ let g:ctrlp_switch_buffer=0
 let g:ctrlp_working_path_mode=0
 " Use 'ag' as search tool
 let g:ctrlp_user_command='ag %s -l --nocolor -g ""'
+"}}}
+
+" vim-latex config {{{
+
+let g:latex_enbaled=1
+let g:latex_build_dir="out"
+let g:latex_fold_enabled=1
+
 "}}}
 
 " Save actions {{{
