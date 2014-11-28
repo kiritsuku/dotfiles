@@ -83,6 +83,8 @@ setopt extendedglob
 setopt no_nomatch
 # interpret lines starting with '#' as comments
 setopt interactive_comments
+# use insensitive matching
+unsetopt CASE_GLOB
 
 # `Frozing' tty, so after any command terminal settings will be restored
 ttyctl -f
@@ -112,6 +114,12 @@ export PATH=$PATH:$HOME/.rvm/bin
 export PATH=$PATH:$HOME/Software/play-2.2.0/
 # scala executables
 export PATH=$PATH:$HOME/Software/scala-2.11.4/bin/
+# activator executables
+export PATH=$PATH:$HOME/software/activator-1.2.10/
+# sbt executables
+export PATH=$PATH:$HOME/software/sbt/bin
+
+export MAKEFLAGS="-j4 $MAKEFLAGS"
 # }}}
 
 # Aliase {{{
