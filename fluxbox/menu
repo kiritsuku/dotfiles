@@ -70,6 +70,7 @@
 		[end]
 		[submenu] (Audio)
 		      [exec]   (alsamixer) {xterm -e alsamixer}
+          [exec]   (pavucontrol) {pavucontrol}
 		[end]
 		[submenu] (Video)
 		      [exec]   (vlc) {vlc}

@@ -26,6 +26,7 @@ exec /usr/bin/tilda &
 exec dropboxd &
 exec ~/.fehbg &
 exec qbittorrent &
+exec ~/bin/xflux -l 49.0 -g 8.4 &
 #exec pidgin &
 
 sleep 1 && exec /usr/bin/conky &
