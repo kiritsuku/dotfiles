@@ -40,6 +40,8 @@ else
   syntax on
   colorscheme solarized
   set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10
+  " Maximize GUI with wmctrl
+  autocmd VimEnter * call system('wmctrl -i -b add,maximized_vert,maximized_horz -r'.v:windowid)
 endif
 
 " Enable patched fonts for *line
@@ -79,6 +81,10 @@ set wildmenu
 set lazyredraw
 " Always show statusline
 set laststatus=2
+" Automatically save file before buffer change
+set autowrite
+" Automatically refersh file on change
+set autoread
 
 " enable folding
 set foldenable
@@ -162,14 +168,26 @@ nmap gV `[v`]
 nmap <leader><space> :nohlsearch<cr>
 nmap <leader>r :CtrlP<cr>
 nmap <leader>t :CtrlPTag<cr>
-nmap <leader>s :setlocal spell! spelllang=en_us<cr>
+nmap <leader>se :setlocal spell! spelllang=en_us<cr>
+nmap <leader>sg :setlocal spell! spelllang=de<cr>
 nmap <leader>o :TagbarToggle<cr>
 nmap <leader>n :NERDTreeToggle .<cr>
+nmap <leader>e :ConqueTermVSplit<space>
+nmap <leader>hs :set syntax=scala<cr>
+nmap <leader>hh :set syntax=sh<cr>
+nmap <leader>hn :set syntax=off<cr>
 
 " vertical split with |
 nmap <C-W><Bar> :vsplit<cr>
 " horizontal split with -
 nmap <C-W>- :split<cr>
+
+" jump to first error location
+map <leader>je :cwindow<cr>:cc<cr><c-w>bz<cr><cr>
+" jump to next error location
+map <leader>jn :cwindow<cr>:cn<cr><c-w>bz<cr><cr>
+" jump to previous error location
+map <leader>jN :cwindow<cr>:cp<cr><c-w>bz<cr><cr>
 
 "}}}
 
@@ -184,10 +202,13 @@ let g:NERDTreeShowHidden = 1
 
 " }}}
 
-" Other config {{{
+" Syntastic config {{{
 
 " enable C++11 support for syntastic
 let g:syntastic_cpp_compiler_options = ' -std=c++11'
+let g:syntastic_mode_map = { "mode": "active",
+                           \ "active_filetypes": [],
+                           \ "passive_filetypes": ["tex"] }
 
 "}}}
 
@@ -230,7 +251,7 @@ function! RangeChooser()
 endfunction
 
 command! -bar RangerChooser call RangeChooser()
-" nmap <leader>r :<C-U>RangerChooser<CR>
+"nmap <leader>m :RangerChooser<CR>
 "}}}
 
 " gVim config {{{
@@ -265,9 +286,22 @@ let g:ctrlp_user_command='ag %s -l --nocolor -g ""'
 " vim-latex config {{{
 
 let g:latex_enbaled=1
-let g:latex_build_dir="out"
+let g:latex_build_dir='out'
 let g:latex_fold_enabled=1
+let g:latex_quickfix_ignored_warnings = [
+  \ "Usage of package",
+  \ "float@addtolists detected"
+\ ]
 
+"}}}
+
+" AutoPairs config {{{
+let g:AutoPairsCenterLine=0
+let g:AutoPairsFlyMode=0
+"}}}
+
+" Airline config {{{
+let g:airline_inactive_collapse=0
 "}}}
 
 " Save actions {{{
@@ -347,5 +381,12 @@ augroup END
 " Folding:
 " v{motion}zf - Surround with fold markers
 " za - toggle fold
+
+" Spelling:
+" zg - add word to dictionary
+" zw - remove word from dictionary
+" z= - ask for corrections
+" ]s - move to next spelling error
+" [s - move to previous spelling error
 
 "}}}

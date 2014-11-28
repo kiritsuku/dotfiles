@@ -7,4 +7,7 @@ set shiftwidth=2
 imap <C-D> <Esc>
 
 " insert single char in normal mode
-nmap <Space> i_<Esc>r
+"nmap <Space> i_<Esc>r
+
+eclipseaction scalainline org.scalaide.refactoring.InlineLocal
+nmap \i :scalainline<cr>
