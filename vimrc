@@ -25,19 +25,24 @@ Plugin 'vim-scripts/TagHighlight'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'lervag/vim-latex'
 Plugin 'bling/vim-airline'
+" Edit images in vim
+"Plugin 'tpope/vim-afterimage'
 
 call vundle#end()
 " }}}
 
 " Vim config {{{
+syntax on
+
 if !has("gui_running")
   set t_Co=256
   set term=screen-256color
-  syntax on
-  colorscheme github
-  hi Normal ctermbg=black |"ctermfg=grey
+  colorscheme desert
+  " no background
+  hi Normal ctermbg=none
+  " highlight line of cursor
+  hi CursorLine term=bold cterm=bold
 else
-  syntax on
   colorscheme solarized
   set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10
   " Maximize GUI with wmctrl
@@ -57,26 +62,30 @@ set number
 set relativenumber
 " enable line wrapping of full words
 set wrap
+" wrap words at end of line
 set linebreak
-" print margin
-"set cc=80
 " size of tabs
 set tabstop=2
 " number of spaces
 set shiftwidth=2
+" insert spaces instead of tabs
 set expandtab
-" insert spaces instead of tab
 set smarttab
+" copy indent of curront line when starting a new line
 set autoindent
+" show column and line numbers
 set ruler
-" highlight search
+" show match while typing
 set incsearch
+" highlight search
 set hlsearch
 " open new splits to the right and below of the current window
 set splitbelow
 set splitright
 " show completion menu in command mode
 set wildmenu
+" show matches in wildmenu but don't complete automatically
+set wildmode=longest:full
 " redraw only when necessary
 set lazyredraw
 " Always show statusline
@@ -85,18 +94,39 @@ set laststatus=2
 set autowrite
 " Automatically refersh file on change
 set autoread
-
+" needed to  show whitespace characters
+set list
+" display whitespace characters
+set listchars=tab:‣\ ,
 " enable folding
 set foldenable
 " fold by markers
 set foldmethod=marker
 " fold most outer level
 set foldlevel=0
-
-let mapleader=","
-
+" number of lines to look forward when cursor at end of screen
+set scrolloff=3
+" show line of cursor
+set cursorline
+" better terminal response time
+set ttyfast
+" store undofiles between sessions
+set undofile
+" ignore case in search
+set ignorecase
+" ignore 'ignorecase' if search contains upper case letters
+set smartcase
+" substitute flag 'g' is enabled by default
+set gdefault
 " Store .swp files in /tmp by their full path
 set dir=/tmp//,.
+" Store undo files in /tmp by their full path
+set undodir=/tmp//,.
+
+" use , instead of \ for mapleader
+let mapleader=","
+" Prefer LaTeX mode for files ending with .tex
+let g:tex_flavor="latex"
 "}}}
 
 " Function definitions {{{
@@ -176,18 +206,26 @@ nmap <leader>e :ConqueTermVSplit<space>
 nmap <leader>hs :set syntax=scala<cr>
 nmap <leader>hh :set syntax=sh<cr>
 nmap <leader>hn :set syntax=off<cr>
-
-" vertical split with |
-nmap <C-W><Bar> :vsplit<cr>
-" horizontal split with -
-nmap <C-W>- :split<cr>
-
 " jump to first error location
 map <leader>je :cwindow<cr>:cc<cr><c-w>bz<cr><cr>
 " jump to next error location
 map <leader>jn :cwindow<cr>:cn<cr><c-w>bz<cr><cr>
 " jump to previous error location
 map <leader>jN :cwindow<cr>:cp<cr><c-w>bz<cr><cr>
+" reformat paragraph
+nn <leader>q gqip
+
+" vertical split with |
+nmap <C-W><Bar> :vsplit<cr>
+" horizontal split with -
+nmap <C-W>- :split<cr>
+
+" enable very magic regex mode (everything except a-zA-Z0-9_ is interpreted)
+nn / /\v
+vn / /\v
+
+" disable history view
+nn q: <nop>
 
 "}}}
 
@@ -322,6 +360,8 @@ augroup configgroup
   autocmd BufWritePre * :call RemoveTrailingWhitespace()
   " automatically reloads .vimrc whenever it has changed
   autocmd BufWritePost .vimrc source $MYVIMRC
+  " automatically save document when focus is lost
+  autocmd FocusLost * :wa
 augroup END
 "}}}
 
@@ -330,6 +370,11 @@ augroup END
 " C-O - leave insert mode temporarily
 " C-U - remove visual mode selection
 " go - guioptions
+" g; g, - move through changelist
+
+" :r! - execute external command
+" :%!xxd - make vim to hex editor
+" :%!xxd -r - revert hex editor mode
 
 "}}}
 
@@ -381,6 +426,8 @@ augroup END
 " Folding:
 " v{motion}zf - Surround with fold markers
 " za - toggle fold
+" zR - open all folds
+" zM - close all folds
 
 " Spelling:
 " zg - add word to dictionary
