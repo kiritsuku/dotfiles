@@ -119,7 +119,8 @@ export PATH=$PATH:$HOME/software/activator-1.2.10/
 # sbt executables
 export PATH=$PATH:$HOME/software/sbt/bin
 
-export MAKEFLAGS="-j4 $MAKEFLAGS"
+# make can't always handle parallel builds; enable on demand
+#export MAKEFLAGS="-j4 $MAKEFLAGS"
 # }}}
 
 # Aliase {{{
