@@ -6,7 +6,6 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 "}}}
-
 " Plugin config {{{
 Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/syntastic'
@@ -30,8 +29,11 @@ Plugin 'bling/vim-airline'
 
 call vundle#end()
 " }}}
-
 " Vim config {{{
+
+filetype on
+" required for Vundle
+filetype plugin indent on
 syntax on
 
 if !has("gui_running")
@@ -53,9 +55,6 @@ endif
 " see https://powerline.readthedocs.org/en/master/installation/linux.html#fonts-installation
 " on how to get patched fonts
 let g:airline_powerline_fonts=1
-
-filetype on
-filetype plugin indent on     " required for Vundle
 
 " enable line numbers
 set number
@@ -128,7 +127,6 @@ let mapleader=","
 " Prefer LaTeX mode for files ending with .tex
 let g:tex_flavor="latex"
 "}}}
-
 " Function definitions {{{
 " Move `vcount` lines down and move cursor to beginning of line if more
 " than one line should be moved down.
@@ -150,14 +148,13 @@ function! MoveUp(vcount)
   endif
 endfunction
 "}}}
-
 " Key combinations {{{
 
 " Use CTRL-S for saving, also in Insert mode
 " see: http://vim.wikia.com/wiki/Map_Ctrl-S_to_save_current_or_new_files
-nmap <C-S> :update<CR>
-vmap <C-S> <C-C>:update<CR>
-imap <C-S> <C-O>:update<CR>
+nn <C-S> :update<CR>
+vn <C-S> <C-C>:update<CR>
+ino <C-S> <C-O>:update<CR>
 
 " Used in vimdiff
 " nn <S-F1> :diffget LO<CR>
@@ -168,57 +165,57 @@ imap <C-S> <C-O>:update<CR>
 " ino <C-F3> <C-0>:diffget RE<CR>
 
 " Use navigation between soft wrapped lines by default
-nmap <silent> <Up> :<C-U>call MoveUp(v:count)<CR>
-imap <silent> <Up> <C-O>:<C-U>call MoveUp(v:count)<CR>
-nmap <silent> <Down> :<C-U>call MoveDown(v:count)<CR>
-imap <silent> <Down> <C-O>:<C-U>call MoveDown(v:count)<CR>
-nmap <silent> <home> g<home>
-imap <silent> <home> <C-o>g<home>
-nmap <silent> <End> g<End>
-imap <silent> <End> <C-o>g<End>
+nn <silent> <Up> :<C-U>call MoveUp(v:count)<CR>
+ino <silent> <Up> <C-O>:<C-U>call MoveUp(v:count)<CR>
+nn <silent> <Down> :<C-U>call MoveDown(v:count)<CR>
+ino <silent> <Down> <C-O>:<C-U>call MoveDown(v:count)<CR>
+nn <silent> <home> g<home>
+ino <silent> <home> <C-o>g<home>
+nn <silent> <End> g<End>
+ino <silent> <End> <C-o>g<End>
 
 " toggle nerdtree
-nmap <F2> :NERDTreeToggle .<CR>
-imap <F2> <C-O>:NERDTreeToggle .<CR>
+nn <F2> :NERDTreeToggle .<CR>
+ino <F2> <C-O>:NERDTreeToggle .<CR>
 
 " toggle tagbar
-nmap <F3> :TagbarToggle<CR>
-imap <F3> <C-O>:TagbarToggle<CR>
+nn <F3> :TagbarToggle<CR>
+ino <F3> <C-O>:TagbarToggle<CR>
 
 " toggle spell checking
-nmap <F5> :setlocal spell! spelllang=en_us<CR>
-imap <F5> <C-O>:setlocal spell! spelllang=en_us<CR>
+nn <F5> :setlocal spell! spelllang=en_us<CR>
+ino <F5> <C-O>:setlocal spell! spelllang=en_us<CR>
 
 " leave insert mode with C-D
-imap <C-D> <C-C>
+ino <C-D> <C-C>
 
 " highlight last inserted text
-nmap gV `[v`]
+nn gV `[v`]
 " remove search highlighting
-nmap <leader><space> :nohlsearch<cr>
-nmap <leader>r :CtrlP<cr>
-nmap <leader>t :CtrlPTag<cr>
-nmap <leader>se :setlocal spell! spelllang=en_us<cr>
-nmap <leader>sg :setlocal spell! spelllang=de<cr>
-nmap <leader>o :TagbarToggle<cr>
-nmap <leader>n :NERDTreeToggle .<cr>
-nmap <leader>e :ConqueTermVSplit<space>
-nmap <leader>hs :set syntax=scala<cr>
-nmap <leader>hh :set syntax=sh<cr>
-nmap <leader>hn :set syntax=off<cr>
+nn <leader><space> :nohlsearch<cr>
+nn <leader>r :CtrlP<cr>
+nn <leader>t :CtrlPTag<cr>
+nn <leader>se :setlocal spell! spelllang=en_us<cr>
+nn <leader>sg :setlocal spell! spelllang=de<cr>
+nn <leader>o :TagbarToggle<cr>
+nn <leader>n :NERDTreeToggle .<cr>
+nn <leader>e :ConqueTermVSplit<space>
+nn <leader>hs :set syntax=scala<cr>
+nn <leader>hh :set syntax=sh<cr>
+nn <leader>hn :set syntax=off<cr>
 " jump to first error location
-map <leader>je :cwindow<cr>:cc<cr><c-w>bz<cr><cr>
+no <leader>je :cwindow<cr>:cc<cr><c-w>bz<cr><cr>
 " jump to next error location
-map <leader>jn :cwindow<cr>:cn<cr><c-w>bz<cr><cr>
+no <leader>jn :cwindow<cr>:cn<cr><c-w>bz<cr><cr>
 " jump to previous error location
-map <leader>jN :cwindow<cr>:cp<cr><c-w>bz<cr><cr>
+no <leader>jN :cwindow<cr>:cp<cr><c-w>bz<cr><cr>
 " reformat paragraph
 nn <leader>q gqip
 
 " vertical split with |
-nmap <C-W><Bar> :vsplit<cr>
+nn <C-W><Bar> :vsplit<cr>
 " horizontal split with -
-nmap <C-W>- :split<cr>
+nn <C-W>- :split<cr>
 
 " enable very magic regex mode (everything except a-zA-Z0-9_ is interpreted)
 nn / /\v
@@ -228,18 +225,15 @@ vn / /\v
 nn q: <nop>
 
 "}}}
-
 " Auto-Pairs config {{{
 let g:AutoPairsFlyMode=1
 " }}}
-
 " NERDTree config {{{
 
 "let g:NERDTreeShowLineNumbers = 1
 let g:NERDTreeShowHidden = 1
 
 " }}}
-
 " Syntastic config {{{
 
 " enable C++11 support for syntastic
@@ -249,7 +243,6 @@ let g:syntastic_mode_map = { "mode": "active",
                            \ "passive_filetypes": ["tex"] }
 
 "}}}
-
 " YouCompleMe config {{{
 
 let g:ycm_autoclose_preview_window_after_insertion=1
@@ -260,7 +253,6 @@ let g:ycm_seed_identifiers_with_syntax=1
 let g:ycm_key_detailed_diagnostics='<leader>d'
 let g:ycm_confirm_extra_conf=0
 " }}}
-
 " Ranger config {{{
 
 " run ranger from within vim
@@ -289,9 +281,8 @@ function! RangeChooser()
 endfunction
 
 command! -bar RangerChooser call RangeChooser()
-"nmap <leader>m :RangerChooser<CR>
+"nn <leader>m :RangerChooser<CR>
 "}}}
-
 " gVim config {{{
 
 " Remove menubar
@@ -308,7 +299,6 @@ set go-=b
 set go+=c
 
 " }}}
-
 " CtrlP config {{{
 
 " List files top to bottom
@@ -320,7 +310,6 @@ let g:ctrlp_working_path_mode=0
 " Use 'ag' as search tool
 let g:ctrlp_user_command='ag %s -l --nocolor -g ""'
 "}}}
-
 " vim-latex config {{{
 
 let g:latex_enbaled=1
@@ -332,16 +321,13 @@ let g:latex_quickfix_ignored_warnings = [
 \ ]
 
 "}}}
-
 " AutoPairs config {{{
 let g:AutoPairsCenterLine=0
 let g:AutoPairsFlyMode=0
 "}}}
-
 " Airline config {{{
 let g:airline_inactive_collapse=0
 "}}}
-
 " Save actions {{{
 
 function! RemoveTrailingWhitespace()
@@ -364,7 +350,6 @@ augroup configgroup
   autocmd FocusLost * :wa
 augroup END
 "}}}
-
 " Vim command docs {{{
 
 " C-O - leave insert mode temporarily
@@ -377,7 +362,6 @@ augroup END
 " :%!xxd -r - revert hex editor mode
 
 "}}}
-
 " Key combinations docs {{{
 
 " UMSCHALT+d - delete all after cursor
