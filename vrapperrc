@@ -1,7 +1,13 @@
-set incsearch
-
 set tabstop=2
 set shiftwidth=2
+set scrolloff=3
+set incsearch
+set hlsearch
+
+" mapleader is not supported
+
+" disable search highlighting
+nn ,<space> :nohlsearch<cr>
 
 " leave insert mode with C-D
 imap <C-D> <Esc>
@@ -11,3 +17,6 @@ imap <C-D> <Esc>
 
 eclipseaction scalainline org.scalaide.refactoring.InlineLocal
 nmap \i :scalainline<cr>
+
+" disable search highlighting at startup
+:nohlsearch

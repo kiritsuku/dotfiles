@@ -24,8 +24,11 @@ Plugin 'vim-scripts/TagHighlight'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'lervag/vim-latex'
 Plugin 'bling/vim-airline'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 " Edit images in vim
 "Plugin 'tpope/vim-afterimage'
+Plugin 'zhaocai/GoldenView.Vim'
 
 call vundle#end()
 " }}}
@@ -191,8 +194,8 @@ ino <C-D> <C-C>
 
 " highlight last inserted text
 nn gV `[v`]
-" remove search highlighting
-nn <leader><space> :nohlsearch<cr>
+" clear search highlighting pattern
+nn <silent> <leader><space> :let @/ = ""<cr>
 nn <leader>r :CtrlP<cr>
 nn <leader>t :CtrlPTag<cr>
 nn <leader>se :setlocal spell! spelllang=en_us<cr>
@@ -212,10 +215,19 @@ no <leader>jN :cwindow<cr>:cp<cr><c-w>bz<cr><cr>
 " reformat paragraph
 nn <leader>q gqip
 
+" invoke functionality of latex plugin
+nn <leader>lt :call latex#latexmk#toggle()<cr>
+nn <leader>lv :call latex#view()<cr>
+
 " vertical split with |
 nn <C-W><Bar> :vsplit<cr>
 " horizontal split with -
 nn <C-W>- :split<cr>
+" better key combinations for window navigation
+"nn <C-h> <C-w>h
+"nn <C-j> <C-w>j
+"nn <C-k> <C-w>k
+"nn <C-l> <C-w>l
 
 " enable very magic regex mode (everything except a-zA-Z0-9_ is interpreted)
 nn / /\v
@@ -240,11 +252,13 @@ let g:NERDTreeShowHidden = 1
 let g:syntastic_cpp_compiler_options = ' -std=c++11'
 let g:syntastic_mode_map = { "mode": "active",
                            \ "active_filetypes": [],
-                           \ "passive_filetypes": ["tex"] }
+                           \ "passive_filetypes": ["tex", "scala"] }
 
 "}}}
 " YouCompleMe config {{{
 
+" We have to disable tab here, otherwise UltiSnips needs to be remapped
+let g:ycm_key_list_select_completion=['<tab>', '<down>']
 let g:ycm_autoclose_preview_window_after_insertion=1
 let g:ycm_complete_in_comments=1
 let g:ycm_collect_identifiers_from_comments_and_strings=1
@@ -253,6 +267,11 @@ let g:ycm_seed_identifiers_with_syntax=1
 let g:ycm_key_detailed_diagnostics='<leader>d'
 let g:ycm_confirm_extra_conf=0
 " }}}
+" UltiSnips config {{{
+let g:UltiSnipsExpandTrigger="<c-k>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+"}}}
 " Ranger config {{{
 
 " run ranger from within vim
@@ -309,6 +328,8 @@ let g:ctrlp_switch_buffer=0
 let g:ctrlp_working_path_mode=0
 " Use 'ag' as search tool
 let g:ctrlp_user_command='ag %s -l --nocolor -g ""'
+" search by filname by default
+let g:ctrlp_by_filename=1
 "}}}
 " vim-latex config {{{
 
@@ -328,7 +349,7 @@ let g:AutoPairsFlyMode=0
 " Airline config {{{
 let g:airline_inactive_collapse=0
 "}}}
-" Save actions {{{
+" Auto-commands {{{
 
 function! RemoveTrailingWhitespace()
   " save last search & cursor position befre trailing whitespace is removed
@@ -348,6 +369,10 @@ augroup configgroup
   autocmd BufWritePost .vimrc source $MYVIMRC
   " automatically save document when focus is lost
   autocmd FocusLost * :wa
+  " configure vrapperrc filetype
+  autocmd BufNewFile,BufRead *.vrapperrc set filetype=vim
+  " configure sbt filetype
+  autocmd BufNewFile,BufRead *.sbt set filetype=scala
 augroup END
 "}}}
 " Vim command docs {{{
