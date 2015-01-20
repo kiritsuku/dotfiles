@@ -110,23 +110,24 @@ export PATH=$PATH:$HOME/.cabal/bin
 # ruby executables
 export PATH=$PATH:$HOME/.gem/ruby/1.9.1/bin
 export PATH=$PATH:$HOME/.rvm/bin
-# play executables
-export PATH=$PATH:$HOME/Software/play-2.2.0/
 # scala executables
-export PATH=$PATH:$HOME/Software/scala-2.11.4/bin/
+export PATH=$PATH:$HOME/software/scala-2.11.5/bin/
 # activator executables
 export PATH=$PATH:$HOME/software/activator-1.2.10/
 # sbt executables
 export PATH=$PATH:$HOME/software/sbt/bin
+# go executables
+export GOPATH=$HOME/.go
+export PATH=$PATH:$GOPATH/bin
 
 # make can't always handle parallel builds; enable on demand
 #export MAKEFLAGS="-j4 $MAKEFLAGS"
 # }}}
 
 # Aliase {{{
-alias -g cp='$HOME/bin/cp -B'
-alias -g mv='$HOME/bin/mv -B'
-alias -g rm='$HOME/bin/rm -B'
+alias -g cp='$HOME/bin/hidden/cp -B'
+alias -g mv='$HOME/bin/hidden/mv -B'
+alias -g rm='$HOME/bin/hidden/rm -B'
 alias -g g='git'
 alias -g p='sudo pacman'
 alias -g y='yaourt'
