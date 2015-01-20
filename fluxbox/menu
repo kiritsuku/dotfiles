@@ -71,6 +71,7 @@
 		[submenu] (Audio)
 		      [exec]   (alsamixer) {xterm -e alsamixer}
           [exec]   (pavucontrol) {pavucontrol}
+          [exec]   (blueman) {blueman-manager}
 		[end]
 		[submenu] (Video)
 		      [exec]   (vlc) {vlc}
