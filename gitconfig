@@ -1,9 +1,8 @@
 [user]
-    name = Simon Schaefer
+    name = Simon Schäfer
     email = mail@antoras.de
 [github]
     user = sschaef
-    #token = 90f72cf6a50e3d0b9226de2229a1e769
 [core]
     editor = vim
     fileMode = false
