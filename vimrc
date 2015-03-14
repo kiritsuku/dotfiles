@@ -153,6 +153,58 @@ function! MoveUp(vcount)
     exe "normal! ". a:vcount ."k|"
   endif
 endfunction
+
+" Generates scala tag files for tagbar
+function! GenerateScalaTags()
+    if executable("sctags")
+        let g:tagbar_ctags_bin = "sctags"
+        let g:tagbar_type_scala = {
+            \ 'ctagstype' : 'scala',
+            \ 'sro'       : '.',
+            \ 'kinds'     : [
+                \ 'p:packages',
+                \ 'V:values',
+                \ 'v:variables',
+                \ 'T:types',
+                \ 't:traits',
+                \ 'o:objects',
+                \ 'O:case objects',
+                \ 'c:classes',
+                \ 'C:case classes',
+                \ 'm:methods:1'
+            \ ],
+            \ 'kind2scope'  : {
+                \ 'p' : 'package',
+                \ 'T' : 'type',
+                \ 't' : 'trait',
+                \ 'o' : 'object',
+                \ 'O' : 'case_object',
+                \ 'c' : 'class',
+                \ 'C' : 'case_class',
+                \ 'm' : 'method'
+            \ },
+            \ 'scope2kind'  : {
+                \ 'package' : 'p',
+                \ 'type' : 'T',
+                \ 'trait' : 't',
+                \ 'object' : 'o',
+                \ 'case_object' : 'O',
+                \ 'class' : 'c',
+                \ 'case_class' : 'C',
+                \ 'method' : 'm'
+            \ }
+        \ }
+    endif
+endfunction
+
+" Checks if current file is a scala file in order to generate tag files
+function! ModifiedTagbarToggle()
+  " case sensitive comparison
+  if &filetype ==# "scala"
+    call GenerateScalaTags()
+  endif
+  :TagbarToggle
+endfunction
 "}}}
 " Key combinations {{{
 
@@ -203,7 +255,7 @@ nn <leader>r :CtrlP<cr>
 nn <leader>t :CtrlPTag<cr>
 nn <leader>se :setlocal spell! spelllang=en_us<cr>
 nn <leader>sg :setlocal spell! spelllang=de<cr>
-nn <leader>o :TagbarToggle<cr>
+nn <leader>o :call ModifiedTagbarToggle()<cr>
 nn <leader>n :NERDTreeToggle .<cr>
 nn <leader>e :ConqueTermVSplit<space>
 nn <leader>hs :set syntax=scala<cr>
