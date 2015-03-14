@@ -113,7 +113,7 @@ export PATH=$PATH:$HOME/.rvm/bin
 # scala executables
 export PATH=$PATH:$HOME/software/scala-2.11.5/bin/
 # activator executables
-export PATH=$PATH:$HOME/software/activator-1.2.10/
+export PATH=$PATH:$HOME/software/activator-1.3.2/
 # sbt executables
 export PATH=$PATH:$HOME/software/sbt/bin
 # go executables
@@ -131,7 +131,6 @@ alias -g rm='$HOME/bin/hidden/rm -B'
 alias -g g='git'
 alias -g p='sudo pacman'
 alias -g y='yaourt'
-alias -g nano='~/bin/nano-sh'
 
 ##### Scala partest
 alias pt='test/partest'
