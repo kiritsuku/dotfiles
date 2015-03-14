@@ -51,7 +51,8 @@ if !has("gui_running")
   hi CursorLine term=bold cterm=bold
 else
   colorscheme solarized
-  set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10
+  "set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10
+  set guifont=Fantasque\ Sans\ Mono\ Italic\ 11
   " Maximize GUI with wmctrl
   autocmd VimEnter * call system('wmctrl -i -b add,maximized_vert,maximized_horz -r'.v:windowid)
 endif
