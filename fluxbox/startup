@@ -23,15 +23,13 @@ export GDK_NATIVE_WINDOWS=true
 exec pulseaudio --start &
 exec ~/.screenlayout/screens.sh &
 exec /usr/bin/tilda &
-exec dropboxd &
 exec ~/.fehbg &
 exec qbittorrent &
 exec ~/bin/xflux -l 49.0 -g 8.4 &
-#exec pidgin &
 
 sleep 1 && exec /usr/bin/conky &
 exec /usr/bin/tint2 &
-#exec java -jar /media/ext/JDownloader/JDownloader.jar &
+exec dropbox &
 
 # And last but not least we start fluxbox.
 # Because it is the last app you have to run it with ''exec'' before it.
