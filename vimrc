@@ -341,7 +341,8 @@ let g:latex_build_dir='out'
 let g:latex_fold_enabled=1
 let g:latex_quickfix_ignored_warnings = [
   \ "Usage of package",
-  \ "float@addtolists detected"
+  \ "float@addtolists detected",
+  \ "Overfull "
 \ ]
 
 "}}}
