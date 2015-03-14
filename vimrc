@@ -19,7 +19,7 @@ Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'majutsushi/tagbar'
 Plugin 'rking/ag.vim'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'vim-scripts/TagHighlight'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'lervag/vim-latex'
@@ -29,6 +29,8 @@ Plugin 'honza/vim-snippets'
 " Edit images in vim
 "Plugin 'tpope/vim-afterimage'
 Plugin 'zhaocai/GoldenView.Vim'
+Plugin 'othree/xml.vim'
+Plugin 'terryma/vim-multiple-cursors'
 
 call vundle#end()
 " }}}
