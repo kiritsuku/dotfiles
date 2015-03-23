@@ -31,6 +31,7 @@ Plugin 'honza/vim-snippets'
 Plugin 'zhaocai/GoldenView.Vim'
 Plugin 'othree/xml.vim'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'ardagnir/vimbed'
 
 call vundle#end()
 " }}}
