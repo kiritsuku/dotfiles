@@ -7,7 +7,7 @@
     editor = vim
     fileMode = false
 [merge]
-    tool = vimdiff
+    tool = gvimdiff
     conflictstyle = diff3
 [diff]
 #   algorithm = patience
