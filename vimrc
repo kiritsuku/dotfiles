@@ -17,7 +17,7 @@ Plugin 'mileszs/ack.vim'
 Plugin 'drewfradette/Conque-Shell'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'majutsushi/tagbar'
+"Plugin 'majutsushi/tagbar'
 Plugin 'rking/ag.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'vim-scripts/TagHighlight'
@@ -31,7 +31,10 @@ Plugin 'honza/vim-snippets'
 Plugin 'zhaocai/GoldenView.Vim'
 Plugin 'othree/xml.vim'
 Plugin 'terryma/vim-multiple-cursors'
-Plugin 'ardagnir/vimbed'
+" Allows to embed vim in other programs
+"Plugin 'ardagnir/vimbed'
+" Expand region by key combination
+Plugin 'terryma/vim-expand-region'
 
 call vundle#end()
 " }}}
@@ -248,16 +251,17 @@ ino <F5> <C-O>:setlocal spell! spelllang=en_us<CR>
 " leave insert mode with C-D
 ino <C-D> <C-C>
 
-" highlight last inserted text
-nn gV `[v`]
 " clear search highlighting pattern
 nn <silent> <leader><space> :let @/ = ""<cr>
 nn <leader>r :CtrlP<cr>
 nn <leader>t :CtrlPTag<cr>
+nn <leader>b :CtrlPBuffer<cr>
 nn <leader>se :setlocal spell! spelllang=en_us<cr>
 nn <leader>sg :setlocal spell! spelllang=de<cr>
-nn <leader>o :call ModifiedTagbarToggle()<cr>
-nn <leader>n :NERDTreeToggle .<cr>
+"nn <leader>o :call ModifiedTagbarToggle()<cr>
+" see http://superuser.com/questions/195022/vim-how-to-synchronize-nerdtree-with-current-opened-tab-file-path
+nn <leader>o :NERDTreeFind<cr>
+nn <leader>c :NERDTreeToggle<cr>
 nn <leader>e :ConqueTermVSplit<space>
 nn <leader>hs :set syntax=scala<cr>
 nn <leader>hh :set syntax=sh<cr>
@@ -270,6 +274,17 @@ no <leader>jn :cwindow<cr>:cn<cr><c-w>bz<cr><cr>
 no <leader>jN :cwindow<cr>:cp<cr><c-w>bz<cr><cr>
 " reformat paragraph
 nn <leader>q gqip
+" run a given macro on the whole file
+nn <leader>@ :%normal @
+" run a given macro on selected area
+vn <leader>@ :normal @
+" copy to system clipboard
+vn <leader>y "+y
+" paste from system clipboard
+nn <leader>p "+p
+nn <leader>P "+P
+vn <leader>p "+p
+vn <leader>P "+P
 
 " invoke functionality of latex plugin
 nn <leader>lt :call latex#latexmk#toggle()<cr>
@@ -288,9 +303,26 @@ nn <C-W>- :split<cr>
 " enable very magic regex mode (everything except a-zA-Z0-9_ is interpreted)
 nn / /\v
 vn / /\v
+" search text that is visually selected
+vn // y/<C-R>"<CR>
 
 " disable history view
 nn q: <nop>
+
+" Allows saving of files with sudo
+cno w!! w !sudo tee > /dev/null %<cr>
+
+" Expand and shrink region
+map + <Plug>(expand_region_expand)
+map - <Plug>(expand_region_shrink)
+
+" highlight last inserted text
+nn gV `[v`]
+" Automatically jump to the end of yanked text
+vn <silent> y y`]
+" Automatically jump to the end of pasted text
+vn <silent> p p`]
+nn <silent> p p`]
 
 "}}}
 " Auto-Pairs config {{{
@@ -501,5 +533,9 @@ augroup END
 " z= - ask for corrections
 " ]s - move to next spelling error
 " [s - move to previous spelling error
+
+" Moving:
+" C-O - Jump to previous location
+" C-I - Jump to next location
 
 "}}}
