@@ -105,17 +105,12 @@ export EDITOR="vim"
 
 # bin folder
 export PATH=$HOME/bin:$PATH
-# haskell executables
-export PATH=$PATH:$HOME/.cabal/bin
 # ruby executables
-export PATH=$PATH:$HOME/.gem/ruby/1.9.1/bin
+export PATH=$PATH:$HOME/.gem/ruby/2.2.0/bin
 export PATH=$PATH:$HOME/.rvm/bin
 # scala executables
-export PATH=$PATH:$HOME/software/scala-2.11.5/bin/
-# activator executables
+export PATH=$PATH:$HOME/software/scala-2.11.6/bin/
 export PATH=$PATH:$HOME/software/activator-1.3.2/
-# sbt executables
-export PATH=$PATH:$HOME/software/sbt/bin
 # go executables
 export GOPATH=$HOME/.go
 export PATH=$PATH:$GOPATH/bin
