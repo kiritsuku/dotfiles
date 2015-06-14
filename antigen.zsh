@@ -147,7 +147,7 @@ antigen-revert () {
         echo "Reverted to state before running -update on $(
                 cat $ADOTDIR/revert-info | sed -n 1p)."
 
-    else 
+    else
         echo 'No revert information available. Cannot revert.' >&2
     fi
 
