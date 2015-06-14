@@ -11,6 +11,13 @@ nn ,<space> :nohlsearch<cr>
 
 " leave insert mode with C-D
 imap <C-D> <Esc>
+" highlight last inserted text
+nn gV `[v`]
+" Automatically jump to the end of yanked text
+vn y y`]
+" Automatically jump to the end of pasted text
+vn p p`]
+nn p p`]
 
 " insert single char in normal mode
 "nmap <Space> i_<Esc>r
