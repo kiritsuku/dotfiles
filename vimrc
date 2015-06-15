@@ -325,9 +325,6 @@ vn <silent> p p`]
 nn <silent> p p`]
 
 "}}}
-" Auto-Pairs config {{{
-let g:AutoPairsFlyMode=1
-" }}}
 " NERDTree config {{{
 
 "let g:NERDTreeShowLineNumbers = 1
@@ -433,7 +430,7 @@ let g:latex_quickfix_ignored_warnings = [
 "}}}
 " AutoPairs config {{{
 let g:AutoPairsCenterLine=0
-let g:AutoPairsFlyMode=0
+let g:AutoPairsFlyMode=1
 "}}}
 " Airline config {{{
 let g:airline_inactive_collapse=0
