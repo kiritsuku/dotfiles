@@ -436,6 +436,11 @@ let g:AutoPairsFlyMode=1
 let g:airline_inactive_collapse=0
 "}}}
 " Auto-commands {{{
+"
+function! SaveAfterFocusLost()
+  :call RemoveTrailingWhitespace()
+  :wa
+endfunction()
 
 function! RemoveTrailingWhitespace()
   " save last search & cursor position befre trailing whitespace is removed
@@ -454,7 +459,7 @@ augroup configgroup
   " automatically reloads .vimrc whenever it has changed
   autocmd BufWritePost .vimrc source $MYVIMRC
   " automatically save document when focus is lost
-  autocmd FocusLost * :wa
+  autocmd FocusLost * :call SaveAfterFocusLost()
   " configure vrapperrc filetype
   autocmd BufNewFile,BufRead *.vrapperrc set filetype=vim
   " configure sbt filetype
