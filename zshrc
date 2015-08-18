@@ -109,8 +109,10 @@ export PATH=$HOME/bin:$PATH
 export PATH=$PATH:$HOME/.gem/ruby/2.2.0/bin
 export PATH=$PATH:$HOME/.rvm/bin
 # scala executables
-export PATH=$PATH:$HOME/software/scala-2.11.6/bin/
+export PATH=$PATH:$HOME/software/scala-2.11.7/bin/
 export PATH=$PATH:$HOME/software/activator-1.3.2/
+# electron executables
+export PATH=$PATH:$HOME/software/electron/
 # go executables
 export GOPATH=$HOME/.go
 export PATH=$PATH:$GOPATH/bin
