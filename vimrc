@@ -35,6 +35,7 @@ Plugin 'terryma/vim-multiple-cursors'
 "Plugin 'ardagnir/vimbed'
 " Expand region by key combination
 Plugin 'terryma/vim-expand-region'
+Plugin 'easymotion/vim-easymotion'
 
 call vundle#end()
 " }}}
@@ -131,6 +132,8 @@ set gdefault
 set dir=/tmp//,.
 " Store undo files in /tmp by their full path
 set undodir=/tmp//,.
+" Enable to move the cursor freely around
+set virtualedit=all
 
 " use , instead of \ for mapleader
 let mapleader=","
@@ -290,6 +293,9 @@ vn <leader>P "+P
 nn <leader>lt :call latex#latexmk#toggle()<cr>
 nn <leader>lv :call latex#view()<cr>
 
+" Enable easymotion plugin
+nm <space> <Plug>(easymotion-prefix)
+
 " vertical split with |
 nn <C-W><Bar> :vsplit<cr>
 " horizontal split with -
@@ -435,11 +441,16 @@ let g:AutoPairsFlyMode=1
 " Airline config {{{
 let g:airline_inactive_collapse=0
 "}}}
+" Easymotion config {{{
+" }}}
 " Auto-commands {{{
 "
 function! SaveAfterFocusLost()
-  :call RemoveTrailingWhitespace()
-  :wa
+  " check if filename is not empty and file is modifiable
+  if !empty(@%) && &modifiable
+    :call RemoveTrailingWhitespace()
+    :update
+  endif
 endfunction()
 
 function! RemoveTrailingWhitespace()
@@ -464,6 +475,8 @@ augroup configgroup
   autocmd BufNewFile,BufRead *.vrapperrc set filetype=vim
   " configure sbt filetype
   autocmd BufNewFile,BufRead *.sbt set filetype=scala
+  " enable useful features for git commit files
+  autocmd FileType gitcommit set spell | set colorcolumn=72
 augroup END
 "}}}
 " Vim command docs {{{
