@@ -22,6 +22,8 @@
     f = fetch
     fu = fetch upstream
     fo = fetch origin
+    # fetch all tags that are in the upstream fork
+    fut = fetch upstream "refs/tags/*:refs/tags/*"
 
     m = merge --no-ff
     mu = merge upstream/master
@@ -121,6 +123,11 @@
 
     d = diff
     dw = diff --word-diff=color
+
+    # tag delete g td tag.version
+    td = tag -d
+    # tag release: g tr "msg" tag.version
+    tr = tag -s -m
 
     ns = notes show
     nc = notes add -m
