@@ -64,17 +64,17 @@ ${color3}Ext3: ${color5}${goto 50}${fs_used /media/ext3} / ${fs_size /media/ext3
 
 ${font Sans:bold:size=10}${color3}TOP PROCESSES ${color1}${hr 2}${font Sans:size=8}
 ${color3}CPU Usage
-${color5}${top name 1}${goto 100}${top cpu 1} %
-${color5}${top name 2}${goto 100}${top cpu 2} %
-${color5}${top name 3}${goto 100}${top cpu 3} %
-${color5}${top name 4}${goto 100}${top cpu 4} %
-${color5}${top name 5}${goto 100}${top cpu 5} %
+${color5}${top name 1}${goto 120}${top cpu 1} %
+${color5}${top name 2}${goto 120}${top cpu 2} %
+${color5}${top name 3}${goto 120}${top cpu 3} %
+${color5}${top name 4}${goto 120}${top cpu 4} %
+${color5}${top name 5}${goto 120}${top cpu 5} %
 ${color3}Mem Usage
-${color5}${top_mem name 1}${goto 100}${top_mem mem 1} %${goto 160}${top_mem mem_res 1}
-${color5}${top_mem name 2}${goto 100}${top_mem mem 2} %${goto 160}${top_mem mem_res 2}
-${color5}${top_mem name 3}${goto 100}${top_mem mem 3} %${goto 160}${top_mem mem_res 3}
-${color5}${top_mem name 4}${goto 100}${top_mem mem 4} %${goto 160}${top_mem mem_res 4}
-${color5}${top_mem name 5}${goto 100}${top_mem mem 5} %${goto 160}${top_mem mem_res 5}
+${color5}${top_mem name 1}${goto 120}${top_mem mem 1} %${goto 180}${top_mem mem_res 1}
+${color5}${top_mem name 2}${goto 120}${top_mem mem 2} %${goto 180}${top_mem mem_res 2}
+${color5}${top_mem name 3}${goto 120}${top_mem mem 3} %${goto 180}${top_mem mem_res 3}
+${color5}${top_mem name 4}${goto 120}${top_mem mem 4} %${goto 180}${top_mem mem_res 4}
+${color5}${top_mem name 5}${goto 120}${top_mem mem 5} %${goto 180}${top_mem mem_res 5}
 
 ${font Sans:bold:size=10}${color3}NETWORK ${color1}${hr 2}${font Sans:size=8}
 ${color3}IP global: ${color5}${execi 3600 ~/bin/publicip}${goto 160}${color3}IP local: ${color5}${addr eth0}
