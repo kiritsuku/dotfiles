@@ -17,7 +17,6 @@
 [begin] (Arch)
 [encoding] {UTF-8}
       [exec]   (Firefox) {firefox}
-      [exec]   (Chromium) {/usr/bin/chromium}
       [exec]   (Chrome) {google-chrome-stable}
       [exec]   (Mail) {thunderbird}
       [exec]   (Filemanager) {thunar}
@@ -33,7 +32,6 @@
 	[submenu] (Internet)
 		[submenu] (Browsers)
 		      [exec]   (Firefox) {firefox}
-              [exec]   (Chromium) {chromium}
               [exec]   (Chrome) {google-chrome-stable}
               [exec]   (Opera) {opera}
 		      [exec]   (Lynx) {xterm -e lynx fluxbox.org}
