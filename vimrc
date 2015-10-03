@@ -305,7 +305,6 @@ nn <leader>sg :setlocal spell! spelllang=de<cr>
 " see http://superuser.com/questions/195022/vim-how-to-synchronize-nerdtree-with-current-opened-tab-file-path
 nn <leader>o :NERDTreeFind<cr>
 nn <leader>c :NERDTreeToggle<cr>
-nn <leader>e :ConqueTermVSplit<space>
 nn <leader>hs :set syntax=scala<cr>
 nn <leader>hh :set syntax=sh<cr>
 nn <leader>hn :set syntax=off<cr>
@@ -329,28 +328,21 @@ nn <leader>P "+P
 vn <leader>p "+p
 vn <leader>P "+P
 
-" invoke functionality of latex plugin
-nn <leader>lt :call latex#latexmk#toggle()<cr>
-nn <leader>lv :call latex#view()<cr>
-
 " Enable easymotion plugin
 nm <space> <Plug>(easymotion-prefix)
 
 " vertical split with |
-nn <C-W><Bar> :vsplit<cr>
+nn <C-w><Bar> :vsplit<cr>
+nn <C-a><Bar> :vsplit<cr>
 " horizontal split with -
-nn <C-W>- :split<cr>
-" better key combinations for window navigation
-"nn <C-h> <C-w>h
-"nn <C-j> <C-w>j
-"nn <C-k> <C-w>k
-"nn <C-l> <C-w>l
+nn <C-w>- :split<cr>
+nn <C-a>- :split<cr>
 
 " enable very magic regex mode (everything except a-zA-Z0-9_ is interpreted)
 nn / /\v
 vn / /\v
 " search text that is visually selected
-vn // y/<C-R>"<CR>
+vn // y/<C-r>"<cc>
 
 " disable history view
 nn q: <nop>
@@ -375,6 +367,23 @@ nn <C-a>c :$tabnew<cr>
 " <C-a> is also used to switch windows in terminal mode
 nn <C-a> <C-w>
 
+" Jump to tab by typing its number
+nn <C-a>1 1gt
+nn <C-a>2 2gt
+nn <C-a>3 3gt
+nn <C-a>4 4gt
+nn <C-a>5 5gt
+nn <C-a>6 6gt
+nn <C-a>7 7gt
+nn <C-a>8 8gt
+nn <C-a>9 9gt
+nn <C-a>10 10gt
+nn <C-a>11 11gt
+nn <C-a>12 12gt
+nn <C-a>13 13gt
+nn <C-a>14 14gt
+nn <C-a>15 15gt
+
 if has('nvim')
   " leave terminal mode
   tnoremap <C-a> <C-\><C-n>
@@ -387,6 +396,23 @@ if has('nvim')
   tnoremap <C-a><down> <C-\><C-n><C-w>j
   tnoremap <C-a><up> <C-\><C-n><C-w>k
   tnoremap <C-a><right> <C-\><C-n><C-w>l
+
+  " Jump to tab by typing its number
+  tnoremap <C-a>1 <C-\><C-n>1gt
+  tnoremap <C-a>2 <C-\><C-n>2gt
+  tnoremap <C-a>3 <C-\><C-n>3gt
+  tnoremap <C-a>4 <C-\><C-n>4gt
+  tnoremap <C-a>5 <C-\><C-n>5gt
+  tnoremap <C-a>6 <C-\><C-n>6gt
+  tnoremap <C-a>7 <C-\><C-n>7gt
+  tnoremap <C-a>8 <C-\><C-n>8gt
+  tnoremap <C-a>9 <C-\><C-n>9gt
+  tnoremap <C-a>10 <C-\><C-n>10gt
+  tnoremap <C-a>11 <C-\><C-n>11gt
+  tnoremap <C-a>12 <C-\><C-n>12gt
+  tnoremap <C-a>13 <C-\><C-n>13gt
+  tnoremap <C-a>14 <C-\><C-n>14gt
+  tnoremap <C-a>15 <C-\><C-n>15gt
 endif
 
 "}}}
