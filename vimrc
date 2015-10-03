@@ -22,7 +22,7 @@ Plugin 'rking/ag.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'vim-scripts/TagHighlight'
 Plugin 'jiangmiao/auto-pairs'
-Plugin 'lervag/vim-latex'
+Plugin 'lervag/vimtex'
 Plugin 'bling/vim-airline'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
@@ -422,15 +422,16 @@ let g:ctrlp_user_command='ag %s -l --nocolor -g ""'
 " search by filname by default
 let g:ctrlp_by_filename=1
 "}}}
-" vim-latex config {{{
+" vimtex config {{{
 
-let g:latex_enbaled=1
-let g:latex_build_dir='out'
-let g:latex_fold_enabled=1
-let g:latex_quickfix_ignored_warnings = [
+let g:vimtex_enbaled=1
+let g:vimtex_latexmk_build_dir='out'
+let g:vimtex_fold_enabled=1
+let g:vimtex_quickfix_ignored_warnings = [
   \ "Usage of package",
   \ "float@addtolists detected",
-  \ "Overfull "
+  \ "Overfull ",
+  \ "Underfull "
 \ ]
 
 "}}}
@@ -477,6 +478,8 @@ augroup configgroup
   autocmd BufNewFile,BufRead *.sbt set filetype=scala
   " enable useful features for git commit files
   autocmd FileType gitcommit set spell | set colorcolumn=72
+  " set a maximum textwidth to tex files
+  autocmd BufNewFile,BufRead *.tex set textwidth=80 | set colorcolumn=81 | set spell
 augroup END
 "}}}
 " Vim command docs {{{
