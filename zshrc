@@ -86,6 +86,9 @@ setopt interactive_comments
 # use insensitive matching
 unsetopt CASE_GLOB
 
+# Do not interpret ^W, we want that neovim interprets it
+bindkey '^W' self-insert
+
 # `Frozing' tty, so after any command terminal settings will be restored
 ttyctl -f
 
@@ -102,6 +105,9 @@ fi
 
 # Exports {{{
 export EDITOR="vim"
+# Do not clear screen after less is exited
+# See: http://unix.stackexchange.com/questions/38634/is-there-any-way-to-exit-less-without-clearing-the-screen
+export LESS="-r -X"
 
 # bin folder
 export PATH=$HOME/bin:$PATH
