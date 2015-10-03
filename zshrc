@@ -74,6 +74,9 @@ add-git-prompt RPROMPT
 # }}}
 # Zsh config {{{
 
+# Colortheme from https://github.com/seebi/dircolors-solarized
+eval `dircolors ~/bin/dircolors.ansi-light`
+
 # weird & wacky pattern matching...
 setopt extendedglob
 # ...but when pattern matching fails, simply use the command as is
