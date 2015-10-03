@@ -8,11 +8,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'Valloric/YouCompleteMe', { 'do': 'python2 ./install.py' }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-abolish'
-Plug 'mileszs/ack.vim'
-Plug 'drewfradette/Conque-Shell'
 Plug 'octol/vim-cpp-enhanced-highlight'
-"Plug 'majutsushi/tagbar'
-Plug 'rking/ag.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-scripts/TagHighlight'
 Plug 'jiangmiao/auto-pairs'
@@ -25,8 +21,6 @@ Plug 'honza/vim-snippets'
 Plug 'zhaocai/GoldenView.Vim'
 Plug 'othree/xml.vim'
 Plug 'terryma/vim-multiple-cursors'
-" Allows to embed vim in other programs
-"Plug 'ardagnir/vimbed'
 " Expand region by key combination
 Plug 'terryma/vim-expand-region'
 Plug 'easymotion/vim-easymotion'
@@ -42,7 +36,12 @@ if has('nvim')
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
   colorscheme flattened_light
-elseif !has("gui_running")
+elseif has("gui_running")
+  colorscheme flattened_light
+  set guifont=Fantasque\ Sans\ Mono\ Italic\ 11
+  " Maximize GUI with wmctrl
+  autocmd VimEnter * call system('wmctrl -i -b add,maximized_vert,maximized_horz -r'.v:windowid)
+else
   set t_Co=256
   set term=screen-256color
   colorscheme desert
@@ -50,12 +49,6 @@ elseif !has("gui_running")
   hi Normal ctermbg=none
   " highlight line of cursor
   hi CursorLine term=bold cterm=bold
-else
-  colorscheme flattened_light
-  "set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10
-  set guifont=Fantasque\ Sans\ Mono\ Italic\ 11
-  " Maximize GUI with wmctrl
-  autocmd VimEnter * call system('wmctrl -i -b add,maximized_vert,maximized_horz -r'.v:windowid)
 endif
 
 " Enable patched fonts for *line
@@ -134,7 +127,7 @@ set virtualedit=all
 set mouse=a
 
 " Specify a custom tabline
-set tabline=%!MyTabLine()
+set tabline=%!CustomTabLine()
 
 " use , instead of \ for mapleader
 let mapleader=","
@@ -143,7 +136,7 @@ let g:tex_flavor="latex"
 "}}}
 " Function definitions {{{
 
-function! MyTabLabel(n)
+function! CustomTabLabel(n)
   let buflist = tabpagebuflist(a:n)
   let winnr = tabpagewinnr(a:n)
   let name = bufname(buflist[winnr - 1])
@@ -157,7 +150,7 @@ function! MyTabLabel(n)
   endif
 endfunction
 
-function! MyTabLine()
+function! CustomTabLine()
   let s = ''
   let nrOfTabs = tabpagenr('$')
   for i in range(nrOfTabs)
@@ -171,8 +164,8 @@ function! MyTabLine()
     " set the tab page number (for mouse clicks)
     let s .= '%' . (i + 1) . 'T'
 
-    " the label is made by MyTabLabel()
-    let s .= '%{MyTabLabel(' . (i + 1) . ')}'
+    " the label is made by CustomTabLabel()
+    let s .= '%{CustomTabLabel(' . (i + 1) . ')}'
   endfor
 
   " after the last tab fill with TabLineFill and reset tab page nr
@@ -200,66 +193,14 @@ function! MoveUp(vcount)
     exe "normal! ". a:vcount ."k|"
   endif
 endfunction
-
-" Generates scala tag files for tagbar
-function! GenerateScalaTags()
-    if executable("sctags")
-        let g:tagbar_ctags_bin = "sctags"
-        let g:tagbar_type_scala = {
-            \ 'ctagstype' : 'scala',
-            \ 'sro'       : '.',
-            \ 'kinds'     : [
-                \ 'p:packages',
-                \ 'V:values',
-                \ 'v:variables',
-                \ 'T:types',
-                \ 't:traits',
-                \ 'o:objects',
-                \ 'O:case objects',
-                \ 'c:classes',
-                \ 'C:case classes',
-                \ 'm:methods:1'
-            \ ],
-            \ 'kind2scope'  : {
-                \ 'p' : 'package',
-                \ 'T' : 'type',
-                \ 't' : 'trait',
-                \ 'o' : 'object',
-                \ 'O' : 'case_object',
-                \ 'c' : 'class',
-                \ 'C' : 'case_class',
-                \ 'm' : 'method'
-            \ },
-            \ 'scope2kind'  : {
-                \ 'package' : 'p',
-                \ 'type' : 'T',
-                \ 'trait' : 't',
-                \ 'object' : 'o',
-                \ 'case_object' : 'O',
-                \ 'class' : 'c',
-                \ 'case_class' : 'C',
-                \ 'method' : 'm'
-            \ }
-        \ }
-    endif
-endfunction
-
-" Checks if current file is a scala file in order to generate tag files
-function! ModifiedTagbarToggle()
-  " case sensitive comparison
-  if &filetype ==# "scala"
-    call GenerateScalaTags()
-  endif
-  :TagbarToggle
-endfunction
 "}}}
 " Key combinations {{{
 
 " Use CTRL-S for saving, also in Insert mode
 " see: http://vim.wikia.com/wiki/Map_Ctrl-S_to_save_current_or_new_files
 nn <C-S> :update<CR>
-vn <C-S> <C-C>:update<CR>
-ino <C-S> <C-O>:update<CR>
+vn <C-S> <C-c>:update<CR>
+ino <C-S> <C-o>:update<CR>
 
 " Used in vimdiff
 " nn <S-F1> :diffget LO<CR>
@@ -270,29 +211,17 @@ ino <C-S> <C-O>:update<CR>
 " ino <C-F3> <C-0>:diffget RE<CR>
 
 " Use navigation between soft wrapped lines by default
-nn <silent> <Up> :<C-U>call MoveUp(v:count)<CR>
-ino <silent> <Up> <C-O>:<C-U>call MoveUp(v:count)<CR>
-nn <silent> <Down> :<C-U>call MoveDown(v:count)<CR>
-ino <silent> <Down> <C-O>:<C-U>call MoveDown(v:count)<CR>
+nn <silent> <Up> :<C-u>call MoveUp(v:count)<cr>
+ino <silent> <Up> <C-o>:<C-u>call MoveUp(v:count)<cr>
+nn <silent> <Down> :<C-u>call MoveDown(v:count)<cr>
+ino <silent> <Down> <C-o>:<C-u>call MoveDown(v:count)<cr>
 nn <silent> <home> g<home>
 ino <silent> <home> <C-o>g<home>
 nn <silent> <End> g<End>
 ino <silent> <End> <C-o>g<End>
 
-" toggle nerdtree
-nn <F2> :NERDTreeToggle .<CR>
-ino <F2> <C-O>:NERDTreeToggle .<CR>
-
-" toggle tagbar
-nn <F3> :TagbarToggle<CR>
-ino <F3> <C-O>:TagbarToggle<CR>
-
-" toggle spell checking
-nn <F5> :setlocal spell! spelllang=en_us<CR>
-ino <F5> <C-O>:setlocal spell! spelllang=en_us<CR>
-
-" leave insert mode with C-D
-ino <C-D> <C-C>
+" leave insert mode with C-d
+ino <C-d> <C-c>
 
 " clear search highlighting pattern
 nn <silent> <leader><space> :let @/ = ""<cr>
@@ -301,7 +230,6 @@ nn <leader>t :CtrlPTag<cr>
 nn <leader>b :CtrlPBuffer<cr>
 nn <leader>se :setlocal spell! spelllang=en_us<cr>
 nn <leader>sg :setlocal spell! spelllang=de<cr>
-"nn <leader>o :call ModifiedTagbarToggle()<cr>
 " see http://superuser.com/questions/195022/vim-how-to-synchronize-nerdtree-with-current-opened-tab-file-path
 nn <leader>o :NERDTreeFind<cr>
 nn <leader>c :NERDTreeToggle<cr>
@@ -386,33 +314,33 @@ nn <C-a>15 15gt
 
 if has('nvim')
   " leave terminal mode
-  tnoremap <C-a> <C-\><C-n>
-  tnoremap <C-a>a <C-\><C-n>
+  tno <C-a> <C-\><C-n>
+  tno <C-a>a <C-\><C-n>
   " Create new tab
-  tnoremap <C-a>c <C-\><C-n>:$tabnew<cr>
+  tno <C-a>c <C-\><C-n>:$tabnew<cr>
 
   " better navigation in terminal mode
-  tnoremap <C-a><left> <C-\><C-n><C-w>h
-  tnoremap <C-a><down> <C-\><C-n><C-w>j
-  tnoremap <C-a><up> <C-\><C-n><C-w>k
-  tnoremap <C-a><right> <C-\><C-n><C-w>l
+  tno <C-a><left> <C-\><C-n><C-w>h
+  tno <C-a><down> <C-\><C-n><C-w>j
+  tno <C-a><up> <C-\><C-n><C-w>k
+  tno <C-a><right> <C-\><C-n><C-w>l
 
   " Jump to tab by typing its number
-  tnoremap <C-a>1 <C-\><C-n>1gt
-  tnoremap <C-a>2 <C-\><C-n>2gt
-  tnoremap <C-a>3 <C-\><C-n>3gt
-  tnoremap <C-a>4 <C-\><C-n>4gt
-  tnoremap <C-a>5 <C-\><C-n>5gt
-  tnoremap <C-a>6 <C-\><C-n>6gt
-  tnoremap <C-a>7 <C-\><C-n>7gt
-  tnoremap <C-a>8 <C-\><C-n>8gt
-  tnoremap <C-a>9 <C-\><C-n>9gt
-  tnoremap <C-a>10 <C-\><C-n>10gt
-  tnoremap <C-a>11 <C-\><C-n>11gt
-  tnoremap <C-a>12 <C-\><C-n>12gt
-  tnoremap <C-a>13 <C-\><C-n>13gt
-  tnoremap <C-a>14 <C-\><C-n>14gt
-  tnoremap <C-a>15 <C-\><C-n>15gt
+  tno <C-a>1 <C-\><C-n>1gt
+  tno <C-a>2 <C-\><C-n>2gt
+  tno <C-a>3 <C-\><C-n>3gt
+  tno <C-a>4 <C-\><C-n>4gt
+  tno <C-a>5 <C-\><C-n>5gt
+  tno <C-a>6 <C-\><C-n>6gt
+  tno <C-a>7 <C-\><C-n>7gt
+  tno <C-a>8 <C-\><C-n>8gt
+  tno <C-a>9 <C-\><C-n>9gt
+  tno <C-a>10 <C-\><C-n>10gt
+  tno <C-a>11 <C-\><C-n>11gt
+  tno <C-a>12 <C-\><C-n>12gt
+  tno <C-a>13 <C-\><C-n>13gt
+  tno <C-a>14 <C-\><C-n>14gt
+  tno <C-a>15 <C-\><C-n>15gt
 endif
 
 "}}}
@@ -567,6 +495,12 @@ augroup configgroup
   au BufNewFile,BufRead *.tex set textwidth=80 | set colorcolumn=81 | set spell
   " automatically move to insert mode once a terminal buffer is entered
   au WinEnter * if &buftype == 'terminal' | :startinsert | endif
+
+  " auto commands that should only work when a gui is running
+  if has("gui_running")
+    " Maximize GUI with wmctrl
+    au VimEnter * call system('wmctrl -i -b add,maximized_vert,maximized_horz -r'.v:windowid)
+  endif
 
   " auto commands that should only work in neovim
   if has('nvim')
