@@ -142,9 +142,11 @@ function! CustomTabLabel(n)
   let name = bufname(buflist[winnr - 1])
   " check if the buffer is a terminal
   if name =~ 'term:'
-    return '[' . a:n . ':' . name . ']'
+    let shortName = substitute(name, 'term://.*//.*:\(.*\)', 'term:\1', '')
+    return '[' . a:n . ':' . shortName . ']'
   elseif !empty(name)
-    return '[' . a:n . ':' . name . ']'
+    let shortName = substitute(name, '.*/\(.*\)', '\1', '')
+    return '[' . a:n . ':' . shortName . ']'
   else
     return '[' . a:n . ':No Name]'
   endif
