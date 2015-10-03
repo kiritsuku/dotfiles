@@ -1,52 +1,48 @@
-" Vundle config {{{
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-"}}}
 " Plugin config {{{
-Plugin 'gmarik/Vundle.vim'
-Plugin 'scrooloose/syntastic'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-abolish'
-Plugin 'mileszs/ack.vim'
-Plugin 'drewfradette/Conque-Shell'
-Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'altercation/vim-colors-solarized'
-"Plugin 'majutsushi/tagbar'
-Plugin 'rking/ag.vim'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'vim-scripts/TagHighlight'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'lervag/vimtex'
-Plugin 'bling/vim-airline'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
+" Plugin manager: https://github.com/junegunn/vim-plug
+call plug#begin('~/.vim/plugged')
+" adds colorthemes
+Plug 'romainl/flattened'
+Plug 'scrooloose/syntastic'
+Plug 'scrooloose/nerdtree'
+Plug 'Valloric/YouCompleteMe', { 'do': 'python2 ./install.py' }
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-abolish'
+Plug 'mileszs/ack.vim'
+Plug 'drewfradette/Conque-Shell'
+Plug 'octol/vim-cpp-enhanced-highlight'
+"Plug 'majutsushi/tagbar'
+Plug 'rking/ag.vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'vim-scripts/TagHighlight'
+Plug 'jiangmiao/auto-pairs'
+Plug 'lervag/vimtex'
+Plug 'bling/vim-airline'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 " Edit images in vim
-"Plugin 'tpope/vim-afterimage'
-Plugin 'zhaocai/GoldenView.Vim'
-Plugin 'othree/xml.vim'
-Plugin 'terryma/vim-multiple-cursors'
+"Plug 'tpope/vim-afterimage'
+Plug 'zhaocai/GoldenView.Vim'
+Plug 'othree/xml.vim'
+Plug 'terryma/vim-multiple-cursors'
 " Allows to embed vim in other programs
-"Plugin 'ardagnir/vimbed'
+"Plug 'ardagnir/vimbed'
 " Expand region by key combination
-Plugin 'terryma/vim-expand-region'
-Plugin 'easymotion/vim-easymotion'
-
-call vundle#end()
+Plug 'terryma/vim-expand-region'
+Plug 'easymotion/vim-easymotion'
+call plug#end()
 " }}}
 " Vim config {{{
 
 filetype on
-" required for Vundle
 filetype plugin indent on
 syntax on
 
-if !has("gui_running")
+if has('nvim')
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+  colorscheme flattened_light
+elseif !has("gui_running")
   set t_Co=256
   set term=screen-256color
   colorscheme desert
@@ -55,7 +51,7 @@ if !has("gui_running")
   " highlight line of cursor
   hi CursorLine term=bold cterm=bold
 else
-  colorscheme solarized
+  colorscheme flattened_light
   "set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10
   set guifont=Fantasque\ Sans\ Mono\ Italic\ 11
   " Maximize GUI with wmctrl
@@ -134,6 +130,11 @@ set dir=/tmp//,.
 set undodir=/tmp//,.
 " Enable to move the cursor freely around
 set virtualedit=all
+" Enable mouse support
+set mouse=a
+
+" Specify a custom tabline
+set tabline=%!MyTabLine()
 
 " use , instead of \ for mapleader
 let mapleader=","
@@ -141,6 +142,45 @@ let mapleader=","
 let g:tex_flavor="latex"
 "}}}
 " Function definitions {{{
+
+function! MyTabLabel(n)
+  let buflist = tabpagebuflist(a:n)
+  let winnr = tabpagewinnr(a:n)
+  let name = bufname(buflist[winnr - 1])
+  " check if the buffer is a terminal
+  if name =~ 'term:'
+    return '[' . a:n . ':' . name . ']'
+  elseif !empty(name)
+    return '[' . a:n . ':' . name . ']'
+  else
+    return '[' . a:n . ':No Name]'
+  endif
+endfunction
+
+function! MyTabLine()
+  let s = ''
+  let nrOfTabs = tabpagenr('$')
+  for i in range(nrOfTabs)
+    " select the highlighting
+    if i + 1 == tabpagenr()
+      let s .= '%#TabLineSel#'
+    else
+      let s .= '%#TabLine#'
+    endif
+
+    " set the tab page number (for mouse clicks)
+    let s .= '%' . (i + 1) . 'T'
+
+    " the label is made by MyTabLabel()
+    let s .= '%{MyTabLabel(' . (i + 1) . ')}'
+  endfor
+
+  " after the last tab fill with TabLineFill and reset tab page nr
+  let s .= '%#TabLineFill#%T'
+
+  return s
+endfunction
+
 " Move `vcount` lines down and move cursor to beginning of line if more
 " than one line should be moved down.
 function! MoveDown(vcount)
@@ -330,6 +370,25 @@ vn <silent> y y`]
 vn <silent> p p`]
 nn <silent> p p`]
 
+" Create new tab
+nn <C-a>c :$tabnew<cr>
+" <C-a> is also used to switch windows in terminal mode
+nn <C-a> <C-w>
+
+if has('nvim')
+  " leave terminal mode
+  tnoremap <C-a> <C-\><C-n>
+  tnoremap <C-a>a <C-\><C-n>
+  " Create new tab
+  tnoremap <C-a>c <C-\><C-n>:$tabnew<cr>
+
+  " better navigation in terminal mode
+  tnoremap <C-a><left> <C-\><C-n><C-w>h
+  tnoremap <C-a><down> <C-\><C-n><C-w>j
+  tnoremap <C-a><up> <C-\><C-n><C-w>k
+  tnoremap <C-a><right> <C-\><C-n><C-w>l
+endif
+
 "}}}
 " NERDTree config {{{
 
@@ -467,19 +526,28 @@ endfunction()
 augroup configgroup
   au!
   " remove trailing whitespace from file
-  autocmd BufWritePre * :call RemoveTrailingWhitespace()
+  au BufWritePre * :call RemoveTrailingWhitespace()
   " automatically reloads .vimrc whenever it has changed
-  autocmd BufWritePost .vimrc source $MYVIMRC
+  au BufWritePost .vimrc source $MYVIMRC
   " automatically save document when focus is lost
-  autocmd FocusLost * :call SaveAfterFocusLost()
+  au FocusLost * :call SaveAfterFocusLost()
   " configure vrapperrc filetype
-  autocmd BufNewFile,BufRead *.vrapperrc set filetype=vim
+  au BufNewFile,BufRead *.vrapperrc set filetype=vim
   " configure sbt filetype
-  autocmd BufNewFile,BufRead *.sbt set filetype=scala
+  au BufNewFile,BufRead *.sbt set filetype=scala
   " enable useful features for git commit files
-  autocmd FileType gitcommit set spell | set colorcolumn=72
+  au FileType gitcommit set spell | set colorcolumn=72
   " set a maximum textwidth to tex files
-  autocmd BufNewFile,BufRead *.tex set textwidth=80 | set colorcolumn=81 | set spell
+  au BufNewFile,BufRead *.tex set textwidth=80 | set colorcolumn=81 | set spell
+  " automatically move to insert mode once a terminal buffer is entered
+  au WinEnter * if &buftype == 'terminal' | :startinsert | endif
+
+  " auto commands that should only work in neovim
+  if has('nvim')
+    " open terminal for every created tab
+    au TabNewEntered * :term
+    au VimEnter * :term
+  endif
 augroup END
 "}}}
 " Vim command docs {{{
