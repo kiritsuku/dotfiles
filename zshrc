@@ -10,7 +10,6 @@ antigen bundle zsh-users/zsh-completions
 antigen bundle autojump
 antigen apply
 # }}}
-
 # Zsh prompt {{{
 PROMPT='[%{$fg[red]%}%n%{$reset_color%}@%{$fg[magenta]%}%m%{$reset_color%} → %{$fg[blue]%}%~%{$reset_color%}$(git_prompt_info)]
 %# '
@@ -43,7 +42,6 @@ function add-git-prompt {
 #RPROMPT='$symbols $return_code$(git_prompt_status)%{$reset_color%}'
 add-git-prompt RPROMPT
 # }}}
-
 # Vi mode {{{
 #
 ## enable vi mode
@@ -74,7 +72,6 @@ add-git-prompt RPROMPT
 #zle -N zle-line-init
 #zle -N zle-keymap-select
 # }}}
-
 # Zsh config {{{
 
 # weird & wacky pattern matching...
@@ -102,7 +99,6 @@ else
   source ~/.ssh-env
 fi
 # }}}
-
 # Exports {{{
 export EDITOR="vim"
 # Do not clear screen after less is exited
@@ -126,7 +122,6 @@ export PATH=$PATH:$GOPATH/bin
 # make can't always handle parallel builds; enable on demand
 #export MAKEFLAGS="-j4 $MAKEFLAGS"
 # }}}
-
 # Aliase {{{
 alias -g cp='$HOME/bin/hidden/cp -B'
 alias -g mv='$HOME/bin/hidden/mv -B'
@@ -145,7 +140,6 @@ alias -g vim="stty stop '' -ixoff ; vim"
 alias -g v="nvim-client"
 alias -g gv="gvim"
 # }}}
-
 # Ranger {{{
 # Automatically jump to the directory ranger is located to when one leaves ranger
 function ranger-cd {
