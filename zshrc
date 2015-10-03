@@ -142,7 +142,7 @@ alias pta='tools/partest-ack'
 ##### Vim
 # needed to enable save on CTRL-S
 alias -g vim="stty stop '' -ixoff ; vim"
-alias -g v="vim"
+alias -g v="nvim-client"
 alias -g gv="gvim"
 # }}}
 
