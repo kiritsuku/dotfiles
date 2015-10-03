@@ -296,21 +296,9 @@ nn <C-a>c :$tabnew<cr>
 nn <C-a> <C-w>
 
 " Jump to tab by typing its number
-nn <C-a>1 1gt
-nn <C-a>2 2gt
-nn <C-a>3 3gt
-nn <C-a>4 4gt
-nn <C-a>5 5gt
-nn <C-a>6 6gt
-nn <C-a>7 7gt
-nn <C-a>8 8gt
-nn <C-a>9 9gt
-nn <C-a>10 10gt
-nn <C-a>11 11gt
-nn <C-a>12 12gt
-nn <C-a>13 13gt
-nn <C-a>14 14gt
-nn <C-a>15 15gt
+for i in range(1, 9)
+  exe 'nn <C-a>' . i . ' ' . i . 'gt'
+endfor
 
 if has('nvim')
   " leave terminal mode
@@ -326,21 +314,9 @@ if has('nvim')
   tno <C-a><right> <C-\><C-n><C-w>l
 
   " Jump to tab by typing its number
-  tno <C-a>1 <C-\><C-n>1gt
-  tno <C-a>2 <C-\><C-n>2gt
-  tno <C-a>3 <C-\><C-n>3gt
-  tno <C-a>4 <C-\><C-n>4gt
-  tno <C-a>5 <C-\><C-n>5gt
-  tno <C-a>6 <C-\><C-n>6gt
-  tno <C-a>7 <C-\><C-n>7gt
-  tno <C-a>8 <C-\><C-n>8gt
-  tno <C-a>9 <C-\><C-n>9gt
-  tno <C-a>10 <C-\><C-n>10gt
-  tno <C-a>11 <C-\><C-n>11gt
-  tno <C-a>12 <C-\><C-n>12gt
-  tno <C-a>13 <C-\><C-n>13gt
-  tno <C-a>14 <C-\><C-n>14gt
-  tno <C-a>15 <C-\><C-n>15gt
+  for i in range(1, 9)
+    exe 'tno <C-a>' . i . ' <C-\><C-n>' . i . 'gt'
+  endfor
 endif
 
 "}}}
