@@ -89,7 +89,7 @@ set splitright
 " show completion menu in command mode
 set wildmenu
 " show matches in wildmenu but don't complete automatically
-set wildmode=longest:full
+set wildmode=full
 " redraw only when necessary
 set lazyredraw
 " Always show statusline
