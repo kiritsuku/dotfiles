@@ -1,6 +1,11 @@
 " Plugin config {{{
 " Plugin manager: https://github.com/junegunn/vim-plug
 call plug#begin('~/.vim/plugged')
+
+" Both python2 and python3 support needs to be installed explicitly:
+" python -m easy_install --user neovim
+" python2 -m easy_install --user neovim
+
 " adds colorthemes
 Plug 'romainl/flattened'
 Plug 'scrooloose/syntastic'
