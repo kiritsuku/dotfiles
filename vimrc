@@ -476,8 +476,6 @@ augroup configgroup
   au FileType gitcommit set spell | set colorcolumn=72
   " set a maximum textwidth to tex files
   au BufNewFile,BufRead *.tex set textwidth=80 | set colorcolumn=81 | set spell
-  " automatically move to insert mode once a terminal buffer is entered
-  au WinEnter * if &buftype == 'terminal' | :startinsert | endif
 
   " auto commands that should only work when a gui is running
   if has("gui_running")
@@ -487,9 +485,10 @@ augroup configgroup
 
   " auto commands that should only work in neovim
   if has('nvim')
+    " automatically move to insert mode once a terminal buffer is entered
+    au WinEnter * if &buftype == 'terminal' | :startinsert | endif
     " open terminal for every created tab
     au TabNewEntered * :term
-    au VimEnter * :term
   endif
 augroup END
 "}}}
