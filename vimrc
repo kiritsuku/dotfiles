@@ -241,9 +241,9 @@ nn <leader>sg :setlocal spell! spelllang=de<cr>
 " see http://superuser.com/questions/195022/vim-how-to-synchronize-nerdtree-with-current-opened-tab-file-path
 nn <leader>o :NERDTreeFind<cr>
 nn <leader>c :NERDTreeToggle<cr>
-nn <leader>hs :set syntax=scala<cr>
-nn <leader>hh :set syntax=sh<cr>
-nn <leader>hn :set syntax=off<cr>
+nn <leader>hs :setlocal syntax=scala<cr>
+nn <leader>hh :setlocal syntax=sh<cr>
+nn <leader>hn :setlocal syntax=off<cr>
 " jump to first error location
 no <leader>je :cwindow<cr>:cc<cr><c-w>bz<cr><cr>
 " jump to next error location
@@ -470,13 +470,13 @@ augroup configgroup
   " automatically save document when focus is lost
   au FocusLost * :call SaveAfterFocusLost()
   " configure vrapperrc filetype
-  au BufNewFile,BufRead *.vrapperrc set filetype=vim
+  au BufNewFile,BufRead *.vrapperrc setlocal filetype=vim
   " configure sbt filetype
-  au BufNewFile,BufRead *.sbt set filetype=scala
+  au BufNewFile,BufRead *.sbt setlocal filetype=scala
   " enable useful features for git commit files
-  au FileType gitcommit set spell | set colorcolumn=72
+  au FileType gitcommit setlocal spell | setlocal colorcolumn=72
   " set a maximum textwidth to tex files
-  au BufNewFile,BufRead *.tex set textwidth=80 | set colorcolumn=81 | set spell
+  au BufNewFile,BufRead *.tex setlocal textwidth=80 | setlocal colorcolumn=81 | setlocal spell
 
   " auto commands that should only work when a gui is running
   if has("gui_running")
