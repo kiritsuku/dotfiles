@@ -50,9 +50,6 @@
         [exec]   (Scala-Eclipse) {/home/antoras/software/scala-eclipse/eclipse -vmargs -server -Xms512m -Xmx3500m -Xss3M -XX:MaxPermSize=512m -XX:+UseConcMarkSweepGC}
         [exec]   (Scala-Eclipse-Prod) {/home/antoras/software/scala-eclipse-prod/eclipse -vmargs -server -Xms512m -Xmx3500m -Xss3M -XX:MaxPermSize=512m -XX:+UseConcMarkSweepGC}
         [exec]   (HS-Eclipse) {/home/antoras/software/hs-eclipse/eclipse -vmargs -server -Xms512m -Xmx1024m -Xss1M -XX:MaxPermSize=512m -XX:+UseConcMarkSweepGC}
-        [exec]   (Java-Eclipse) {/home/antoras/software/eclipse/eclipse -vmargs -server -Xms512m -Xmx1024m -Xss1M -XX:MaxPermSize=512m -XX:+UseConcMarkSweepGC}
-        [exec]   (Cpp-Eclipse) {/home/antoras/software/cpp-eclipse/eclipse -vmargs -server}
-        [exec]   (LaTeX-Eclipse) {/home/antoras/software/latex-eclipse/eclipse}
         [exec]   (subl) {subl}
         [exec]   (nano) {xterm -e nano}
         [exec]   (vim) {xterm -e vim}
