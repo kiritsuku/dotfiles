@@ -40,6 +40,7 @@ syntax on
 if has('nvim')
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+  let g:terminal_scrollback_buffer_size=10000
   colorscheme flattened_light
 elseif has("gui_running")
   colorscheme flattened_light
