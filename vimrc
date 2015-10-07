@@ -199,6 +199,13 @@ function! MoveUp(vcount)
     exe "normal! ". a:vcount ."k|"
   endif
 endfunction
+
+" Create a new tab and open a terminal buffer in it
+function! CreateNewTabShell()
+  $tabnew
+  term
+endfunction()
+
 "}}}
 " Key combinations {{{
 
@@ -297,7 +304,7 @@ vn <silent> p p`]
 nn <silent> p p`]
 
 " Create new tab
-nn <C-a>c :$tabnew<cr>
+nn <C-a>c :call CreateNewTabShell()<cr>
 " <C-a> is also used to switch windows in terminal mode
 nn <C-a> <C-w>
 
@@ -311,7 +318,7 @@ if has('nvim')
   tno <C-a> <C-\><C-n>
   tno <C-a>a <C-\><C-n>
   " Create new tab
-  tno <C-a>c <C-\><C-n>:$tabnew<cr>
+  tno <C-a>c <C-\><C-n>:call CreateNewTabShell()<cr>
 
   " better navigation in terminal mode
   tno <C-a><left> <C-\><C-n><C-w>h
@@ -486,8 +493,6 @@ augroup configgroup
   if has('nvim')
     " automatically move to insert mode once a terminal buffer is entered
     au WinEnter * if &buftype == 'terminal' | :startinsert | endif
-    " open terminal for every created tab
-    au TabNewEntered * :term
   endif
 augroup END
 "}}}
