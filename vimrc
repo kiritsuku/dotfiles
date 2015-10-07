@@ -45,8 +45,6 @@ if has('nvim')
 elseif has("gui_running")
   colorscheme flattened_light
   set guifont=Fantasque\ Sans\ Mono\ Italic\ 11
-  " Maximize GUI with wmctrl
-  autocmd VimEnter * call system('wmctrl -i -b add,maximized_vert,maximized_horz -r'.v:windowid)
 else
   set t_Co=256
   set term=screen-256color
