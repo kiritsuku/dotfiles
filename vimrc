@@ -427,7 +427,7 @@ let g:ctrlp_by_filename=1
 " vimtex config {{{
 
 let g:vimtex_enbaled=1
-let g:vimtex_latexmk_build_dir='out'
+let g:vimtex_latexmk_build_dir='bin'
 let g:vimtex_fold_enabled=1
 let g:vimtex_quickfix_ignored_warnings = [
   \ "Usage of package",
