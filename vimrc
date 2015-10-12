@@ -332,6 +332,10 @@ if has('nvim')
   endfor
 endif
 
+" <home> goes to the beginning of the text on first press and the
+" beginning of the line on second. It alternates afterwards.
+nn <expr> <home> virtcol('.') - 1 <= indent('.') && col('.') > 1 ? '0' : '_'
+
 "}}}
 " NERDTree config {{{
 
