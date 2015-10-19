@@ -72,10 +72,6 @@ fi
 # }}}
 # Exports {{{
 export EDITOR="vim"
-# Do not clear screen after less is exited
-# See: http://unix.stackexchange.com/questions/38634/is-there-any-way-to-exit-less-without-clearing-the-screen
-export LESS="-r -X"
-
 # bin folder
 export PATH=$HOME/bin:$PATH
 # ruby executables
@@ -111,7 +107,17 @@ alias -g vim="stty stop '' -ixoff ; vim"
 alias -g v="nvim-client"
 alias -g gv="gvim"
 # }}}
-# Ranger {{{
+# FZF config {{{
+
+# Load fzf config
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Setting ag as the default source for fzf
+export FZF_DEFAULT_COMMAND='ag -l -g ""'
+# To apply the command to CTRL-T as well
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# }}}
+# Ranger config {{{
 # Automatically jump to the directory ranger is located to when one leaves ranger
 function ranger-cd {
   tempfile='/tmp/ranger-chosendir'
