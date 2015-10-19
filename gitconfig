@@ -6,6 +6,7 @@
 [core]
     editor = vim
     fileMode = false
+    pager = less -S -X
 [merge]
     tool = gvimdiff
     conflictstyle = diff3
