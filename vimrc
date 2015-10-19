@@ -9,26 +9,28 @@ call plug#begin('~/.vim/plugged')
 " adds colorthemes
 Plug 'romainl/flattened'
 Plug 'scrooloose/syntastic'
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'Valloric/YouCompleteMe', { 'do': 'python2 ./install.py' }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-abolish'
 Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-scripts/TagHighlight'
 Plug 'jiangmiao/auto-pairs'
-Plug 'lervag/vimtex'
+Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'bling/vim-airline'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 " Edit images in vim
 "Plug 'tpope/vim-afterimage'
 Plug 'zhaocai/GoldenView.Vim'
-Plug 'othree/xml.vim'
+Plug 'othree/xml.vim', { 'for': ['xml', 'html', 'xhtml'] }
 Plug 'terryma/vim-multiple-cursors'
 " Expand region by key combination
 Plug 'terryma/vim-expand-region'
 Plug 'easymotion/vim-easymotion'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+Plug 'junegunn/fzf.vim'
+
 call plug#end()
 " }}}
 " Vim config {{{
@@ -54,11 +56,6 @@ else
   " highlight line of cursor
   hi CursorLine term=bold cterm=bold
 endif
-
-" Enable patched fonts for *line
-" see https://powerline.readthedocs.org/en/master/installation/linux.html#fonts-installation
-" on how to get patched fonts
-let g:airline_powerline_fonts=1
 
 " enable line numbers
 set number
@@ -238,17 +235,19 @@ ino <C-d> <C-c>
 
 " clear search highlighting pattern
 nn <silent> <leader><space> :let @/ = ""<cr>
-nn <leader>r :CtrlP<cr>
-nn <leader>t :CtrlPTag<cr>
-nn <leader>b :CtrlPBuffer<cr>
+nn <leader>r :Files<cr>
+nn <leader>t :Tags<cr>
+nn <leader>b :Buffer<cr>
+nn <leader>h: :History<cr>
+nn <leader>h/ :History<cr>
 nn <leader>se :setlocal spell! spelllang=en_us<cr>
 nn <leader>sg :setlocal spell! spelllang=de<cr>
 " see http://superuser.com/questions/195022/vim-how-to-synchronize-nerdtree-with-current-opened-tab-file-path
 nn <leader>o :NERDTreeFind<cr>
 nn <leader>c :NERDTreeToggle<cr>
-nn <leader>hs :setlocal syntax=scala<cr>
-nn <leader>hh :setlocal syntax=sh<cr>
-nn <leader>hn :setlocal syntax=off<cr>
+nn <leader>ss :setlocal syntax=scala<cr>
+nn <leader>sh :setlocal syntax=sh<cr>
+nn <leader>sn :setlocal syntax=off<cr>
 " jump to first error location
 no <leader>je :cwindow<cr>:cc<cr><c-w>bz<cr><cr>
 " jump to next error location
@@ -283,7 +282,7 @@ nn <C-a>- :split<cr>
 nn / /\v
 vn / /\v
 " search text that is visually selected
-vn // y/<C-r>"<cc>
+vn // y/<C-r>"<cr>
 
 " disable history view
 nn q: <nop>
@@ -446,7 +445,23 @@ let g:AutoPairsCenterLine=0
 let g:AutoPairsFlyMode=1
 "}}}
 " Airline config {{{
-let g:airline_inactive_collapse=0
+let g:airline_inactive_collapse = 0
+
+" Enable patched fonts for *line
+" see https://powerline.readthedocs.org/en/master/installation/linux.html#fonts-installation
+" on how to get patched fonts
+let g:airline_powerline_fonts = 1
+
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#show_tabs = 1
+"let g:airline#extensions#tabline#show_buffers = 0
+"let g:airline#extensions#tabline#show_close_button = 0
+"let g:airline#extensions#tabline#show_tab_type = 0
+"let g:airline#extensions#tabline#show_tab_nr = 1
+"let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
+"let g:airline#extensions#tabline#left_sep = ''
+"let g:airline#extensions#tabline#left_alt_sep = ''
+"let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 "}}}
 " Easymotion config {{{
 " }}}
@@ -476,6 +491,8 @@ augroup configgroup
   au BufWritePre * :call RemoveTrailingWhitespace()
   " automatically reloads .vimrc whenever it has changed
   au BufWritePost .vimrc source $MYVIMRC
+  " automatically reloads .nvimrc whenever it has changed
+  au BufWritePost .nvimrc source $MYVIMRC
   " automatically save document when focus is lost
   au FocusLost * :call SaveAfterFocusLost()
   " configure vrapperrc filetype
