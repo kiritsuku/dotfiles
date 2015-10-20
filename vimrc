@@ -240,6 +240,7 @@ nn <leader>t :Tags<cr>
 nn <leader>b :Buffer<cr>
 nn <leader>h: :History<cr>
 nn <leader>h/ :History<cr>
+nn <leader>f :Ag<cr>
 nn <leader>se :setlocal spell! spelllang=en_us<cr>
 nn <leader>sg :setlocal spell! spelllang=de<cr>
 " see http://superuser.com/questions/195022/vim-how-to-synchronize-nerdtree-with-current-opened-tab-file-path
