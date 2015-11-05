@@ -332,6 +332,13 @@ if has('nvim')
   tno <C-a>v <C-\><C-n>:vsplit \| :term<cr>
   tno <C-a>s <C-\><C-n>:split \| :term<cr>
 
+  " vertical split with |
+  tno <C-w><Bar> <C-\><C-n>:vsplit \| :term<cr>
+  tno <C-a><Bar> <C-\><C-n>:vsplit \| :term<cr>
+  " horizontal split with -
+  tno <C-w>- <C-\><C-n>:split \| :term<cr>
+  tno <C-a>- <C-\><C-n>:split \| :term<cr>
+
   " Jump to tab by typing its number
   for i in range(1, 9)
     exe 'tno <C-a>' . i . ' <C-\><C-n>' . i . 'gt'
