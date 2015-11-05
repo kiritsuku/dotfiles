@@ -96,6 +96,7 @@ alias -g rm='$HOME/bin/hidden/rm -B'
 alias -g g='git'
 alias -g p='sudo pacman'
 alias -g y='yaourt'
+alias -g les='less -X'
 
 ##### Scala partest
 alias pt='test/partest'
