@@ -8,12 +8,11 @@ call plug#begin('~/.vim/plugged')
 
 " adds colorthemes
 Plug 'romainl/flattened'
-Plug 'scrooloose/syntastic'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
-Plug 'Valloric/YouCompleteMe', { 'do': 'python2 ./install.py' }
+Plug 'Valloric/YouCompleteMe', { 'do': 'python2 ./install.py --clang-completer' }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-abolish'
-Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['cpp', 'hpp', 'c', 'h'] }
 Plug 'vim-scripts/TagHighlight'
 Plug 'jiangmiao/auto-pairs'
 Plug 'lervag/vimtex', { 'for': 'tex' }
@@ -30,6 +29,7 @@ Plug 'terryma/vim-expand-region'
 Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'junegunn/fzf.vim'
+Plug 'benekastah/neomake'
 
 call plug#end()
 " }}}
@@ -303,17 +303,17 @@ vn <silent> y y`]
 vn <silent> p p`]
 nn <silent> p p`]
 
-" Create new tab
-nn <C-a>c :call CreateNewTabShell()<cr>
-" <C-a> is also used to switch windows in terminal mode
-nn <C-a> <C-w>
-
 " Jump to tab by typing its number
 for i in range(1, 9)
   exe 'nn <C-a>' . i . ' ' . i . 'gt'
 endfor
 
 if has('nvim')
+  " Create new tab
+  nn <C-a>c :call CreateNewTabShell()<cr>
+  " <C-a> is also used to switch windows in terminal mode
+  nn <C-a> <C-w>
+
   " leave terminal mode
   tno <C-a> <C-\><C-n>
   tno <C-a>a <C-\><C-n>
@@ -326,10 +326,21 @@ if has('nvim')
   tno <C-a><up> <C-\><C-n><C-w>k
   tno <C-a><right> <C-\><C-n><C-w>l
 
+  " create a new shell when a split is opened
+  tno <C-w>v <C-\><C-n>:vsplit \| :term<cr>
+  tno <C-w>s <C-\><C-n>:split \| :term<cr>
+  tno <C-a>v <C-\><C-n>:vsplit \| :term<cr>
+  tno <C-a>s <C-\><C-n>:split \| :term<cr>
+
   " Jump to tab by typing its number
   for i in range(1, 9)
     exe 'tno <C-a>' . i . ' <C-\><C-n>' . i . 'gt'
   endfor
+else
+  " Create new tab
+  nn <C-a>c :$tabnew<cr>
+  " <C-a> is also used to switch windows in terminal mode
+  nn <C-a> <C-w>
 endif
 
 " <home> goes to the beginning of the text on first press and the
@@ -368,6 +379,7 @@ let g:ycm_confirm_extra_conf=0
 let g:UltiSnipsExpandTrigger="<c-k>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsUsePythonVersion=2
 "}}}
 " Ranger config {{{
 
@@ -432,7 +444,7 @@ let g:ctrlp_by_filename=1
 
 let g:vimtex_enbaled=1
 let g:vimtex_latexmk_build_dir='bin'
-let g:vimtex_fold_enabled=1
+let g:vimtex_fold_enabled=0
 let g:vimtex_quickfix_ignored_warnings = [
   \ "Usage of package",
   \ "float@addtolists detected",
@@ -514,7 +526,7 @@ augroup configgroup
   " auto commands that should only work in neovim
   if has('nvim')
     " automatically move to insert mode once a terminal buffer is entered
-    au WinEnter * if &buftype == 'terminal' | :startinsert | endif
+    au WinEnter * if &buftype == 'terminal' | startinsert | endif
   endif
 augroup END
 "}}}
