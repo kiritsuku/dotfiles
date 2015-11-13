@@ -50,6 +50,10 @@ elseif has("gui_running")
 else
   set t_Co=256
   set term=screen-256color
+  " better terminal response time
+  set ttyfast
+  " vims default backspace behavior is annoying
+  set backspace=indent,eol,start
   colorscheme desert
   " no background
   hi Normal ctermbg=none
@@ -108,8 +112,6 @@ set foldlevel=0
 set scrolloff=3
 " show line of cursor
 set cursorline
-" better terminal response time
-set ttyfast
 " store undofiles between sessions
 set undofile
 " ignore case in search
@@ -126,9 +128,10 @@ set undodir=/tmp//,.
 set virtualedit=all
 " Enable mouse support
 set mouse=a
-
 " Specify a custom tabline
 set tabline=%!CustomTabLine()
+" use + register by default for all yank and delete operations
+set clipboard+=unnamedplus
 
 " use , instead of \ for mapleader
 let mapleader=","
