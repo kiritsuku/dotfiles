@@ -9,7 +9,9 @@ antigen bundle autojump
 antigen apply
 # }}}
 # Zsh prompt {{{
-PROMPT='[%{$fg[red]%}%n%{$reset_color%}@%{$fg[magenta]%}%m%{$reset_color%} → %{$fg[blue]%}%~%{$reset_color%}$(git_prompt_info)]
+
+# `fg` is needed for color names and `FG` for color numbers
+PROMPT='[%{$fg[red]%}%n%{$reset_color%}@%{$fg[magenta]%}%m%{$reset_color%} → %{$FG[039]%}%~%{$reset_color%}$(git_prompt_info)]
 %# '
 
 ZSH_THEME_GIT_PROMPT_PREFIX=" on %{$fg[green]%}"
@@ -41,6 +43,14 @@ function add-git-prompt {
 add-git-prompt RPROMPT
 # }}}
 # Zsh config {{{
+
+# set colors for zsh syntax highlighting
+# execute `spectrum_ls` to get a list of color values
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=208'
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=208'
+ZSH_HIGHLIGHT_STYLES[dollar-quoted-argument]='fg=208'
+ZSH_HIGHLIGHT_STYLES[path_approx]='fg=208,underline'
+ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=208'
 
 # Colortheme from https://github.com/seebi/dircolors-solarized
 eval `dircolors ~/bin/dircolors.ansi-light`
