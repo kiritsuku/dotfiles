@@ -143,6 +143,9 @@
     unassumeall = "!git assumed | xargs git update-index --no-assume-unchanged"
 
     snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
+
+    # Delete all pull request branches
+    prda = "!git branch -D `git for-each-ref --format='%(refname:short)' refs/heads/pr/`"
 [color "branch"]
     current = yellow bold
     local = green bold
