@@ -51,13 +51,9 @@
 
     l = log
     # shows the log in a nicer format
-    #ls = log --pretty=format:'%Cred%h%Creset - %Cgreen%an%Creset - %ad%C(yellow)%d%Creset%n    %s%n' --date=local
     ls = log --pretty=format:'%C(red)%h%Creset -%C(yellow)%d%Creset %s %C(green)(%cr)%Creset %C(bold blue)[%an]%Creset'
     # shows unpushed commits
     lu = log --branches --not --remotes --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
-    # shows the next commits after a given commit
-    # example: g lnext 894e8b4e..master
-    lnext = log --reverse --ancestry-path
 
     rl = reflog
 
@@ -130,19 +126,10 @@
     # tag release: g tr "msg" tag.version
     tr = tag -s -m
 
-    ns = notes show
-    nc = notes add -m
-    na = notes append -m
-    ne = notes edit
-    nr = notes remove
-    nl = notes list
-
     assume = update-index --assume-unchanged
     unassume = update-index --no-assume-unchanged
     assumed = "!git ls-files -v | grep ^h | cut -c 3-"
     unassumeall = "!git assumed | xargs git update-index --no-assume-unchanged"
-
-    snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
 
     # Delete all pull request branches
     prda = "!git branch -D `git for-each-ref --format='%(refname:short)' refs/heads/pr/`"
