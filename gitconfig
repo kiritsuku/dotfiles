@@ -37,6 +37,7 @@
     pf = push -f
     pm = push origin master
     pg = push origin gh-pages
+    puu = push upstream
 
     rb = rebase
     rbc = rebase --continue
