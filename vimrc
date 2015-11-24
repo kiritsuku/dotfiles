@@ -6,8 +6,8 @@ call plug#begin('~/.vim/plugged')
 " python -m easy_install --user neovim
 " python2 -m easy_install --user neovim
 
-" adds colorthemes
 Plug 'romainl/flattened'
+Plug 'morhetz/gruvbox'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'Valloric/YouCompleteMe', { 'do': 'python2 ./install.py --clang-completer' }
 Plug 'tpope/vim-fugitive'
@@ -43,10 +43,14 @@ if has('nvim')
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
   let g:terminal_scrollback_buffer_size=10000
-  colorscheme flattened_light
+  colorscheme gruvbox
+  let g:gruvbox_contrast_dark='soft'
+  set background=dark
 elseif has("gui_running")
-  colorscheme flattened_light
+  colorscheme gruvbox
+  let g:gruvbox_contrast_dark='soft'
   set guifont=Fantasque\ Sans\ Mono\ Italic\ 11
+  set background=dark
 else
   set t_Co=256
   set term=screen-256color
@@ -124,6 +128,8 @@ set gdefault
 set dir=/tmp//,.
 " Store undo files in /tmp by their full path
 set undodir=/tmp//,.
+" Store backup files in /tmp by their full path
+set backupdir=/tmp//,.
 " Enable to move the cursor freely around
 set virtualedit=all
 " Enable mouse support
@@ -232,6 +238,7 @@ nn <silent> <home> g<home>
 ino <silent> <home> <C-o>g<home>
 nn <silent> <End> g<End>
 ino <silent> <End> <C-o>g<End>
+nn <silent> $ g$
 
 " leave insert mode with C-d
 ino <C-d> <C-c>
@@ -353,9 +360,12 @@ else
   nn <C-a> <C-w>
 endif
 
-" <home> goes to the beginning of the text on first press and the
-" beginning of the line on second. It alternates afterwards.
+" <home> goes to the beginning of the text on first press and to the
+" beginning of the line on second press. It alternates afterwards.
 nn <expr> <home> virtcol('.') - 1 <= indent('.') && col('.') > 1 ? '0' : '_'
+" <end> goes to the end of the text on first press and to the end of the line
+" on second press.
+nn <expr> <end> virtcol('.') <= virtcol('$')-1 ? 'g_' : winwidth(0)-1.'\|'
 
 "}}}
 " NERDTree config {{{
@@ -465,7 +475,8 @@ let g:vimtex_quickfix_ignored_warnings = [
 "}}}
 " AutoPairs config {{{
 let g:AutoPairsCenterLine=0
-let g:AutoPairsFlyMode=1
+let g:AutoPairsFlyMode=0
+
 "}}}
 " Airline config {{{
 let g:airline_inactive_collapse = 0
