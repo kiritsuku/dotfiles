@@ -1,35 +1,25 @@
 #!/bin/sh
 #
 # fluxbox startup-script:
-#
-# Lines starting with a '#' are ignored.
 
 # Change your keymap:
 #setxkbmap -layout de,de -variant neo,basic -option -option grp:sclk_toggle -option grp_led:scroll
-##setxkbmap -layout de,de -variant basic,neo -option -option grp:sclk_toggle -option grp_led:scroll
 setxkbmap de neo
-
-#xmodmap "/home/schaefer/.Xmodmap"
 
 # Applications you want to run with fluxbox.
 # MAKE SURE THAT APPS THAT KEEP RUNNING HAVE AN ''&'' AT THE END.
 #
-# unclutter -idle 2 &
-# wmnd &
-# wmsmixer -w &
-# idesk &
-
 export GDK_NATIVE_WINDOWS=true
+
 exec pulseaudio --start &
 exec ~/.screenlayout/screens.sh &
 exec /usr/bin/tilda &
 exec ~/.fehbg &
 exec qbittorrent &
-exec ~/bin/xflux -l 49.0 -g 8.4 &
-
 sleep 1 && exec /usr/bin/conky &
 exec /usr/bin/tint2 &
 exec dropbox &
+exec ~/bin/xflux -l 49.0 -g 8.4 &
 
 # And last but not least we start fluxbox.
 # Because it is the last app you have to run it with ''exec'' before it.
