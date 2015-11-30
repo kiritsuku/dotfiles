@@ -91,6 +91,6 @@ ${color3}Updates: ${color5}${execi 3600 cat /etc/cron.hourly/updates.log}
 ${color3}Mails: ${color5}${texeci 300 ~/bin/ant-mails}
 
 ${font Sans:bold:size=10}${color3}TIME ${color1}${hr 2}
-${font Sans:size=30}${alignc}${time %H:%M:%S}
+${color4}${font Sans:size=30}${alignc}${time %H:%M:%S}
 ${voffset -30}${font Sans:bold:size=10}${alignc}${time %d. %B %Y}
 ${font Sans:bold:size=8}${alignc}${time %A}
