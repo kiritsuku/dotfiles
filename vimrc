@@ -49,7 +49,7 @@ if has('nvim')
 elseif has("gui_running")
   colorscheme gruvbox
   let g:gruvbox_contrast_dark='soft'
-  set guifont=Fantasque\ Sans\ Mono\ Italic\ 11
+  set guifont=Fantasque\ Sans\ Mono\ Italic\ 13
   set background=dark
 else
   set t_Co=256
@@ -248,8 +248,9 @@ nn <silent> <leader><space> :let @/ = ""<cr>
 nn <leader>r :Files<cr>
 nn <leader>t :Tags<cr>
 nn <leader>b :Buffer<cr>
-nn <leader>h: :History<cr>
-nn <leader>h/ :History<cr>
+nn <leader>hh :History<cr>
+nn <leader>h: :History:<cr>
+nn <leader>h/ :History/<cr>
 nn <leader>f :Ag<cr>
 nn <leader>se :setlocal spell! spelllang=en_us<cr>
 nn <leader>sg :setlocal spell! spelllang=de<cr>
