@@ -319,6 +319,16 @@ for i in range(1, 9)
   exe 'nn <C-a>' . i . ' ' . i . 'gt'
 endfor
 
+function! OpenTerm()
+  let cur = getcwd()
+  " how to get buffer working directory / terminal working directory
+  "let netrwdir = fnamemodify(b:netrw_curdir, ':t')
+  "exe 'lcd '.netrwdir
+  exe 'vsplit'
+  exe 'lcd '.cur
+  exe 'term'
+endfunction
+
 if has('nvim')
   " Create new tab
   nn <C-a>c :call CreateNewTabShell()<cr>
@@ -341,6 +351,7 @@ if has('nvim')
   tno <C-w>v <C-\><C-n>:vsplit \| :term<cr>
   tno <C-w>s <C-\><C-n>:split \| :term<cr>
   tno <C-a>v <C-\><C-n>:vsplit \| :term<cr>
+  "tno <C-a>v <C-\><C-n>:call OpenTerm()<cr>
   tno <C-a>s <C-\><C-n>:split \| :term<cr>
 
   " vertical split with |
@@ -364,9 +375,11 @@ endif
 " <home> goes to the beginning of the text on first press and to the
 " beginning of the line on second press. It alternates afterwards.
 nn <expr> <home> virtcol('.') - 1 <= indent('.') && col('.') > 1 ? '0' : '_'
+ino <expr> <home> virtcol('.') - 1 <= indent('.') && col('.') > 1 ? '<c-o>0' : '<c-o>_'
 " <end> goes to the end of the text on first press and to the end of the line
 " on second press.
 nn <expr> <end> virtcol('.') <= virtcol('$')-1 ? 'g_' : winwidth(0)-1.'\|'
+ino <expr> <end> virtcol('.') <= virtcol('$')-1 ? '<c-o>g_' : '<c-o>'.winwidth(0)-1.'\|'
 
 "}}}
 " NERDTree config {{{
