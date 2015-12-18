@@ -63,7 +63,8 @@
     [submenu] (Multimedia)
         [submenu] (Graphics)
             [exec]   (gqview) {gqview}
-            [exec]   (xscreensaver-demo) {xscreensaver-demo}
+            [exec]   (inkscape) {inkscape}
+            [exec]   (blender) {blender}
         [end]
         [submenu] (Audio)
             [exec]   (alsamixer) {xterm -e alsamixer}
