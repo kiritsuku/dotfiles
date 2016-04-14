@@ -2,6 +2,21 @@
 #
 # fluxbox startup-script:
 
+start_feh () {
+  sleep 1
+  exec ~/.fehbg
+}
+
+start_xflux () {
+  sleep 2
+  exec ~/bin/xflux -l 49.0 -g 8.4
+}
+
+start_conky () {
+  sleep 1
+  exec /usr/bin/conky
+}
+
 # Change your keymap:
 #setxkbmap -layout de,de -variant neo,basic -option -option grp:sclk_toggle -option grp_led:scroll
 setxkbmap de neo
@@ -14,12 +29,12 @@ export GDK_NATIVE_WINDOWS=true
 exec pulseaudio --start &
 exec ~/.screenlayout/screens.sh &
 exec /usr/bin/tilda &
-exec ~/.fehbg &
-exec qbittorrent &
-sleep 1 && exec /usr/bin/conky &
+exec transmission-gtk &
 exec /usr/bin/tint2 &
 exec dropbox &
-exec ~/bin/xflux -l 49.0 -g 8.4 &
+start_feh &
+start_conky &
+start_xflux &
 
 # And last but not least we start fluxbox.
 # Because it is the last app you have to run it with ''exec'' before it.
