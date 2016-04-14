@@ -82,19 +82,23 @@ fi
 # }}}
 # Exports {{{
 export EDITOR="vim"
+# This needs to be set and at the same time true color support needs to be disabled in
+# neovim in order to display all colors correctly. Only setting true color support in
+# neovim leads to broken colors in some terminals.
+export COLORTERM=xterm-256color
 # bin folder
 export PATH=$HOME/bin:$PATH
 # ruby executables
 export PATH=$PATH:$HOME/.gem/ruby/2.2.0/bin
 export PATH=$PATH:$HOME/.rvm/bin
 # scala executables
-export PATH=$PATH:$HOME/software/scala-2.11.7/bin/
+export PATH=$PATH:$HOME/software/scala-2.11.8/bin/
 export PATH=$PATH:$HOME/software/activator-1.3.2/
-# electron executables
-export PATH=$PATH:$HOME/software/electron/
 # go executables
 export GOPATH=$HOME/.go
 export PATH=$PATH:$GOPATH/bin
+# apache-jena executables
+export PATH=$PATH:$HOME/software/apache-jena-3.0.1/bin/
 
 # make can't always handle parallel builds; enable on demand
 #export MAKEFLAGS="-j4 $MAKEFLAGS"
