@@ -1,8 +1,15 @@
 " Plugin config {{{
 " Plugin manager: https://github.com/junegunn/vim-plug
-call plug#begin('~/.vim/plugged')
 
-" Both python2 and python3 support needs to be installed explicitly:
+" auto-install vim-plug
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall
+endif
+
+call plug#begin('~/.vim/plugged')
+" python2 and python3 support needs to be installed explicitly for neovim support:
 " python -m easy_install --user neovim
 " python2 -m easy_install --user neovim
 
@@ -30,6 +37,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'junegunn/fzf.vim'
 Plug 'benekastah/neomake'
+Plug 'airblade/vim-rooter'
 
 call plug#end()
 " }}}
@@ -40,7 +48,7 @@ filetype plugin indent on
 syntax on
 
 if has('nvim')
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  "let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
   let g:terminal_scrollback_buffer_size=10000
   colorscheme gruvbox
@@ -100,7 +108,7 @@ set lazyredraw
 set laststatus=2
 " Automatically save file before buffer change
 set autowrite
-" Automatically refersh file on change
+" Automatically refresh file on change
 set autoread
 " needed to  show whitespace characters
 set list
@@ -245,13 +253,13 @@ ino <C-d> <C-c>
 
 " clear search highlighting pattern
 nn <silent> <leader><space> :let @/ = ""<cr>
-nn <leader>r :Files<cr>
+nn <leader>f :Files<cr>
 nn <leader>t :Tags<cr>
 nn <leader>b :Buffer<cr>
 nn <leader>hh :History<cr>
 nn <leader>h: :History:<cr>
 nn <leader>h/ :History/<cr>
-nn <leader>f :Ag<cr>
+nn <leader>a :Ag<cr>
 nn <leader>se :setlocal spell! spelllang=en_us<cr>
 nn <leader>sg :setlocal spell! spelllang=de<cr>
 " see http://superuser.com/questions/195022/vim-how-to-synchronize-nerdtree-with-current-opened-tab-file-path
@@ -348,17 +356,13 @@ if has('nvim')
   tno <C-a><right> <C-\><C-n><C-w>l
 
   " create a new shell when a split is opened
-  tno <C-w>v <C-\><C-n>:vsplit \| :term<cr>
-  tno <C-w>s <C-\><C-n>:split \| :term<cr>
   tno <C-a>v <C-\><C-n>:vsplit \| :term<cr>
   "tno <C-a>v <C-\><C-n>:call OpenTerm()<cr>
   tno <C-a>s <C-\><C-n>:split \| :term<cr>
 
   " vertical split with |
-  tno <C-w><Bar> <C-\><C-n>:vsplit \| :term<cr>
   tno <C-a><Bar> <C-\><C-n>:vsplit \| :term<cr>
   " horizontal split with -
-  tno <C-w>- <C-\><C-n>:split \| :term<cr>
   tno <C-a>- <C-\><C-n>:split \| :term<cr>
 
   " Jump to tab by typing its number
@@ -562,6 +566,8 @@ augroup configgroup
   if has('nvim')
     " automatically move to insert mode once a terminal buffer is entered
     au WinEnter * if &buftype == 'terminal' | startinsert | endif
+    " close terminal buffer without showing the exit status of the shell
+    au TermClose * call feedkeys("\<cr>")
   endif
 augroup END
 "}}}
@@ -575,6 +581,11 @@ augroup END
 " :r! - execute external command
 " :%!xxd - make vim to hex editor
 " :%!xxd -r - revert hex editor mode
+
+" Capture ex-command output:
+" :redir @a
+" <command>
+" :redir END
 
 "}}}
 " Key combinations docs {{{
