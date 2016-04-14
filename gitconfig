@@ -120,6 +120,7 @@
     cl = clean -fd
 
     d = diff
+    ds = diff --staged
     dw = diff --word-diff=color
 
     # tag delete g td tag.version
