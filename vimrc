@@ -38,6 +38,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'junegunn/fzf.vim'
 Plug 'benekastah/neomake'
 Plug 'airblade/vim-rooter'
+Plug 'rvesse/vim-sparql', { 'for': ['sparql'] }
 
 call plug#end()
 " }}}
@@ -66,7 +67,7 @@ else
   set ttyfast
   " vims default backspace behavior is annoying
   set backspace=indent,eol,start
-  colorscheme desert
+  colorscheme askapachecode
   " no background
   hi Normal ctermbg=none
   " highlight line of cursor
@@ -555,6 +556,10 @@ augroup configgroup
   au FileType gitcommit setlocal spell | setlocal colorcolumn=72
   " set a maximum textwidth to tex files
   au BufNewFile,BufRead *.tex setlocal textwidth=80 | setlocal colorcolumn=81 | setlocal spell
+  " configure jsonld filetype
+  au BufNewFile,BufRead *.jsonld setlocal filetype=json
+  " configure sparql filetype
+  au BufNewFile,BufRead *.sparql setlocal filetype=sparql
 
   " auto commands that should only work when a gui is running
   if has("gui_running")
