@@ -104,23 +104,39 @@ export PATH=$PATH:$HOME/software/apache-jena-3.0.1/bin/
 #export MAKEFLAGS="-j4 $MAKEFLAGS"
 # }}}
 # Aliase {{{
-alias -g cp='$HOME/bin/hidden/cp -B'
-alias -g mv='$HOME/bin/hidden/mv -B'
-alias -g rm='$HOME/bin/hidden/rm -B'
-alias -g g='git'
-alias -g p='sudo pacman'
-alias -g y='yaourt'
-alias -g les='less -X'
-
-##### Scala partest
-alias pt='test/partest'
-alias pta='tools/partest-ack'
+cp() {
+  command $HOME/bin/hidden/cp -B "$@"
+}
+mv() {
+  command $HOME/bin/hidden/mv -B "$@"
+}
+rm() {
+  command $HOME/bin/hidden/rm -B "$@"
+}
+g() {
+  command git "$@"
+}
+p() {
+  command sudo pacman "$@"
+}
+y() {
+  command yaourt "$@"
+}
+les() {
+  command less -X "$@"
+}
 
 ##### Vim
 # needed to enable save on CTRL-S
-alias -g vim="stty stop '' -ixoff ; vim"
-alias -g v="nvim-client"
-alias -g gv="gvim"
+vim() {
+  stty stop '' -ixoff; command vim "$@"
+}
+v() {
+  command nvim-client "$@"
+}
+gv() {
+  command gvim "$@"
+}
 # }}}
 # FZF config {{{
 
@@ -134,7 +150,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # }}}
 # Ranger config {{{
 # Automatically jump to the directory ranger is located to when one leaves ranger
-function ranger-cd {
+rn() {
   tempfile='/tmp/ranger-chosendir'
   /usr/bin/ranger --choosedir="$tempfile" "${@:-$(pwd)}"
   test -f "$tempfile" &&
@@ -143,8 +159,6 @@ function ranger-cd {
   fi
   rm -f -- "$tempfile"
 }
-
-alias -g rn='ranger-cd'
 # }}}
 # Colorized man pages {{{
 # see: http://boredzo.org/blog/archives/2016-08-15/colorized-man-pages-understood-and-customized
