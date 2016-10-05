@@ -100,6 +100,9 @@ export PATH=$PATH:$GOPATH/bin
 # apache-jena executables
 export PATH=$PATH:$HOME/software/apache-jena-3.0.1/bin/
 
+# https://www.topbug.net/blog/2016/09/27/make-gnu-less-more-powerful/
+export LESS='--quit-if-one-screen --ignore-case --LONG-PROMPT --RAW-CONTROL-CHARS --HILITE-UNREAD --tabs=4 --no-init --window=-4'
+
 # make can't always handle parallel builds; enable on demand
 #export MAKEFLAGS="-j4 $MAKEFLAGS"
 # }}}
@@ -122,8 +125,8 @@ p() {
 y() {
   command yaourt "$@"
 }
-les() {
-  command less -X "$@"
+c() {
+  command code .
 }
 
 ##### Vim
