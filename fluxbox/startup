@@ -17,6 +17,10 @@ start_conky () {
   exec /usr/bin/conky
 }
 
+start_eye_break_loop () {
+  while true; do sleep 1800; notify-send "Give your eyes a break"; done
+}
+
 # Change your keymap:
 #setxkbmap -layout de,de -variant neo,basic -option -option grp:sclk_toggle -option grp_led:scroll
 setxkbmap de neo
@@ -35,6 +39,8 @@ exec dropbox &
 start_feh &
 start_conky &
 start_xflux &
+start_eye_break_loop &
+exec /usr/lib/notification-daemon-1.0/notification-daemon &
 
 # And last but not least we start fluxbox.
 # Because it is the last app you have to run it with ''exec'' before it.
