@@ -39,6 +39,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'benekastah/neomake'
 Plug 'airblade/vim-rooter'
 Plug 'rvesse/vim-sparql', { 'for': ['sparql'] }
+Plug 'vim-scripts/n3.vim', { 'for': ['n3', 'nq', 'turtle'] }
 
 call plug#end()
 " }}}
@@ -324,7 +325,7 @@ vn <silent> p p`]
 nn <silent> p p`]
 
 " Jump to tab by typing its number
-for i in range(1, 9)
+for i in range(1, 19)
   exe 'nn <C-a>' . i . ' ' . i . 'gt'
 endfor
 
@@ -367,7 +368,7 @@ if has('nvim')
   tno <C-a>- <C-\><C-n>:split \| :term<cr>
 
   " Jump to tab by typing its number
-  for i in range(1, 9)
+  for i in range(1, 19)
     exe 'tno <C-a>' . i . ' <C-\><C-n>' . i . 'gt'
   endfor
 else
@@ -560,6 +561,8 @@ augroup configgroup
   au BufNewFile,BufRead *.jsonld setlocal filetype=json
   " configure sparql filetype
   au BufNewFile,BufRead *.sparql setlocal filetype=sparql
+  " configure n3 filetype
+  au BufNewFile,BufRead *.n3 setlocal filetype=n3
 
   " auto commands that should only work when a gui is running
   if has("gui_running")
