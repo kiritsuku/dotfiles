@@ -56,6 +56,8 @@
     ls = log --pretty=format:'%C(red)%h%Creset -%C(yellow)%d%Creset %s %C(green)(%cr)%Creset %C(bold blue)[%an]%Creset'
     # shows unpushed commits
     lu = log --branches --not --remotes --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+    # searches the log and the diffs for a regex
+    lsearch = log --full-diff -p -G
 
     rl = reflog
 
