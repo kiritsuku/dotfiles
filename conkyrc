@@ -88,7 +88,6 @@ ${color3}Month:${color5}${goto 70}${execi 300 vnstat -m | grep "`date +"%b '%y"`
 
 ${font Sans:bold:size=10}${color3}NEWS ${color1}${hr 2}${font Sans:size=8}
 ${color3}Updates: ${color5}${execi 3600 cat /etc/cron.hourly/updates.log}
-${color3}Mails: ${color5}${texeci 300 ~/bin/ant-mails}
 
 ${font Sans:bold:size=10}${color3}TIME ${color1}${hr 2}
 ${color4}${font Sans:size=30}${alignc}${time %H:%M:%S}
