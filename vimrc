@@ -390,7 +390,7 @@ ino <expr> <end> virtcol('.') <= virtcol('$')-1 ? '<c-o>g_' : '<c-o>'.winwidth(0
 "}}}
 " NERDTree config {{{
 
-"let g:NERDTreeShowLineNumbers = 1
+let g:NERDTreeShowLineNumbers = 1
 let g:NERDTreeShowHidden = 1
 
 " }}}
@@ -523,7 +523,7 @@ let g:airline_powerline_fonts = 1
 "
 function! SaveAfterFocusLost()
   " check if filename is not empty and file is modifiable
-  if !empty(@%) && &modifiable
+  if !empty(@%) && &modifiable && &buftype !=# 'terminal'
     :call RemoveTrailingWhitespace()
     :update
   endif
@@ -562,7 +562,9 @@ augroup configgroup
   " configure sparql filetype
   au BufNewFile,BufRead *.sparql setlocal filetype=sparql
   " configure n3 filetype
-  au BufNewFile,BufRead *.n3 setlocal filetype=n3
+  au BufNewFile,BufRead *.n3,*.ttl setlocal filetype=n3
+  " make sure relative line numbers are used in nerdtree
+  au FileType nerdtree setlocal relativenumber
 
   " auto commands that should only work when a gui is running
   if has("gui_running")
