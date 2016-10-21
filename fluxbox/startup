@@ -2,9 +2,9 @@
 #
 # fluxbox startup-script:
 
-start_feh () {
+start_nitrogen () {
   sleep 1
-  exec ~/.fehbg
+  exec nitrogen --restore &
 }
 
 start_xflux () {
@@ -13,12 +13,8 @@ start_xflux () {
 }
 
 start_conky () {
-  sleep 1
+  sleep 2
   exec /usr/bin/conky
-}
-
-start_eye_break_loop () {
-  while true; do sleep 1800; notify-send "Give your eyes a break"; done
 }
 
 # Change your keymap:
@@ -36,10 +32,9 @@ exec /usr/bin/tilda &
 exec transmission-gtk &
 exec /usr/bin/tint2 &
 exec dropbox &
-start_feh &
+start_nitrogen &
 start_conky &
 start_xflux &
-start_eye_break_loop &
 exec /usr/lib/notification-daemon-1.0/notification-daemon &
 
 # And last but not least we start fluxbox.
