@@ -4,7 +4,7 @@
 
 start_nitrogen () {
   sleep 1
-  exec nitrogen --restore &
+  exec nitrogen --restore
 }
 
 start_xflux () {
