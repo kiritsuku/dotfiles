@@ -75,6 +75,10 @@ ${color5}${top_mem name 2}${goto 120}${top_mem mem 2} %${goto 180}${top_mem mem_
 ${color5}${top_mem name 3}${goto 120}${top_mem mem 3} %${goto 180}${top_mem mem_res 3}
 ${color5}${top_mem name 4}${goto 120}${top_mem mem 4} %${goto 180}${top_mem mem_res 4}
 ${color5}${top_mem name 5}${goto 120}${top_mem mem 5} %${goto 180}${top_mem mem_res 5}
+${color5}${top_mem name 6}${goto 120}${top_mem mem 6} %${goto 180}${top_mem mem_res 6}
+${color5}${top_mem name 7}${goto 120}${top_mem mem 7} %${goto 180}${top_mem mem_res 7}
+${color5}${top_mem name 8}${goto 120}${top_mem mem 8} %${goto 180}${top_mem mem_res 8}
+${color5}${top_mem name 9}${goto 120}${top_mem mem 9} %${goto 180}${top_mem mem_res 9}
 
 ${font Sans:bold:size=10}${color3}NETWORK ${color1}${hr 2}${font Sans:size=8}
 ${color3}IP global: ${color5}${execi 3600 ~/bin/publicip}${goto 160}${color3}IP local: ${color5}${addr eth0}
