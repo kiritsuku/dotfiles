@@ -4,7 +4,7 @@
 [github]
     user = sschaef
 [core]
-    editor = vim
+    editor = nvim -c 'startinsert'
     fileMode = false
     pager = less -S -X
 [merge]
@@ -113,6 +113,7 @@
     sts = stash show
 
     r = reset
+    rs = reset --soft
     r1 = reset @^
     r2 = reset @^^
     rh = reset @
