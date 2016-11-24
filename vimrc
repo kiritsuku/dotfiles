@@ -10,8 +10,8 @@ endif
 
 call plug#begin('~/.vim/plugged')
 " python2 and python3 support needs to be installed explicitly for neovim support:
-" python -m easy_install --user -U neovim
-" python2 -m easy_install --user -U neovim
+" python -m easy_install --user -U neovim msgpack-python
+" python2 -m easy_install --user -U neovim msgpack-python
 
 Plug 'romainl/flattened'
 Plug 'morhetz/gruvbox'
