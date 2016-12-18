@@ -148,6 +148,8 @@ set mouse=a
 set tabline=%!CustomTabLine()
 " use + register by default for all yank and delete operations
 set clipboard+=unnamedplus
+" live preview of various commands, including :s
+set inccommand=split
 
 " use , instead of \ for mapleader
 let mapleader=","
