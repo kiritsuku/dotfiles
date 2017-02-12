@@ -92,7 +92,7 @@ export PATH=$HOME/bin:$PATH
 export PATH=$PATH:$HOME/.gem/ruby/2.2.0/bin
 export PATH=$PATH:$HOME/.rvm/bin
 # scala executables
-export PATH=$PATH:$HOME/software/scala-2.12.0/bin/
+export PATH=$PATH:$HOME/software/scala-2.12.1/bin/
 export PATH=$PATH:$HOME/software/activator-1.3.2/
 # go executables
 export GOPATH=$HOME/.go
@@ -106,7 +106,7 @@ export LESS='--quit-if-one-screen --ignore-case --LONG-PROMPT --RAW-CONTROL-CHAR
 # make can't always handle parallel builds; enable on demand
 #export MAKEFLAGS="-j4 $MAKEFLAGS"
 # }}}
-# Aliase {{{
+# Commands {{{
 cp() {
   command $HOME/bin/hidden/cp -B "$@"
 }
@@ -128,6 +128,9 @@ y() {
 c() {
   command code .
 }
+cl() {
+  command cloc . --exclude-dir=target,bin,node_modules --read-lang-def=$HOME/bin/cloc-ttl.txt "$@"
+}
 
 ##### Vim
 # needed to enable save on CTRL-S
@@ -139,6 +142,13 @@ v() {
 }
 gv() {
   command gvim "$@"
+}
+d() {
+  command sudo systemctl restart dhcpcd.service
+}
+
+pacman-remove-orphans() {
+  command sudo pacman -R $(pacman -Qdtq)
 }
 # }}}
 # FZF config {{{
