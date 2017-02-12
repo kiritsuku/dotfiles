@@ -38,9 +38,6 @@
         [submenu] (IM)
             [exec]   (Pidgin) {pidgin}
         [end]
-        [submenu] (Mail)
-            [exec]   (Thunderbird) {thunderbird}
-        [end]
     [end]
     [submenu] (Editors)
         [exec]   (Scala-Eclipse) {/home/antoras/software/scala-eclipse/eclipse}
@@ -59,7 +56,7 @@
         [submenu] (Graphics)
             [exec]   (gqview) {gqview}
             [exec]   (inkscape) {inkscape}
-            [exec]   (blender) {blender}
+            [exec]   (yed) {yed}
         [end]
         [submenu] (Audio)
             [exec]   (alsamixer) {xterm -e alsamixer}
