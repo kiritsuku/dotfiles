@@ -19,6 +19,14 @@ vn y y`]
 vn p p`]
 nn p p`]
 
+" copy to system clipboard
+vn <leader>y "+y
+" paste from system clipboard
+nn <leader>p "+p
+nn <leader>P "+P
+vn <leader>p "+p
+vn <leader>P "+P
+
 " insert single char in normal mode
 "nmap <Space> i_<Esc>r
 
