@@ -92,8 +92,7 @@ export PATH=$HOME/bin:$PATH
 export PATH=$PATH:$HOME/.gem/ruby/2.2.0/bin
 export PATH=$PATH:$HOME/.rvm/bin
 # scala executables
-export PATH=$PATH:$HOME/software/scala-2.12.1/bin/
-export PATH=$PATH:$HOME/software/activator-1.3.2/
+export PATH=$PATH:$HOME/software/scala-2.12.3/bin/
 # go executables
 export GOPATH=$HOME/.go
 export PATH=$PATH:$GOPATH/bin
@@ -101,53 +100,53 @@ export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$HOME/software/apache-jena-3.0.1/bin/
 
 # https://www.topbug.net/blog/2016/09/27/make-gnu-less-more-powerful/
-export LESS='--quit-if-one-screen --ignore-case --LONG-PROMPT --RAW-CONTROL-CHARS --HILITE-UNREAD --tabs=4 --no-init --window=-4'
+export LESS='--quit-if-one-screen --ignore-case --LONG-PROMPT --RAW-CONTROL-CHARS --tabs=4 --no-init --window=-4'
 
 # make can't always handle parallel builds; enable on demand
 #export MAKEFLAGS="-j4 $MAKEFLAGS"
 # }}}
 # Commands {{{
-cp() {
+function cp() {
   command $HOME/bin/hidden/cp -B "$@"
 }
-mv() {
+function mv() {
   command $HOME/bin/hidden/mv -B "$@"
 }
-rm() {
+function rm() {
   command $HOME/bin/hidden/rm -B "$@"
 }
-g() {
+function g() {
   command git "$@"
 }
-p() {
+function p() {
   command sudo pacman "$@"
 }
-y() {
+function y() {
   command yaourt "$@"
 }
-c() {
+function c() {
   command code .
 }
-cl() {
+function cl() {
   command cloc . --exclude-dir=target,bin,node_modules --read-lang-def=$HOME/bin/cloc-ttl.txt "$@"
 }
 
 ##### Vim
 # needed to enable save on CTRL-S
-vim() {
+function vim() {
   stty stop '' -ixoff; command vim "$@"
 }
-v() {
+function v() {
   command nvim-client "$@"
 }
-gv() {
+function gv() {
   command gvim "$@"
 }
-d() {
+function d() {
   command sudo systemctl restart dhcpcd.service
 }
 
-pacman-remove-orphans() {
+function pacman-remove-orphans() {
   command sudo pacman -R $(pacman -Qdtq)
 }
 # }}}
@@ -156,14 +155,19 @@ pacman-remove-orphans() {
 # Load fzf config
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # Setting ag as the default source for fzf
-export FZF_DEFAULT_COMMAND='ag -l -g ""'
+export FZF_DEFAULT_COMMAND='ag -g ""'
 # To apply the command to CTRL-T as well
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+# Options to fzf command
+export FZF_COMPLETION_OPTS='+c -x'
 
+function _fzf_compgen_path() {
+  ag -g "" "$1"
+}
 # }}}
 # Ranger config {{{
 # Automatically jump to the directory ranger is located to when one leaves ranger
-rn() {
+function rn() {
   tempfile='/tmp/ranger-chosendir'
   /usr/bin/ranger --choosedir="$tempfile" "${@:-$(pwd)}"
   test -f "$tempfile" &&
@@ -175,7 +179,7 @@ rn() {
 # }}}
 # Colorized man pages {{{
 # see: http://boredzo.org/blog/archives/2016-08-15/colorized-man-pages-understood-and-customized
-man() {
+function man() {
   LESS_TERMCAP_md=$'\e[1;36m' \
   LESS_TERMCAP_me=$'\e[0m' \
   LESS_TERMCAP_se=$'\e[0m' \
