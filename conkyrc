@@ -44,9 +44,9 @@ ${font Sans:size=20}${color3}ARCH${color2}LINUX${font openlogos:size=20}${font S
 ${voffset -5}${color4}
 ${font Sans:bold:size=10}${color3}SYSTEM ${color1}${hr 2}${font Sans:size=8}
 ${color3}Uptime: ${color5}${uptime}
-${color3}CPU1: ${color5}${cpu cpu1}%${goto 85}${execpi 6 sensors | grep 'Core 0' | cut -c18-19 | xargs ~/bin/ant-colorize}°C${goto 160}${color3}CPU2: ${color5}${cpu cpu2}%${goto 245}${execpi 6 sensors | grep 'Core 1' | cut -c18-19 | xargs ~/bin/ant-colorize}°C
+${color3}CPU1: ${color5}${cpu cpu1}%${goto 85}${execpi 6 sensors | grep 'Core 0' | cut -c17-18 | xargs ~/bin/ant-colorize}°C${goto 160}${color3}CPU2: ${color5}${cpu cpu2}%${goto 245}${execpi 6 sensors | grep 'Core 1' | cut -c17-18 | xargs ~/bin/ant-colorize}°C
 ${cpugraph cpu1 25,148 FFC11F 8B4B0B}$alignr${cpugraph cpu2 25,148 FFC11F 8B4B0B}
-${color3}CPU3: ${color5}${cpu cpu3}%${goto 85}${execpi 6 sensors | grep 'Core 2' | cut -c18-19 | xargs ~/bin/ant-colorize}°C${goto 160}${color3}CPU4: ${color5}${cpu cpu4}%${goto 245}${execpi 6 sensors | grep 'Core 3' | cut -c18-19 | xargs ~/bin/ant-colorize}°C
+${color3}CPU3: ${color5}${cpu cpu3}%${goto 85}${execpi 6 sensors | grep 'Core 2' | cut -c17-18 | xargs ~/bin/ant-colorize}°C${goto 160}${color3}CPU4: ${color5}${cpu cpu4}%${goto 245}${execpi 6 sensors | grep 'Core 3' | cut -c17-18 | xargs ~/bin/ant-colorize}°C
 ${cpugraph cpu3 25,148 FFC11F 8B4B0B}$alignr${cpugraph cpu4 25,148 FFC11F 8B4B0B}
 #${color3}GPU: ${color5}${execpi 6 nvidia-settings -q gpucoretemp | grep ':' | awk '{print $4}' | cut -c1-2 | xargs ~/bin/ant-colorize}°C
 
@@ -79,6 +79,7 @@ ${color5}${top_mem name 6}${goto 120}${top_mem mem 6} %${goto 180}${top_mem mem_
 ${color5}${top_mem name 7}${goto 120}${top_mem mem 7} %${goto 180}${top_mem mem_res 7}
 ${color5}${top_mem name 8}${goto 120}${top_mem mem 8} %${goto 180}${top_mem mem_res 8}
 ${color5}${top_mem name 9}${goto 120}${top_mem mem 9} %${goto 180}${top_mem mem_res 9}
+${color5}${top_mem name 10}${goto 120}${top_mem mem 10} %${goto 180}${top_mem mem_res 10}
 
 ${font Sans:bold:size=10}${color3}NETWORK ${color1}${hr 2}${font Sans:size=8}
 ${color3}IP global: ${color5}${execi 3600 ~/bin/publicip}${goto 160}${color3}IP local: ${color5}${addr eth0}
