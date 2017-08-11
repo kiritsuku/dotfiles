@@ -16,7 +16,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'romainl/flattened'
 Plug 'morhetz/gruvbox'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
-Plug 'Valloric/YouCompleteMe', { 'do': 'python2 ./install.py --clang-completer' }
+" Plug 'Valloric/YouCompleteMe', { 'do': 'python2 ./install.py --clang-completer' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-abolish'
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['cpp', 'hpp', 'c', 'h'] }
@@ -34,7 +35,7 @@ Plug 'terryma/vim-multiple-cursors'
 " Expand region by key combination
 Plug 'terryma/vim-expand-region'
 Plug 'easymotion/vim-easymotion'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'benekastah/neomake'
 Plug 'airblade/vim-rooter'
@@ -50,8 +51,6 @@ filetype plugin indent on
 syntax on
 
 if has('nvim')
-  "let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
   let g:terminal_scrollback_buffer_size=10000
   colorscheme gruvbox
   let g:gruvbox_contrast_dark='soft'
@@ -416,6 +415,8 @@ let g:ycm_collect_identifiers_from_tags_files=1
 let g:ycm_seed_identifiers_with_syntax=1
 let g:ycm_key_detailed_diagnostics='<leader>d'
 let g:ycm_confirm_extra_conf=0
+
+let g:deoplete#enable_at_startup = 1
 " }}}
 " UltiSnips config {{{
 let g:UltiSnipsExpandTrigger="<c-k>"
@@ -485,7 +486,7 @@ let g:ctrlp_by_filename=1
 " vimtex config {{{
 
 let g:vimtex_enbaled=1
-let g:vimtex_latexmk_build_dir='bin'
+"let g:vimtex_latexmk_build_dir='bin'
 let g:vimtex_fold_enabled=0
 let g:vimtex_quickfix_ignored_warnings = [
   \ "Usage of package",
@@ -493,6 +494,10 @@ let g:vimtex_quickfix_ignored_warnings = [
   \ "Overfull ",
   \ "Underfull "
 \ ]
+let g:vimtex_compiler_latexmk = {
+\ 'build_dir' : 'bin',
+\}
+
 
 "}}}
 " AutoPairs config {{{
