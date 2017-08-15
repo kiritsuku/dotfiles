@@ -1,33 +1,27 @@
 # Antigen config {{{
 source $HOME/.antigen.zsh
-#antigen use oh-my-zsh
-#antigen bundle robbyrussell/oh-my-zsh
-#antigen bundle git
+
+# Instead of
+#   antigen use oh-my-zsh
+# or
+#   antigen bundle robbyrussell/oh-my-zsh lib/
+# we load the source files of the lib directory directly.
+# This way not all existing source files are loaded but only
+# the ones that are needed.
+LIB=$HOME/.antigen/bundles/robbyrussell/oh-my-zsh/lib
+source $LIB/compfix.zsh
+source $LIB/completion.zsh
+source $LIB/correction.zsh
+source $LIB/git.zsh
+source $LIB/history.zsh
+source $LIB/key-bindings.zsh
+source $LIB/spectrum.zsh
+source $LIB/theme-and-appearance.zsh
+
 antigen bundle scala
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
 antigen bundle autojump
-
-LIB=$HOME/.antigen/bundles/robbyrussell/oh-my-zsh/lib
-source $LIB/bzr.zsh
-source $LIB/clipboard.zsh
-source $LIB/compfix.zsh
-source $LIB/completion.zsh
-source $LIB/correction.zsh
-source $LIB/diagnostics.zsh
-source $LIB/directories.zsh
-source $LIB/functions.zsh
-source $LIB/git.zsh
-source $LIB/grep.zsh
-source $LIB/history.zsh
-source $LIB/key-bindings.zsh
-source $LIB/misc.zsh
-source $LIB/nvm.zsh
-source $LIB/prompt_info_functions.zsh
-source $LIB/spectrum.zsh
-source $LIB/termsupport.zsh
-source $LIB/theme-and-appearance.zsh
-
 antigen apply
 # }}}
 # Zsh prompt {{{
