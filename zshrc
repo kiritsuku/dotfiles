@@ -121,7 +121,16 @@ export LESS='--quit-if-one-screen --ignore-case --LONG-PROMPT --RAW-CONTROL-CHAR
 # make can't always handle parallel builds; enable on demand
 #export MAKEFLAGS="-j4 $MAKEFLAGS"
 # }}}
-# Commands {{{
+# Commands and Aliases {{{
+
+# Default auto completions only work for aliases but not for functions
+alias g='git'
+alias p='sudo pacman'
+alias y='yaourt'
+
+function l() {
+  ls -lAh --color=always "$@" | less
+}
 function cp() {
   command $HOME/bin/hidden/cp -B "$@"
 }
@@ -131,25 +140,14 @@ function mv() {
 function rm() {
   command $HOME/bin/hidden/rm -B "$@"
 }
-function g() {
-  command git "$@"
-}
-function p() {
-  command sudo pacman "$@"
-}
-function y() {
-  command yaourt "$@"
-}
 function c() {
   command code .
 }
 function cl() {
   command cloc . --exclude-dir=target,bin,node_modules --read-lang-def=$HOME/bin/cloc-ttl.txt "$@"
 }
-
-##### Vim
-# needed to enable save on CTRL-S
 function vim() {
+  # needed to enable save on CTRL-S
   stty stop '' -ixoff; command vim "$@"
 }
 function v() {
@@ -161,7 +159,6 @@ function gv() {
 function d() {
   command sudo systemctl restart dhcpcd.service
 }
-
 function pacman-remove-orphans() {
   command sudo pacman -R $(pacman -Qdtq)
 }
