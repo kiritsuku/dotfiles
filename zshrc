@@ -169,9 +169,12 @@ function pacman-remove-orphans() {
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # Setting ag as the default source for fzf
 export FZF_DEFAULT_COMMAND='ag -g ""'
-# To apply the command to CTRL-T as well
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-# Options to fzf command
+# Show results on entire screen
+export FZF_DEFAULT_OPTS='--height 100%'
+# Show a preview window for file contents in CTRL-T
+# If the file is binary, don't show its contents. Otherwise show the highlighted content.
+export FZF_CTRL_T_OPTS='--preview '\''[[ $(file --mime {}) =~ binary ]] && echo "$(file {})" || (highlight -O ansi {} || head -50 {}) 2> /dev/null | head -50'\'
+
 export FZF_COMPLETION_OPTS='+c -x'
 
 function _fzf_compgen_path() {
