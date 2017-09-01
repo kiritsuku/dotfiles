@@ -16,8 +16,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'romainl/flattened'
 Plug 'morhetz/gruvbox'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
-" Plug 'Valloric/YouCompleteMe', { 'do': 'python2 ./install.py --clang-completer' }
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-abolish'
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['cpp', 'hpp', 'c', 'h'] }
@@ -42,6 +40,11 @@ Plug 'airblade/vim-rooter'
 Plug 'rvesse/vim-sparql', { 'for': ['sparql'] }
 Plug 'vim-scripts/n3.vim', { 'for': ['n3', 'nq', 'turtle'] }
 
+if has('nvim')
+  " Plug 'Valloric/YouCompleteMe', { 'do': 'python2 ./install.py --clang-completer' }
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+endif
+
 call plug#end()
 " }}}
 " Vim config {{{
@@ -54,7 +57,9 @@ if has('nvim')
   colorscheme gruvbox
   let g:gruvbox_contrast_dark='soft'
   set background=dark
-  set scrollback=-1
+  set scrollback=10000
+  " live preview of various commands, including :s
+  set inccommand=split
 elseif has("gui_running")
   colorscheme gruvbox
   let g:gruvbox_contrast_dark='soft'
@@ -147,8 +152,6 @@ set mouse=a
 set tabline=%!CustomTabLine()
 " use + register by default for all yank and delete operations
 set clipboard+=unnamedplus
-" live preview of various commands, including :s
-set inccommand=split
 
 " use , instead of \ for mapleader
 let mapleader=","
