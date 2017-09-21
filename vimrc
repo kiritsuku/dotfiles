@@ -25,9 +25,6 @@ Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'bling/vim-airline'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-" Edit images in vim
-"Plug 'tpope/vim-afterimage'
-Plug 'zhaocai/GoldenView.Vim'
 Plug 'othree/xml.vim', { 'for': ['xml', 'html', 'xhtml'] }
 Plug 'terryma/vim-multiple-cursors'
 " Expand region by key combination
@@ -255,7 +252,7 @@ ino <silent> <End> <C-o>g<End>
 nn <silent> $ g$
 
 " leave insert mode with C-d
-ino <C-d> <C-c>
+ino <C-d> <esc>
 
 " clear search highlighting pattern
 nn <silent> <leader><space> :let @/ = ""<cr>
