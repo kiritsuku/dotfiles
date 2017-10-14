@@ -17,4 +17,4 @@
 --exclude=target
 --exclude=bin
 --exclude=*.js.map
---exclude=@.gitignore
+--fields=+l
