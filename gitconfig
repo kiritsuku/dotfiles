@@ -27,7 +27,8 @@
     # fetch all tags that are in the upstream fork
     fut = fetch upstream "refs/tags/*:refs/tags/*"
 
-    m = merge --no-ff
+    m = merge
+    mn = merge --no-ff
     mu = merge upstream/master
     mo = merge origin/master
     ma = merge --abort
