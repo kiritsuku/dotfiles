@@ -1,45 +1,52 @@
-background yes
-use_xft yes
-xftfont 123:size=8
-xftalpha 0.1
-update_interval 1
-total_run_times 0
-own_window yes
-own_window_type normal
-own_window_transparent yes
-own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
-double_buffer yes
-minimum_size 300 100
-maximum_width 400
-draw_shades no
-draw_outline no
-draw_borders no
-draw_graph_borders no
-default_color gray
-default_shade_color red
-default_outline_color green
-alignment top_right
-gap_x 15
-gap_y 30
-no_buffers yes
-uppercase no
-cpu_avg_samples 2
-net_avg_samples 1
-override_utf8_locale yes
-use_spacer right
-text_buffer_size 256
+-- vim: syntax=lua
+conky.config = {
+  background = true,
+  use_xft = true,
+  font = '123:size=8',
+  xftalpha = 0.1,
+  update_interval = 1,
+  total_run_times = 0,
+  own_window = true,
+  own_window_type = 'normal',
+  own_window_transparent = true,
+  own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+  double_buffer = true,
+  minimum_width = 300, minimum_height = 100,
+  maximum_width = 400,
+  draw_shades = false,
+  draw_outline = false,
+  draw_borders = false,
+  draw_graph_borders = false,
+  default_color = 'gray',
+  default_shade_color = 'red',
+  default_outline_color = 'green',
+  --[[
+  -- top_right for some reason doesn't work, therefore we have to use gap_x in order to move the window to the right side
+  alignment = 'top_right',
+  gap_x = 15,
+  ]]
+  alignment = 'top_left',
+  gap_x = 970,
+  gap_y = 30,
+  no_buffers = true,
+  uppercase = false,
+  cpu_avg_samples = 2,
+  net_avg_samples = 1,
+  override_utf8_locale = true,
+  use_spacer = 'right',
+  text_buffer_size = 256,
 
-color1 Black
-color2 Ivory
-color3 Tan1
-color4 DimGray
-color5 White
-color7 Green
-color8 Orange
-color9 Red
+  color1 = 'Black',
+  color2 = 'Ivory',
+  color3 = 'Tan1',
+  color4 = 'DimGray',
+  color5 = 'White',
+  color7 = 'Green',
+  color8 = 'Orange',
+  color9 = 'Red',
+};
 
-TEXT
-
+conky.text = [[
 ${font Sans:size=20}${color3}ARCH${color2}LINUX${font openlogos:size=20}${font Sans:size=8}${color5}  $kernel - $machine
 ${voffset -5}${color4}
 ${font Sans:bold:size=10}${color3}SYSTEM ${color1}${hr 2}${font Sans:size=8}
@@ -98,3 +105,4 @@ ${font Sans:bold:size=10}${color3}TIME ${color1}${hr 2}
 ${color4}${font Sans:size=30}${alignc}${time %H:%M:%S}
 ${voffset -30}${font Sans:bold:size=10}${alignc}${time %d. %B %Y}
 ${font Sans:bold:size=8}${alignc}${time %A}
+]];
