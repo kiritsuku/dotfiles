@@ -170,7 +170,7 @@ function pacman-remove-orphans() {
 # Setting ag as the default source for fzf
 export FZF_DEFAULT_COMMAND='ag -g ""'
 # Show results on entire screen
-export FZF_DEFAULT_OPTS='--height 100%'
+export FZF_DEFAULT_OPTS='--no-height'
 # Show a preview window for file contents in CTRL-T
 # If the file is binary, don't show its contents. Otherwise show the highlighted content.
 export FZF_CTRL_T_OPTS='--preview '\''[[ $(file --mime {}) =~ binary ]] && echo "$(file {})" || (highlight -O ansi {} || head -50 {}) 2> /dev/null | head -50'\'
