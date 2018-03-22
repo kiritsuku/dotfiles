@@ -219,7 +219,9 @@ endfunction
 
 " Create a new tab and open a terminal buffer in it
 function! CreateNewTabShell()
-  $tabnew
+  tabnew
+  startinsert
+  setlocal nonumber
   term
 endfunction()
 
@@ -582,7 +584,7 @@ augroup configgroup
   " auto commands that should only work in neovim
   if has('nvim')
     " automatically move to insert mode once a terminal buffer is entered
-    au WinEnter * if &buftype == 'terminal' | startinsert | endif
+    au WinEnter * if &buftype == 'terminal' | startinsert | setlocal nonumber | endif
     " close terminal buffer without showing the exit status of the shell
     au TermClose * call feedkeys("\<cr>")
   endif
