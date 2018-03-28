@@ -19,7 +19,7 @@
     [exec]   (Firefox) {firefox}
     [exec]   (Chrome) {google-chrome-stable}
     [exec]   (Filemanager) {thunar}
-    [exec]   (Bildbetrachter) {gqview}
+    [exec]   (Bildbetrachter) {gthumb}
     [exec]   (Audioplayer) {quodlibet}
     [exec]   (Run) {fbrun}
     [nop]
