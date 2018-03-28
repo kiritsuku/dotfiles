@@ -89,14 +89,17 @@ ${color5}${top_mem name 9}${goto 120}${top_mem mem 9} %${goto 180}${top_mem mem_
 ${color5}${top_mem name 10}${goto 120}${top_mem mem 10} %${goto 180}${top_mem mem_res 10}
 
 ${font Sans:bold:size=10}${color3}NETWORK ${color1}${hr 2}${font Sans:size=8}
-${color3}IP global: ${color5}${execi 3600 ~/bin/publicip}${goto 160}${color3}IP local: ${color5}${addr eth0}
-
+${color3}IP global: ${color5}${execi 3600 ~/bin/publicip}${goto 160}${color3}IP local: ${color5}${if_existing /sys/class/net/eth0/operstate up}${addr eth0}${endif}${if_existing /sys/class/net/wlan0/operstate up}${addr wlan0}
+${if_existing /sys/class/net/eth0/operstate up}
 ${color3}Down: ${color5}${downspeed eth0}${goto 160}${color3}Up: ${color5}${upspeed eth0}
-${downspeedgraph 25,148 FFC11F 8B4B0B 3000}$alignr${upspeedgraph 25,148 FFC11F 8B4B0B 120}
-${color3}${goto 70}Down${goto 150}Up${goto 230}Total
-${color3}Today:${color5}${goto 70}${execi 300 vnstat | grep "today" | awk '{print $2 $3}'}${goto 150}${execi 300 vnstat | grep "today" | awk '{print $5 $6}'}${goto 230}${execi 300 vnstat | grep "today" | awk '{print $8 $9}'}
-${color3}Week:${color5}${goto 70}${execi 300 vnstat -w | grep "current week" | awk '{print $3 $4}'}${goto 150}${execi 300 vnstat -w | grep "current week" | awk '{print $6 $7}'}${goto 230}${execi 300 vnstat -w | grep "current week" | awk '{print $9 $10}'}
-${color3}Month:${color5}${goto 70}${execi 300 vnstat -m | grep "`date +"%b '%y"`" | awk '{print $3 $4}'}${goto 150}${execi 300 vnstat -m | grep "`date +"%b '%y"`" | awk '{print $6 $7}'}${goto 230}${execi 300 vnstat -m | grep "`date +"%b '%y"`" | awk '{print $9 $10}'}
+${downspeedgraph eth0 25,148 FFC11F 8B4B0B 3000}$alignr${upspeedgraph eth0 25,148 FFC11F 8B4B0B 120}
+${endif}${if_existing /sys/class/net/wlan0/operstate up}
+${color3}Down: ${color5}${downspeed wlan0}${goto 160}${color3}Up: ${color5}${upspeed wlan0}
+${downspeedgraph wlan0 25,148 FFC11F 8B4B0B 3000}$alignr${upspeedgraph wlan0 25,148 FFC11F 8B4B0B 120}
+${endif}${color3}${goto 70}Down${goto 150}Up${goto 230}Total
+${color3}Today:${color5}${goto 70}${execi 300 vnstat -i wlan0+eth0 | grep "today" | awk '{print $2 $3}'}${goto 150}${execi 300 vnstat -i wlan0+eth0 | grep "today" | awk '{print $5 $6}'}${goto 230}${execi 300 vnstat -i wlan0+eth0 | grep "today" | awk '{print $8 $9}'}
+${color3}Week:${color5}${goto 70}${execi 300 vnstat -i wlan0+eth0 -w | grep "current week" | awk '{print $3 $4}'}${goto 150}${execi 300 vnstat -i wlan0+eth0 -w | grep "current week" | awk '{print $6 $7}'}${goto 230}${execi 300 vnstat -i wlan0+eth0 -w | grep "current week" | awk '{print $9 $10}'}
+${color3}Month:${color5}${goto 70}${execi 300 vnstat -i wlan0+eth0 -m | grep "`date +"%b '%y"`" | awk '{print $3 $4}'}${goto 150}${execi 300 vnstat -i wlan0+eth0 -m | grep "`date +"%b '%y"`" | awk '{print $6 $7}'}${goto 230}${execi 300 vnstat -i wlan0+eth0 -m | grep "`date +"%b '%y"`" | awk '{print $9 $10}'}
 
 ${font Sans:bold:size=10}${color3}NEWS ${color1}${hr 2}${font Sans:size=8}
 ${color3}Updates: ${color5}${execi 3600 cat /etc/cron.hourly/updates.log}
