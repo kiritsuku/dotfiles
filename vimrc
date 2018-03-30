@@ -16,7 +16,6 @@ call plug#begin('~/.vim/plugged')
 "
 " Use :checkhealth to find out if everything has been installed correctly
 
-Plug 'romainl/flattened'
 Plug 'morhetz/gruvbox'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'tpope/vim-fugitive'
