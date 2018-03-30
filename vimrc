@@ -36,6 +36,9 @@ Plug 'benekastah/neomake'
 Plug 'airblade/vim-rooter'
 Plug 'rvesse/vim-sparql', { 'for': ['sparql'] }
 Plug 'vim-scripts/n3.vim', { 'for': ['n3', 'nq', 'turtle'] }
+" dependency for plasticboy/vim-markdown
+Plug 'godlygeek/tabular', { 'for': 'markdown' }
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 
 if has('nvim')
   " Plug 'Valloric/YouCompleteMe', { 'do': 'python2 ./install.py --clang-completer' }
@@ -149,6 +152,8 @@ set mouse=a
 set tabline=%!CustomTabLine()
 " use + register by default for all yank and delete operations
 set clipboard+=unnamedplus
+" conceal text (for example links in markdown files)
+set conceallevel=2
 
 " use , instead of \ for mapleader
 let mapleader=","
@@ -572,6 +577,8 @@ augroup configgroup
   au BufNewFile,BufRead *.sparql setlocal filetype=sparql
   " configure n3 filetype
   au BufNewFile,BufRead *.n3,*.ttl setlocal filetype=n3
+  " configure md filetype
+  au BufNewFile,BufRead *.md setlocal textwidth=80 | setlocal colorcolumn=81
   " make sure relative line numbers are used in nerdtree
   au FileType nerdtree setlocal relativenumber
 
@@ -655,6 +662,7 @@ augroup END
 " Folding:
 " v{motion}zf - Surround with fold markers
 " za - toggle fold
+" zA - toggle fold of all levels
 " zR - open all folds
 " zM - close all folds
 
