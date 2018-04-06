@@ -66,7 +66,6 @@ ${color3}Home: ${color5}${goto 50}${fs_used /home} / ${fs_size /home} $alignr ${
 ${color3}Root: ${color5}${goto 50}${fs_used /} / ${fs_size /} $alignr ${fs_used_perc /}% ${color4}${fs_bar 5,100 /}
 ${color3}Win: ${color5}${goto 50}${fs_used /media/win} / ${fs_size /media/win} $alignr ${fs_used_perc /media/win}% ${color4}${fs_bar 5,100 /media/win}
 ${color3}Ext: ${color5}${goto 50}${fs_used /media/ext} / ${fs_size /media/ext} $alignr ${fs_used_perc /media/ext}% ${color4}${fs_bar 5,100 /media/ext}
-${color3}Ext2: ${color5}${goto 50}${fs_used /media/ext2} / ${fs_size /media/ext2} $alignr ${fs_used_perc /media/ext2}% ${color4}${fs_bar 5,100 /media/ext2}
 ${color3}Ext3: ${color5}${goto 50}${fs_used /media/ext3} / ${fs_size /media/ext3} $alignr ${fs_used_perc /media/ext3}% ${color4}${fs_bar 5,100 /media/ext3}
 
 ${font Sans:bold:size=10}${color3}TOP PROCESSES ${color1}${hr 2}${font Sans:size=8}
