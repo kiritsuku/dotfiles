@@ -32,31 +32,26 @@
         [submenu] (Browsers)
             [exec]   (Firefox) {firefox}
             [exec]   (Chrome) {google-chrome-stable}
-            [exec]   (Opera) {opera}
             [exec]   (Lynx) {xterm -e lynx fluxbox.org}
-        [end]
-        [submenu] (IM)
-            [exec]   (Pidgin) {pidgin}
         [end]
     [end]
     [submenu] (Editors)
         [exec]   (Scala-Eclipse) {/home/antoras/software/scala-eclipse/eclipse}
         [exec]   (Scala-Eclipse-Prod) {/home/antoras/software/scala-eclipse-prod/eclipse}
-        [exec]   (subl) {subl}
+        [exec]   (subl) {subl3}
         [exec]   (nano) {xterm -e nano}
         [exec]   (vim) {xterm -e vim}
     [end]
     [submenu] (Utilities)
-        [exec]   (qBittorrent) {qbittorrent}
-        [exec]   (Tipp10) {tipp10}
         [exec]   (JDownloader2) {java -jar /home/antoras/software/jd2/JDownloader.jar}
         [exec]   (VirtualBox) {VirtualBox}
+        [exec]   (LibreOffice) {libreoffice}
     [end]
     [submenu] (Multimedia)
         [submenu] (Graphics)
-            [exec]   (gqview) {gqview}
+            [exec]   (gthumb) {gthumb}
             [exec]   (inkscape) {inkscape}
-            [exec]   (yed) {yed}
+            [exec]   (gimp) {gimp}
         [end]
         [submenu] (Audio)
             [exec]   (alsamixer) {xterm -e alsamixer}
@@ -79,18 +74,9 @@
             [exec]   (Reload .Xdefaults) {xrdb -load $HOME/.Xdefaults}
         [end]
     [end]
-    [submenu] (Office)
-        [exec]   (xclock) {xclock}
-        [exec]   (xcalc) {xcalc}
-        [exec]   (LibreOffice) {libreoffice}
-    [end]
-    [submenu] (Games)
-        [exec]   (xeyes) {xeyes}
-    [end]
     [submenu] (System Tools)
-        [exec]   (top) {xterm -e top}
         [exec]   (System-Monitor) {gnome-system-monitor}
-        [exec]   (cpufreq) {xterm -e watch grep \"cpu MHz\" /proc/cpuinfo}
+        [exec]   (top) {xterm -e top}
     [end]
     [submenu] (Fluxbox config)
         [config] (Configure)
@@ -102,8 +88,6 @@
         [end]
             [workspaces] (Workspace List)
         [submenu] (Tools)
-            [exec] (Window name) {xprop WM_CLASS|cut -d \" -f 2|xmessage -file - -center}
-            [exec] (Run) {fbrun }
             [exec] (gtk-theme-switch2) {gtk-theme-switch2}
             [exec] (Regen Menu) {fluxbox-generate_menu }
         [end]
@@ -112,7 +96,6 @@
         [commanddialog] (Fluxbox Command)
         [reconfig] (Reload config)
         [restart] (Restart)
-        [exec] (About) {(fluxbox -v; fluxbox -info | sed 1d) | xmessage -file - -center}
     [end]
     [separator]
     [exit] (Exit)
