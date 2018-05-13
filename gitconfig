@@ -1,8 +1,8 @@
 [user]
-    name = Simon Schäfer
-    email = mail@antoras.de
+    name = Liara Schäfer
+    email = mail@kiritsuku.de
 [github]
-    user = sschaef
+    user = kiritsuku
 [core]
     editor = nvim -c 'startinsert'
     fileMode = false
