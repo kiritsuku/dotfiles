@@ -108,7 +108,7 @@ export PATH=$HOME/bin:$PATH
 export PATH=$PATH:$HOME/.gem/ruby/2.2.0/bin
 export PATH=$PATH:$HOME/.rvm/bin
 # scala executables
-export PATH=$PATH:$HOME/software/scala-2.12.3/bin/
+export PATH=$PATH:$HOME/software/scala-2.12.6/bin/
 # go executables
 export GOPATH=$HOME/.go
 export PATH=$PATH:$GOPATH/bin
@@ -128,18 +128,21 @@ alias g='git'
 alias p='sudo pacman'
 alias y='yaourt'
 
+function st() {
+  startx >/tmp/startx.log 2>&1
+}
 function l() {
   ls -lAh --color=always "$@" | less
 }
-function cp() {
-  command $HOME/bin/hidden/cp -B "$@"
-}
-function mv() {
-  command $HOME/bin/hidden/mv -B "$@"
-}
-function rm() {
-  command $HOME/bin/hidden/rm -B "$@"
-}
+#function cp() {
+#  command $HOME/bin/hidden/cp -B "$@"
+#}
+#function mv() {
+#  command $HOME/bin/hidden/mv -B "$@"
+#}
+#function rm() {
+#  command $HOME/bin/hidden/rm -B "$@"
+#}
 function c() {
   command code .
 }
@@ -160,7 +163,7 @@ function d() {
   command sudo systemctl restart dhcpcd.service
 }
 function pacman-remove-orphans() {
-  command sudo pacman -R $(pacman -Qdtq)
+  command sudo pacman -Rs $(pacman -Qdtq)
 }
 # }}}
 # FZF config {{{
@@ -168,7 +171,7 @@ function pacman-remove-orphans() {
 # Load fzf config
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # Setting ag as the default source for fzf
-export FZF_DEFAULT_COMMAND='ag -g ""'
+export FZF_DEFAULT_COMMAND='ag -g "" -p ~/.gitignore'
 # Show results on entire screen
 export FZF_DEFAULT_OPTS='--no-height'
 # Show a preview window for file contents in CTRL-T
@@ -178,7 +181,7 @@ export FZF_CTRL_T_OPTS='--preview '\''[[ $(file --mime {}) =~ binary ]] && echo 
 export FZF_COMPLETION_OPTS='+c -x'
 
 function _fzf_compgen_path() {
-  ag -g "" "$1"
+  ag -g "" -p ~/.gitignore "$1"
 }
 # }}}
 # Ranger config {{{
