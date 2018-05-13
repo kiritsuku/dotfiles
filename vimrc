@@ -58,8 +58,9 @@ syntax on
 if has('nvim')
   colorscheme gruvbox
   let g:gruvbox_contrast_dark='soft'
+  let g:gruvbox_italic=1
   set background=dark
-  set scrollback=10000
+  set scrollback=100000
   " live preview of various commands, including :s
   set inccommand=split
 elseif has("gui_running")
@@ -596,6 +597,8 @@ augroup configgroup
     au WinEnter * if &buftype == 'terminal' | startinsert | setlocal nonumber | endif
     " close terminal buffer without showing the exit status of the shell
     au TermClose * call feedkeys("\<cr>")
+    " Make autoread possible. See https://www.reddit.com/r/neovim/comments/468udc/i_wrote_a_very_simple_plugin_to_make_autoread/d0zm1n5
+    au FocusGained * silent! checktime
   endif
 augroup END
 "}}}
