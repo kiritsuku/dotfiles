@@ -57,7 +57,6 @@
             [exec]   (alsamixer) {xterm -e alsamixer}
             [exec]   (pavucontrol) {pavucontrol}
             [exec]   (Guvcview) {guvcview}
-            [exec]   (blueman) {blueman-manager}
         [end]
         [submenu] (Video)
             [exec]   (vlc) {vlc}
