@@ -60,7 +60,7 @@ if has('nvim')
   let g:gruvbox_contrast_dark='soft'
   let g:gruvbox_italic=1
   set background=dark
-  set scrollback=100000
+  set scrollback=10000
   " live preview of various commands, including :s
   set inccommand=split
 elseif has("gui_running")
