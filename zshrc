@@ -104,16 +104,8 @@ export EDITOR="vim"
 export COLORTERM=xterm-256color
 # bin folder
 export PATH=$HOME/bin:$PATH
-# ruby executables
-export PATH=$PATH:$HOME/.gem/ruby/2.2.0/bin
-export PATH=$PATH:$HOME/.rvm/bin
 # scala executables
 export PATH=$PATH:$HOME/software/scala-2.12.6/bin/
-# go executables
-export GOPATH=$HOME/.go
-export PATH=$PATH:$GOPATH/bin
-# apache-jena executables
-export PATH=$PATH:$HOME/software/apache-jena-3.0.1/bin/
 
 # https://www.topbug.net/blog/2016/09/27/make-gnu-less-more-powerful/
 export LESS='--quit-if-one-screen --ignore-case --LONG-PROMPT --RAW-CONTROL-CHARS --tabs=4 --no-init --window=-4'
