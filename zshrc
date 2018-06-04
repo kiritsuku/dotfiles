@@ -85,16 +85,6 @@ bindkey '^W' self-insert
 
 # `Frozing' tty, so after any command terminal settings will be restored
 ttyctl -f
-
-# start ssh agent if not started yet
-if [ -z $SSH_AGENT_PID ]; then
-  # only take first lines of ssh-agent output
-  ssh-agent | head -n 2 > ~/.ssh-env
-  source ~/.ssh-env
-  ssh-add
-else
-  source ~/.ssh-env
-fi
 # }}}
 # Exports {{{
 export EDITOR="vim"
