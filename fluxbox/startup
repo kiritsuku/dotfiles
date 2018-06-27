@@ -26,7 +26,9 @@ setxkbmap de neo
 #
 export GDK_NATIVE_WINDOWS=true
 
-exec pulseaudio --start &
+# We have to run the pacmd command here in order to allow pulseaudio to detect
+# plugged-in sound devices, which for some reason doesn't correctly happen on pulseaudio startup
+exec pulseaudio && pacmd unload-module module-udev-detect && pacmd load-module module-udev-detect &
 exec ~/.screenlayout/screens.sh &
 exec /usr/bin/tilda &
 exec transmission-gtk &
