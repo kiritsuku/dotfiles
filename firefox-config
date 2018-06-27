@@ -1,0 +1,7 @@
+Additional Firefox about:config settings that can't be configured through a GUI:
+- browser.tabs.remote.autostart -> (default false)
+- media.block-autoplay-until-in-foreground -> (default true)
+- browser.urlbar.maxRichResults -> (default 15)
+- extensions.pocket.enabled -> (default true)
+- extensions.webextensions.tabhide.enabled -> (default false)
+- pdfjs.disabled -> (default true)
