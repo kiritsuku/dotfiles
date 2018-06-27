@@ -230,6 +230,7 @@ function! CreateNewTabShell()
   tabnew
   startinsert
   setlocal nonumber
+  setlocal norelativenumber
   term
 endfunction()
 
@@ -534,10 +535,7 @@ let g:airline_powerline_fonts = 1
 "let g:airline#extensions#tabline#left_alt_sep = ''
 "let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 "}}}
-" Easymotion config {{{
-" }}}
 " Auto-commands {{{
-"
 function! SaveAfterFocusLost()
   " check if filename is not empty and file is modifiable
   if !empty(@%) && &modifiable && &buftype !=# 'terminal'
@@ -594,7 +592,7 @@ augroup configgroup
   " auto commands that should only work in neovim
   if has('nvim')
     " automatically move to insert mode once a terminal buffer is entered
-    au WinEnter * if &buftype == 'terminal' | startinsert | setlocal nonumber | endif
+    au WinEnter term://* startinsert
     " close terminal buffer without showing the exit status of the shell
     au TermClose * call feedkeys("\<cr>")
     " Make autoread possible. See https://www.reddit.com/r/neovim/comments/468udc/i_wrote_a_very_simple_plugin_to_make_autoread/d0zm1n5
