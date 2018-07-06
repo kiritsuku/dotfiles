@@ -110,21 +110,23 @@ alias g='git'
 alias p='sudo pacman'
 alias y='yaourt'
 
+# Requires 32 bit glibc to be installed. In arch: lib32-glibc
+function cp() {
+  command $HOME/bin/hidden/cp -B "$@"
+}
+function mv() {
+  command $HOME/bin/hidden/mv -B "$@"
+}
+function rm() {
+  command $HOME/bin/hidden/rm -B "$@"
+}
+
 function st() {
   startx >/tmp/startx.log 2>&1
 }
 function l() {
   ls -lAh --color=always "$@" | less
 }
-#function cp() {
-#  command $HOME/bin/hidden/cp -B "$@"
-#}
-#function mv() {
-#  command $HOME/bin/hidden/mv -B "$@"
-#}
-#function rm() {
-#  command $HOME/bin/hidden/rm -B "$@"
-#}
 function c() {
   command code .
 }
