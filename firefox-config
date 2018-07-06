@@ -3,3 +3,4 @@ Additional Firefox about:config settings that can't be configured through a GUI:
 - browser.urlbar.maxRichResults -> (default 15)
 - extensions.pocket.enabled -> (default true)
 - extensions.webextensions.tabhide.enabled -> (default false)
+- reader.parse-on-load.enabled -> (default true, disable reader view)
