@@ -41,6 +41,8 @@ Plug 'vim-scripts/n3.vim', { 'for': ['n3', 'nq', 'turtle'] }
 " dependency for plasticboy/vim-markdown
 Plug 'godlygeek/tabular', { 'for': 'markdown' }
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+Plug 'bkad/CamelCaseMotion'
+Plug 'ryanoasis/vim-devicons'
 
 if has('nvim')
   " Plug 'Valloric/YouCompleteMe', { 'do': 'python2 ./install.py --clang-completer' }
@@ -66,7 +68,7 @@ if has('nvim')
 elseif has("gui_running")
   colorscheme gruvbox
   let g:gruvbox_contrast_dark='soft'
-  set guifont=Fantasque\ Sans\ Mono\ Italic\ 13
+  set guifont=Fantasque\ Sans\ Mono\ Nerd\ Font\ Italic\ 13
   set background=dark
 else
   set t_Co=256
@@ -301,6 +303,10 @@ nn <leader>p "+p
 nn <leader>P "+P
 vn <leader>p "+p
 vn <leader>P "+P
+
+nm <leader>w <Plug>CamelCaseMotion_w
+nm <leader>b <Plug>CamelCaseMotion_b
+nm <leader>e <Plug>CamelCaseMotion_e
 
 " Enable easymotion plugin
 nm <space> <Plug>(easymotion-prefix)
