@@ -160,7 +160,7 @@ export FZF_DEFAULT_COMMAND='ag -g "" -p ~/.gitignore'
 export FZF_DEFAULT_OPTS='--no-height'
 # Show a preview window for file contents in CTRL-T
 # If the file is binary, don't show its contents. Otherwise show the highlighted content.
-export FZF_CTRL_T_OPTS='--preview '\''[[ $(file --mime {}) =~ binary ]] && echo "$(file {})" || (highlight -O ansi {} || head -50 {}) 2> /dev/null | head -50'\'
+export FZF_CTRL_T_OPTS='--preview '\''[[ $(file --mime {}) =~ binary ]] && echo "$(file {})" || bat --style numbers --color always {} | head -50'\'
 
 export FZF_COMPLETION_OPTS='+c -x'
 
