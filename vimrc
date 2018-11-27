@@ -45,8 +45,8 @@ Plug 'bkad/CamelCaseMotion'
 Plug 'ryanoasis/vim-devicons'
 
 if has('nvim')
-  " Plug 'Valloric/YouCompleteMe', { 'do': 'python2 ./install.py --clang-completer' }
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 endif
 
 call plug#end()
