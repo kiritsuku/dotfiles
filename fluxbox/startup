@@ -7,9 +7,9 @@ start_nitrogen () {
   exec nitrogen --restore
 }
 
-start_xflux () {
+start_redshift () {
   sleep 2
-  exec ~/bin/xflux -l 49.0 -g 8.4
+  exec redshift -l 47:9
 }
 
 start_conky () {
@@ -26,9 +26,7 @@ setxkbmap de neo
 #
 export GDK_NATIVE_WINDOWS=true
 
-# We have to run the pacmd command here in order to allow pulseaudio to detect
-# plugged-in sound devices, which for some reason doesn't correctly happen on pulseaudio startup
-exec pulseaudio && pacmd unload-module module-udev-detect && pacmd load-module module-udev-detect &
+exec pulseaudio &
 exec ~/.screenlayout/screens.sh &
 exec /usr/bin/tilda &
 exec transmission-gtk &
@@ -36,11 +34,11 @@ exec /usr/bin/tint2 &
 exec dropbox &
 start_nitrogen &
 start_conky &
-start_xflux &
+start_redshift &
 exec /usr/lib/notification-daemon-1.0/notification-daemon &
 
 # And last but not least we start fluxbox.
 # Because it is the last app you have to run it with ''exec'' before it.
 exec fluxbox
 # or if you want to keep a log:
-# exec fluxbox -log "/home/antoras/.fluxbox/log"
+# exec fluxbox -log "/tmp/fluxbox.log"
