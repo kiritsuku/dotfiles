@@ -43,6 +43,7 @@ Plug 'godlygeek/tabular', { 'for': 'markdown' }
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'bkad/CamelCaseMotion'
 Plug 'ryanoasis/vim-devicons'
+Plug 'wellle/targets.vim'
 
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -625,11 +626,6 @@ augroup END
 "}}}
 " Key combinations docs {{{
 
-" UMSCHALT+d - delete all after cursor
-" CTRL+W+direction - move between windows
-" SHIFT+Z+Z - save and close window
-" CTRL+D - open completion menu in command mode
-" CTRL+X - decrement number
 " M,H,L - place cursor at middle, top or bottom of screen
 
 " gi - switches to insertion mode and set cursor to the same location it was
@@ -662,7 +658,6 @@ augroup END
 " `` - jump to last cursor location
 
 " Coercions:
-"
 " crs - snake_case
 " crm - MixedCase
 " crc - camelCase
