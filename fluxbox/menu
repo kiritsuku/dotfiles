@@ -24,23 +24,16 @@
     [exec]   (Run) {fbrun}
     [nop]
 [submenu] (Menu)
-    [submenu] (Terminals)
-        [exec]   (xterm) {xterm}
-        [exec]   (urxvt) {urxvt}
-    [end]
     [submenu] (Internet)
         [submenu] (Browsers)
             [exec]   (Firefox) {firefox}
             [exec]   (Chrome) {google-chrome-stable}
-            [exec]   (Lynx) {xterm -e lynx fluxbox.org}
         [end]
     [end]
     [submenu] (Editors)
         [exec]   (Scala-Eclipse) {/home/antoras/software/scala-eclipse/eclipse}
         [exec]   (Scala-Eclipse-Prod) {/home/antoras/software/scala-eclipse-prod/eclipse}
         [exec]   (subl) {subl3}
-        [exec]   (nano) {xterm -e nano}
-        [exec]   (vim) {xterm -e vim}
     [end]
     [submenu] (Utilities)
         [exec]   (JDownloader2) {java -jar /home/antoras/software/jd2/JDownloader.jar}
