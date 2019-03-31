@@ -94,7 +94,7 @@ ${color3}Down: ${color5}${downspeed eth0}${goto 160}${color3}Up: ${color5}${upsp
 ${downspeedgraph eth0 25,148 FFC11F 8B4B0B 3000}$alignr${upspeedgraph eth0 25,148 FFC11F 8B4B0B 120}
 ${color3}${goto 70}Down${goto 150}Up${goto 230}Total
 ${color3}Today:${color5}${goto 70}${execi 300 vnstat -i eth0 | grep "today" | awk '{print $2 $3}'}${goto 150}${execi 300 vnstat -i eth0 | grep "today" | awk '{print $5 $6}'}${goto 230}${execi 300 vnstat -i eth0 | grep "today" | awk '{print $8 $9}'}
-${color3}Yesterday:${color5}${goto 70}${execi 300 vnstat -i eth0 | grep "yesterday" | awk '{print $2 $3}'}${goto 150}${execi 300 vnstat -i eth0 | grep "yesterday" | awk '{print $5 $6}'}${goto 230}${execi 300 vnstat -i eth0 | grep "yesterday" | awk '{print $8 $9}'}
+${color3}Yesterday:${color5}${goto 70}${execi 300 vnstat -i eth0 -d 2 | grep "`date -d 'yesterday 13:00' '+%Y-%m-%d'`" | awk '{print $2 $3}'}${goto 150}${execi 300 vnstat -i eth0 -d 2 | grep "`date -d 'yesterday 13:00' '+%Y-%m-%d'`" | awk '{print $5 $6}'}${goto 230}${execi 300 vnstat -i eth0 -d 2 | grep "`date -d 'yesterday 13:00' '+%Y-%m-%d'`" | awk '{print $8 $9}'}
 ${color3}Month:${color5}${goto 70}${execi 300 vnstat -i eth0 -m 1 | grep "`date +"%Y-%m"`" | awk '{print $2 $3}'}${goto 150}${execi 300 vnstat -i eth0 -m 1 | grep "`date +"%Y-%m"`" | awk '{print $5 $6}'}${goto 230}${execi 300 vnstat -i eth0 -m 1 | grep "`date +"%Y-%m"`" | awk '{print $8 $9}'}
 
 ${font Sans:bold:size=10}${color3}NEWS ${color1}${hr 2}${font Sans:size=8}
