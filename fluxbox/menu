@@ -25,10 +25,8 @@
     [nop]
 [submenu] (Menu)
     [submenu] (Internet)
-        [submenu] (Browsers)
-            [exec]   (Firefox) {firefox}
-            [exec]   (Chrome) {google-chrome-stable}
-        [end]
+        [exec]   (Firefox) {firefox}
+        [exec]   (Chrome) {google-chrome-stable}
     [end]
     [submenu] (Editors)
         [exec]   (Scala-Eclipse) {/home/antoras/software/scala-eclipse/eclipse}
@@ -39,36 +37,15 @@
         [exec]   (JDownloader2) {java -jar /home/antoras/software/jd2/JDownloader.jar}
         [exec]   (VirtualBox) {VirtualBox}
         [exec]   (LibreOffice) {libreoffice}
+        [exec]   (System-Monitor) {gnome-system-monitor}
     [end]
     [submenu] (Multimedia)
-        [submenu] (Graphics)
-            [exec]   (gthumb) {gthumb}
-            [exec]   (inkscape) {inkscape}
-            [exec]   (gimp) {gimp}
-        [end]
-        [submenu] (Audio)
-            [exec]   (alsamixer) {xterm -e alsamixer}
-            [exec]   (pavucontrol) {pavucontrol}
-            [exec]   (Guvcview) {guvcview}
-        [end]
-        [submenu] (Video)
-            [exec]   (vlc) {vlc}
-        [end]
-        [submenu] (X-utils)
-            [exec]   (xfontsel) {xfontsel}
-            [exec]   (xman) {xman}
-            [exec]   (xload) {xload}
-            [exec]   (xbiff) {xbiff}
-            [exec]   (editres) {editres}
-            [exec]   (viewres) {viewres}
-            [exec]   (xclock) {xclock}
-            [exec]   (xmag) {xmag}
-            [exec]   (Reload .Xdefaults) {xrdb -load $HOME/.Xdefaults}
-        [end]
-    [end]
-    [submenu] (System Tools)
-        [exec]   (System-Monitor) {gnome-system-monitor}
-        [exec]   (top) {xterm -e top}
+        [exec]   (gthumb) {gthumb}
+        [exec]   (inkscape) {inkscape}
+        [exec]   (gimp) {gimp}
+        [exec]   (alsamixer) {xterm -e alsamixer}
+        [exec]   (pavucontrol) {pavucontrol}
+        [exec]   (Guvcview) {guvcview}
     [end]
     [submenu] (Fluxbox config)
         [config] (Configure)
