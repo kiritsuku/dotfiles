@@ -94,8 +94,6 @@ export EDITOR="vim"
 export COLORTERM=xterm-256color
 # bin folder
 export PATH=$HOME/bin:$PATH
-# scala executables
-export PATH=$PATH:$HOME/software/scala-2.12.6/bin/
 
 # https://www.topbug.net/blog/2016/09/27/make-gnu-less-more-powerful/
 export LESS='--quit-if-one-screen --ignore-case --LONG-PROMPT --RAW-CONTROL-CHARS --tabs=4 --no-init --window=-4'
