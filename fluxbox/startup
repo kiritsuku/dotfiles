@@ -31,7 +31,7 @@ exec ~/.screenlayout/screens.sh &
 exec /usr/bin/tilda &
 exec transmission-gtk &
 exec /usr/bin/tint2 &
-exec dropbox &
+#exec dropbox &
 start_nitrogen &
 start_conky &
 start_redshift &

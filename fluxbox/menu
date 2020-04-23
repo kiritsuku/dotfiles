@@ -21,6 +21,7 @@
     [exec]   (Filemanager) {thunar}
     [exec]   (Bildbetrachter) {gthumb}
     [exec]   (Audioplayer) {quodlibet}
+    [exec]   (Dropbox) {dropbox}
     [exec]   (Run) {fbrun}
     [nop]
 [submenu] (Menu)
