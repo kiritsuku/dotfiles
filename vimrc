@@ -406,6 +406,10 @@ ino <expr> <home> virtcol('.') - 1 <= indent('.') && col('.') > 1 ? '<c-o>0' : '
 nn <expr> <end> virtcol('.') <= virtcol('$')-1 ? 'g_' : winwidth(0)-1.'\|'
 ino <expr> <end> virtcol('.') <= virtcol('$')-1 ? '<c-o>g_' : '<c-o>'.winwidth(0)-1.'\|'
 
+" use tab to forward and backward cycle in tab completion
+ino <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+ino <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
+
 "}}}
 " NERDTree config {{{
 
