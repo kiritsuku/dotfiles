@@ -1,0 +1,38 @@
+#!/bin/bash
+#
+# calculate the lines of code change by a given author between two commits
+#
+# example usage: git loc "<author name>" abcdef..@
+# the second parameter must not be specified
+
+author=$1
+range=$2
+
+# set globally defined git user if no user specified
+if [ -z "$author" ]; then
+  author=`git config user.name`
+fi
+
+# the active branch of the current repo
+cur_branch=`git rev-parse --abbrev-ref @`
+
+# the commit where the active branch starts
+first_commit=`diff -u \
+  <(git rev-list --first-parent $cur_branch) \
+  <(git rev-list --first-parent master) | \
+  sed -ne 's/^ //p' | \
+  head -1`
+
+# set range from first commit of branch to HEAD
+if [[ -z "$range" && -n "$first_commit" ]]; then
+  range="$first_commit..@"
+fi
+
+if [ -n "$range" ]; then
+  echo -n "Stats of '$author' in range '$range': "
+else
+  echo -n "Stats of '$author': "
+fi
+
+git log --no-merges --author="$author" --pretty="%H" --numstat $range |\
+  awk 'NF==3 {plus+=$1; minus+=$2} END {printf("+%d, -%d\n", plus, minus)}'

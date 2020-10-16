@@ -1,0 +1,14 @@
+#!/bin/sh
+# fetch and checkout pull request
+
+prid=$1
+
+[ -z "$prid" ] && echo "error: no PR id specified" && exit 1
+[ -n "$2" ] && echo "error: only one parameter allowed" && exit 1
+
+branchname="pr/$prid"
+
+# remove branch if it already exists
+git branch -D $branchname
+git fetch upstream pull/$prid/head:$branchname
+git checkout $branchname

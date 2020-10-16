@@ -1,0 +1,11 @@
+#!/bin/sh
+# branch-delete-full
+#
+# Deletes a branch on the origin remote and if that succeeds deletes it locally as well
+
+branch=$1
+
+[ -z "$branch" ] && echo "error: no branch specified" && exit 1
+[ -n "$2" ] && echo "error: only one parameter allowed" && exit 1
+
+git po :$branch && git bd $branch
