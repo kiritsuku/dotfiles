@@ -126,7 +126,8 @@
 
     cl = clean -fd
 
-    d = diff
+    # show diff for tracked and untracked files
+    d = !sh -c '(git --no-pager diff && git ls-files --others --exclude-standard | xargs -n 1 git --no-pager diff /dev/null) | diff-so-fancy | less' -
     dn = !sh -c 'git --no-pager diff' -
     ds = diff --staged
     dw = diff --word-diff=color
