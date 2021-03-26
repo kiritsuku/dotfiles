@@ -122,7 +122,7 @@ set laststatus=2
 set autowrite
 " Automatically refresh file on change
 set autoread
-" needed to  show whitespace characters
+" needed to show whitespace characters
 set list
 " display whitespace characters
 set listchars=tab:‣\ ,
@@ -237,6 +237,13 @@ function! CreateNewTabShell()
   term
 endfunction()
 
+function! CreateNewSplitShell()
+  term
+  setlocal nonumber
+  setlocal norelativenumber
+  startinsert
+endfunction()
+
 "}}}
 " Key combinations {{{
 
@@ -343,6 +350,9 @@ vn <silent> y y`]
 vn <silent> p p`]
 nn <silent> p p`]
 
+" yanks from the cursor to the end of line
+map Y y$
+
 " Jump to tab by typing its number
 for i in range(1, 19)
   exe 'nn <C-a>' . i . ' ' . i . 'gt'
@@ -377,14 +387,14 @@ if has('nvim')
   tno <C-a><right> <C-\><C-n><C-w>l
 
   " create a new shell when a split is opened
-  tno <C-a>v <C-\><C-n>:vsplit \| :term<cr>
+  tno <C-a>v <C-\><C-n>:vsplit \| :call CreateNewSplitShell()<cr>
   "tno <C-a>v <C-\><C-n>:call OpenTerm()<cr>
-  tno <C-a>s <C-\><C-n>:split \| :term<cr>
+  tno <C-a>s <C-\><C-n>:split \| :call CreateNewSplitShell()<cr>
 
   " vertical split with |
-  tno <C-a><Bar> <C-\><C-n>:vsplit \| :term<cr>
+  tno <C-a><Bar> <C-\><C-n>:vsplit \| :call CreateNewSplitShell()<cr>
   " horizontal split with -
-  tno <C-a>- <C-\><C-n>:split \| :term<cr>
+  tno <C-a>- <C-\><C-n>:split \| :call CreateNewSplitShell()<cr>
 
   " Jump to tab by typing its number
   for i in range(1, 19)
