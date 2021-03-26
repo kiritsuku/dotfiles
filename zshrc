@@ -123,7 +123,12 @@ function st() {
   startx >/tmp/startx.log 2>&1
 }
 function l() {
-  ls -lAh --color=always "$@" | less
+  # on macos there is no --color parameter
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    CLICOLOR_FORCE= ls -lAh "$@" | less
+  else
+    ls -lAh --color=always "$@" | less
+  fi
 }
 function c() {
   command code .
@@ -146,6 +151,15 @@ function d() {
 }
 function pacman-remove-orphans() {
   command sudo pacman -Rs $(pacman -Qdtq)
+}
+function http() {
+  command http --pretty=all "$@" | less -R
+}
+function https() {
+  command https --pretty=all "$@" | less -R
+}
+function awslocal() {
+  command aws --endpoint-url=http://localhost:4566 "$@"
 }
 # }}}
 # FZF config {{{
@@ -170,7 +184,7 @@ function _fzf_compgen_path() {
 # Automatically jump to the directory ranger is located to when one leaves ranger
 function rn() {
   tempfile='/tmp/ranger-chosendir'
-  /usr/bin/ranger --choosedir="$tempfile" "${@:-$(pwd)}"
+  ranger --choosedir="$tempfile" "${@:-$(pwd)}"
   test -f "$tempfile" &&
   if [ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]; then
     cd -- "$(cat "$tempfile")"
@@ -189,4 +203,15 @@ function man() {
   LESS_TERMCAP_us=$'\e[1;32m' \
   command man "$@"
 }
+# }}}
+# Perseus {{{
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
+  export PATH="/usr/local/opt/node@10/bin:$PATH"
+  # https://apple.stackexchange.com/questions/33677/how-can-i-configure-mac-terminal-to-have-color-ls-output
+  # better colors for black background
+  export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
+  # On iterm2 we have to unset LANG because it is set automatically but it breaks our character display
+  unset LANG
+fi
 # }}}
