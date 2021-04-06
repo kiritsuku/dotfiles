@@ -44,6 +44,7 @@ Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'bkad/CamelCaseMotion'
 Plug 'ryanoasis/vim-devicons'
 Plug 'wellle/targets.vim'
+Plug 'GEverding/vim-hocon'
 
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
