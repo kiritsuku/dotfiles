@@ -168,6 +168,5 @@
     log = diff-so-fancy | less
     show = diff-so-fancy | less
     diff = diff-so-fancy | less
-# Disable until https://github.com/so-fancy/diff-so-fancy/issues/35 is fixed
 [interactive]
     diffFilter = diff-so-fancy --patch
