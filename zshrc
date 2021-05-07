@@ -85,6 +85,9 @@ bindkey '^W' self-insert
 
 # `Frozing' tty, so after any command terminal settings will be restored
 ttyctl -f
+
+# incrementally add new entries to history instead of waiting until the shell exists
+setopt INC_APPEND_HISTORY
 # }}}
 # Exports {{{
 export EDITOR="vim"
