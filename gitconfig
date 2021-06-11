@@ -23,8 +23,8 @@
     helper = cache
 [alias]
     f = fetch
-    fu = fetch upstream
-    fo = fetch origin
+    fu = fetch upstream --prune
+    fo = fetch origin --prune
     # fetch all tags that are in the upstream fork
     fut = fetch upstream "refs/tags/*:refs/tags/*"
 
@@ -127,7 +127,7 @@
     cl = clean -fd
 
     # show diff for tracked and untracked files
-    d = !sh -c '(git --no-pager diff && git ls-files --others --exclude-standard | xargs -n 1 git --no-pager diff /dev/null) | diff-so-fancy | less' -
+    d = !sh -c '(git --no-pager diff && git ls-files --others --exclude-standard | xargs -n 1 --no-run-if-empty git --no-pager diff /dev/null) | diff-so-fancy | less' -
     dn = !sh -c 'git --no-pager diff' -
     ds = diff --staged
     dw = diff --word-diff=color
