@@ -1,0 +1,25 @@
+{
+  "languageserver": {
+    "terraform": {
+      "command": "terraform-ls",
+      "args": ["serve"],
+      "filetypes": ["terraform", "tf"],
+      "initializationOptions": {}
+    }
+  },
+  // yaml config: https://github.com/neoclide/coc-yaml
+  "yaml.customTags": [
+    "!Ref scalar",
+    "!GetAtt scalar",
+    "!Select sequence",
+    "!Join sequence",
+    "!GetAZs mapping",
+    "!Sub scalar"
+  ],
+  // https://www.schemastore.org/json/
+  "yaml.schemas": {
+    // https://github.com/awslabs/goformation
+    "https://raw.githubusercontent.com/awslabs/goformation/master/schema/sam.schema.json": ["/template.yaml"],
+    "https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json": "/.gitlab-ci.yml"
+  }
+}
