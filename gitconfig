@@ -1,8 +1,6 @@
 [user]
     name = Liara Schäfer
-    email = mail@kiritsuku.de
-[github]
-    user = kiritsuku
+    email = liara.schaefer@perseus.de
 [core]
     editor = nvim -c 'startinsert'
     fileMode = false
@@ -117,8 +115,8 @@
 
     r = reset
     rs = reset --soft
-    r1 = reset @^
-    r2 = reset @^^
+    r1 = reset @^ --soft
+    r2 = reset @^^ --soft
     rh = reset @
     rhard = reset --hard
     rhard1 = reset @^ --hard
