@@ -1,0 +1,109 @@
+{
+    "editor.suggest.showMethods": true,
+    "editor.suggest.preview": true,
+    "editor.snippetSuggestions": "top",
+    "aws.profile": "profile:perseus-dev",
+    "redhat.telemetry.enabled": true,
+    "aws.suppressPrompts": {
+        "fileViewerEdit": true
+    },
+    "yaml.customTags": [
+        "!And",
+        "!And sequence",
+        "!If",
+        "!If sequence",
+        "!Not",
+        "!Not sequence",
+        "!Equals",
+        "!Equals sequence",
+        "!Or",
+        "!Or sequence",
+        "!FindInMap",
+        "!FindInMap sequence",
+        "!Base64",
+        "!Join",
+        "!Join sequence",
+        "!Cidr",
+        "!Ref",
+        "!Sub",
+        "!Sub sequence",
+        "!GetAtt",
+        "!GetAZs",
+        "!ImportValue",
+        "!ImportValue sequence",
+        "!Select",
+        "!Select sequence",
+        "!Split",
+        "!Split sequence"
+    ],
+    "editor.lineNumbers": "relative",
+    "files.autoSave": "onFocusChange",
+    "editor.fontFamily": "'Fantasque Sans Mono','Droid Sans Mono', 'monospace', monospace",
+    "editor.renderWhitespace": "trailing",
+    "editor.fontSize": 16,
+    "window.dialogStyle": "custom",
+    "window.titleBarStyle": "custom",
+    "terraform.codelens.referenceCount": true,
+    "workbench.colorTheme": "Gruvbox Dark Hard",
+    "explorer.autoReveal": false,
+    "workbench.iconTheme": "material-icon-theme",
+    "cSpell.userWords": [
+        "boto",
+        "Chakra",
+        "Fantasque",
+        "Gruvbox"
+    ],
+    "files.trimTrailingWhitespace": true,
+    "files.trimFinalNewlines": true,
+    "files.eol": "\n",
+    "workbench.startupEditor": "none",
+    "explorer.confirmDragAndDrop": false,
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "files.exclude": {
+        "**/.next": true,
+        "**/node_modules": true,
+        "**/out": true
+    },
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": ["p"],
+            "after": ["\"", "+", "p"]
+        },
+        {
+            "before": ["d", "d"],
+            "after": ["\"", "+", "d", "d"]
+        },
+        {
+            "before": ["g", "V"],
+            "after": ["`", "[", "v", "`", "]"]
+        },
+        {
+            "before": ["<Up>"],
+            "after": ["g", "k"]
+        },
+        {
+            "before": ["<Down>"],
+            "after": ["g", "j"]
+        }
+    ],
+    "vim.leader": ",",
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": ["y"],
+            "after": ["\"", "+", "y"]
+        },
+        {
+            "before": ["d"],
+            "after": ["\"", "+", "d"]
+        },
+        {
+            "before": ["c"],
+            "after": ["\"", "+", "c"]
+        }
+    ],
+    "gitlens.codeLens.enabled": false,
+    "files.associations": {
+        "*.tftpl": "terraform",
+        "*.hcl": "terraform"
+    }
+}
