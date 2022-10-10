@@ -22,10 +22,15 @@ antigen bundle scala
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
 antigen bundle autojump
+antigen bundle macunha1/zsh-terraform
 antigen apply
 # }}}
 # Zsh prompt {{{
 
+# To see a color spectrum execute (from https://askubuntu.com/questions/27314/script-to-display-all-terminal-colors):
+#
+#     for x in {0..8}; do for i in {30..37}; do for a in {40..47}; do echo -ne "\e[$x;$i;$a""m\\\e[$x;$i;$a""m\e[0;37;40m "; done; echo; done; done; echo ""
+#
 # `fg` is needed for color names and `FG` for color numbers
 PROMPT='[%{$fg[red]%}%n%{$reset_color%}@%{$fg[magenta]%}%m%{$reset_color%} → %{$FG[039]%}%~%{$reset_color%}$(git_prompt_info)]
 %# '
@@ -91,11 +96,6 @@ setopt INC_APPEND_HISTORY
 # }}}
 # Exports {{{
 export EDITOR="vim"
-# This needs to be set and at the same time true color support needs to be disabled in
-# neovim in order to display all colors correctly. Only setting true color support in
-# neovim leads to broken colors in some terminals.
-export COLORTERM=xterm-256color
-# bin folder
 export PATH=$HOME/bin:$PATH
 
 # https://www.topbug.net/blog/2016/09/27/make-gnu-less-more-powerful/
@@ -158,11 +158,14 @@ function pacman-remove-orphans() {
 function http() {
   command http --pretty=all "$@" | less -R
 }
-function https() {
-  command https --pretty=all "$@" | less -R
-}
 function awslocal() {
   command aws --endpoint-url=http://localhost:4566 "$@"
+}
+function tf() {
+  command terraform "$@"
+}
+function tg() {
+  command terragrunt "$@"
 }
 # }}}
 # FZF config {{{
