@@ -17,7 +17,6 @@ call plug#begin('~/.vim/plugged')
 " Use :checkhealth to find out if everything has been installed correctly
 
 Plug 'morhetz/gruvbox'
-Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-abolish'
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['cpp', 'hpp', 'c', 'h'] }
@@ -42,13 +41,21 @@ Plug 'vim-scripts/n3.vim', { 'for': ['n3', 'nq', 'turtle'] }
 Plug 'godlygeek/tabular', { 'for': 'markdown' }
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'bkad/CamelCaseMotion'
-Plug 'ryanoasis/vim-devicons'
+" Fork of ryanoasis/vim-devicons. This plugin provides the same icons as well as colors for each icon.
+Plug 'kyazdani42/nvim-web-devicons'
 Plug 'wellle/targets.vim'
 Plug 'GEverding/vim-hocon'
+Plug 'hashivim/vim-terraform'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'pangloss/vim-javascript'
+
+" The following plugins require patched fonts: https://github.com/ryanoasis/nerd-fonts
+" Colored icons
+Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
+Plug 'nvim-tree/nvim-tree.lua'
 
 if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
+  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 'markdown' }
 endif
 
 call plug#end()
@@ -70,7 +77,7 @@ if has('nvim')
 elseif has("gui_running")
   colorscheme gruvbox
   let g:gruvbox_contrast_dark='soft'
-  set guifont=Fantasque\ Sans\ Mono\ Nerd\ Font\ Italic\ 13
+  set guifont=Fantasque\ Sans\ Mono\ 13
   set background=dark
 else
   set t_Co=256
@@ -161,6 +168,8 @@ set tabline=%!CustomTabLine()
 set clipboard+=unnamedplus
 " conceal text (for example links in markdown files)
 set conceallevel=2
+" Required by bufferline,nvim-tree
+set termguicolors
 
 " use , instead of \ for mapleader
 let mapleader=","
@@ -278,18 +287,23 @@ ino <C-d> <esc>
 
 " clear search highlighting pattern
 nn <silent> <leader><space> :let @/ = ""<cr>
-nn <leader>f :Files<cr>
-nn <leader>t :Tags<cr>
-nn <leader>b :Buffer<cr>
-nn <leader>hh :History<cr>
+
+" fzf configuration
+nn <leader>t :Files<cr>
+nn <leader>f :Tags<cr>
+nn <leader>u :Buffers<cr>
+nn <leader>h :History<cr>
 nn <leader>h: :History:<cr>
 nn <leader>h/ :History/<cr>
+nn <leader>l :BCommits<cr>
+nn <leader>x :Commands<cr>
 nn <leader>a :Ag<cr>
+
 nn <leader>se :setlocal spell! spelllang=en_us<cr>
 nn <leader>sg :setlocal spell! spelllang=de<cr>
-" see http://superuser.com/questions/195022/vim-how-to-synchronize-nerdtree-with-current-opened-tab-file-path
-nn <leader>o :NERDTreeFind<cr>
-nn <leader>c :NERDTreeToggle<cr>
+" Open NvimTree; ! means update the root
+nn <leader>o :NvimTreeFindFileToggle!<cr>
+nn <leader>r :NvimTreeRefresh<cr>
 nn <leader>ss :setlocal syntax=scala<cr>
 nn <leader>sh :setlocal syntax=sh<cr>
 nn <leader>sn :setlocal syntax=off<cr>
@@ -421,36 +435,47 @@ ino <expr> <end> virtcol('.') <= virtcol('$')-1 ? '<c-o>g_' : '<c-o>'.winwidth(0
 ino <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 ino <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
 
-"}}}
-" NERDTree config {{{
-
-let g:NERDTreeShowLineNumbers = 1
-let g:NERDTreeShowHidden = 1
-
-" }}}
-" Syntastic config {{{
-
-" enable C++11 support for syntastic
-let g:syntastic_cpp_compiler_options = ' -std=c++11'
-let g:syntastic_mode_map = { "mode": "active",
-                           \ "active_filetypes": [],
-                           \ "passive_filetypes": ["tex", "scala"] }
+" J/K moves selected lines down/up in visual mode
+" This plugin could also be used: https://github.com/matze/vim-move
+vn J :move '>+1<CR>gv=gv
+vn K :move '<-2<CR>gv=gv
 
 "}}}
-" YouCompleMe config {{{
-
-" We have to disable tab here, otherwise UltiSnips needs to be remapped
-let g:ycm_key_list_select_completion=['<tab>', '<down>']
-let g:ycm_autoclose_preview_window_after_insertion=1
-let g:ycm_complete_in_comments=1
-let g:ycm_collect_identifiers_from_comments_and_strings=1
-let g:ycm_collect_identifiers_from_tags_files=1
-let g:ycm_seed_identifiers_with_syntax=1
-let g:ycm_key_detailed_diagnostics='<leader>d'
-let g:ycm_confirm_extra_conf=0
-
-let g:deoplete#enable_at_startup = 1
-" }}}
+" nvim-web-devicons {{{
+lua << EOF
+require("nvim-web-devicons").setup{
+}
+EOF
+"}}}
+" Bufferline {{{
+lua << EOF
+require("bufferline").setup{
+  options = {
+    mode = "tabs",
+    numbers = function(opts)
+      return string.format('%s', opts.raise(opts.ordinal))
+    end,
+    tab_size = 8,
+    show_buffer_close_icons = false,
+    show_close_icon = false,
+  }
+}
+EOF
+"}}}
+" NvimTree {{{
+lua << EOF
+require("nvim-tree").setup{
+  view = {
+    relativenumber = true,
+  },
+  renderer = {
+    indent_markers = {
+      enable = true
+    }
+  }
+}
+EOF
+"}}}
 " UltiSnips config {{{
 let g:UltiSnipsExpandTrigger="<c-k>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
@@ -521,18 +546,18 @@ let g:ctrlp_by_filename=1
 let g:vimtex_enbaled=1
 "let g:vimtex_latexmk_build_dir='bin'
 let g:vimtex_fold_enabled=0
-let g:vimtex_quickfix_ignored_warnings = [
-  \ "Usage of package",
-  \ "float@addtolists detected",
-  \ "Overfull ",
-  \ "Underfull "
-\ ]
 let g:vimtex_compiler_latexmk = {
 \ 'build_dir' : 'bin',
 \}
 
-
 "}}}
+" markdown config {{{
+
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_frontmatter = 1
+let g:vim_markdown_conceal = 0
+
+" }}}
 " AutoPairs config {{{
 let g:AutoPairsCenterLine=0
 let g:AutoPairsFlyMode=0
@@ -602,8 +627,10 @@ augroup configgroup
   au BufNewFile,BufRead *.n3,*.ttl setlocal filetype=n3
   " configure md filetype
   au BufNewFile,BufRead *.md setlocal textwidth=80 | setlocal colorcolumn=81
-  " make sure relative line numbers are used in nerdtree
-  au FileType nerdtree setlocal relativenumber
+  " highlight comments in JSON files
+  au FileType json syntax match Comment +\/\/.\+$+
+  " configure tftpl filetype
+  au BufNewFile,BufRead *.tftpl setlocal filetype=terraform
 
   " auto commands that should only work when a gui is running
   if has("gui_running")
