@@ -17,7 +17,7 @@ call plug#begin('~/.vim/plugged')
 " Use :checkhealth to find out if everything has been installed correctly
 
 Plug 'morhetz/gruvbox'
-Plug 'tpope/vim-fugitive'
+" coerce words functionality (snake: crs, mixed: crm, camel: crc, upper: cru)
 Plug 'tpope/vim-abolish'
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['cpp', 'hpp', 'c', 'h'] }
 Plug 'vim-scripts/TagHighlight'
@@ -33,16 +33,17 @@ Plug 'terryma/vim-expand-region'
 Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'benekastah/neomake'
+" Rooter changes the working directory to the project root when you open a file or directory.
 Plug 'airblade/vim-rooter'
 Plug 'rvesse/vim-sparql', { 'for': ['sparql'] }
 Plug 'vim-scripts/n3.vim', { 'for': ['n3', 'nq', 'turtle'] }
 " dependency for plasticboy/vim-markdown
 Plug 'godlygeek/tabular', { 'for': 'markdown' }
-Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+Plug 'preservim/vim-markdown', { 'for': 'markdown' }
 Plug 'bkad/CamelCaseMotion'
 " Fork of ryanoasis/vim-devicons. This plugin provides the same icons as well as colors for each icon.
 Plug 'kyazdani42/nvim-web-devicons'
+" Adds text object selection functionality like vi{
 Plug 'wellle/targets.vim'
 Plug 'GEverding/vim-hocon'
 Plug 'hashivim/vim-terraform'
@@ -512,35 +513,6 @@ endfunction
 command! -bar RangerChooser call RangeChooser()
 "nn <leader>m :RangerChooser<CR>
 "}}}
-" gVim config {{{
-
-" Remove menubar
-set go-=m
-" Remove toolbar
-set go-=T
-" Remove scrollbars
-set go-=r
-set go-=R
-set go-=l
-set go-=L
-set go-=b
-" Use console dialogs
-set go+=c
-
-" }}}
-" CtrlP config {{{
-
-" List files top to bottom
-let g:ctrlp_match_window='bottom,order:ttb'
-" Open files in new buffers
-let g:ctrlp_switch_buffer=0
-" Grabs a change to the working directory
-let g:ctrlp_working_path_mode=0
-" Use 'ag' as search tool
-let g:ctrlp_user_command='ag %s -l --nocolor -g ""'
-" search by filname by default
-let g:ctrlp_by_filename=1
-"}}}
 " vimtex config {{{
 
 let g:vimtex_enbaled=1
@@ -561,7 +533,6 @@ let g:vim_markdown_conceal = 0
 " AutoPairs config {{{
 let g:AutoPairsCenterLine=0
 let g:AutoPairsFlyMode=0
-
 "}}}
 " Airline config {{{
 let g:airline_inactive_collapse = 0
@@ -570,24 +541,13 @@ let g:airline_inactive_collapse = 0
 " see https://powerline.readthedocs.org/en/master/installation/linux.html#fonts-installation
 " on how to get patched fonts
 let g:airline_powerline_fonts = 1
-
-"let g:airline#extensions#tabline#enabled = 1
-"let g:airline#extensions#tabline#show_tabs = 1
-"let g:airline#extensions#tabline#show_buffers = 0
-"let g:airline#extensions#tabline#show_close_button = 0
-"let g:airline#extensions#tabline#show_tab_type = 0
-"let g:airline#extensions#tabline#show_tab_nr = 1
-"let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
-"let g:airline#extensions#tabline#left_sep = ''
-"let g:airline#extensions#tabline#left_alt_sep = ''
-"let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 "}}}
 " Auto-commands {{{
 function! SaveAfterFocusLost()
   " check if filename is not empty and file is modifiable
   if !empty(@%) && &modifiable && &buftype !=# 'terminal'
-    :call RemoveTrailingWhitespace()
-    :update
+    call RemoveTrailingWhitespace()
+    update
   endif
 endfunction()
 
