@@ -277,11 +277,6 @@ nn <silent> <Up> :<C-u>call MoveUp(v:count)<cr>
 ino <silent> <Up> <C-o>:<C-u>call MoveUp(v:count)<cr>
 nn <silent> <Down> :<C-u>call MoveDown(v:count)<cr>
 ino <silent> <Down> <C-o>:<C-u>call MoveDown(v:count)<cr>
-nn <silent> <home> g<home>
-ino <silent> <home> <C-o>g<home>
-nn <silent> <End> g<End>
-ino <silent> <End> <C-o>g<End>
-nn <silent> $ g$
 
 " leave insert mode with C-d
 ino <C-d> <esc>
@@ -423,14 +418,15 @@ else
   nn <C-a> <C-w>
 endif
 
-" <home> goes to the beginning of the text on first press and to the
+" <Home> goes to the beginning of the text on first press and to the
 " beginning of the line on second press. It alternates afterwards.
-nn <expr> <home> virtcol('.') - 1 <= indent('.') && col('.') > 1 ? '0' : '_'
-ino <expr> <home> virtcol('.') - 1 <= indent('.') && col('.') > 1 ? '<c-o>0' : '<c-o>_'
-" <end> goes to the end of the text on first press and to the end of the line
-" on second press.
-nn <expr> <end> virtcol('.') <= virtcol('$')-1 ? 'g_' : winwidth(0)-1.'\|'
-ino <expr> <end> virtcol('.') <= virtcol('$')-1 ? '<c-o>g_' : '<c-o>'.winwidth(0)-1.'\|'
+" In case there is a wrapped multi line, it should jump to the beginning of
+" the wrapped line.
+nn <expr> <Home> indent('.') == 0 ? 'g<Home>' : virtcol('.') - 1 <= indent('.') && col('.') > 1 ? '0' : '_'
+ino <expr> <Home> indent('.') == 0 ? '<c-o>g<Home>' : virtcol('.') - 1 <= indent('.') && col('.') > 1 ? '<c-o>0' : '<c-o>_'
+"nn <silent> <End> g<End>
+"ino <silent> <End> <C-o>g<End>
+nn <silent> $ g$
 
 " use tab to forward and backward cycle in tab completion
 ino <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
@@ -459,6 +455,9 @@ require("bufferline").setup{
     tab_size = 8,
     show_buffer_close_icons = false,
     show_close_icon = false,
+    show_duplicate_prefix = false,
+    separator_style = "slant",
+    indicator = { style = 'underline' },
   }
 }
 EOF
@@ -525,7 +524,7 @@ let g:vimtex_compiler_latexmk = {
 "}}}
 " markdown config {{{
 
-let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_folding_disabled = 0
 let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_conceal = 0
 
