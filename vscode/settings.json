@@ -50,8 +50,14 @@
     "cSpell.userWords": [
         "boto",
         "Chakra",
+        "enduml",
         "Fantasque",
-        "Gruvbox"
+        "Gruvbox",
+        "plantuml",
+        "plantumlcode",
+        "simplejson",
+        "startuml",
+        "tftpl"
     ],
     "files.trimTrailingWhitespace": true,
     "files.trimFinalNewlines": true,
@@ -105,5 +111,8 @@
     "files.associations": {
         "*.tftpl": "terraform",
         "*.hcl": "terraform"
-    }
+    },
+    "editor.linkedEditing": true,
+    "plantuml.server": "http://127.0.0.1:8080",
+    "plantuml.render": "PlantUMLServer"
 }
