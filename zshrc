@@ -74,7 +74,7 @@ ZSH_HIGHLIGHT_STYLES[path_approx]='fg=208,underline'
 ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=208'
 
 # Colortheme from https://github.com/seebi/dircolors-solarized
-eval `dircolors ~/bin/dircolors.ansi-light`
+#eval `dircolors ~/bin/dircolors.ansi-light`
 
 # weird & wacky pattern matching...
 setopt extendedglob
@@ -112,15 +112,15 @@ alias p='sudo pacman'
 alias y='yaourt'
 
 # Requires 32 bit glibc to be installed. In arch: lib32-glibc
-function cp() {
-  command $HOME/bin/hidden/cp -B "$@"
-}
-function mv() {
-  command $HOME/bin/hidden/mv -B "$@"
-}
-function rm() {
-  command $HOME/bin/hidden/rm -B "$@"
-}
+#function cp() {
+#  command $HOME/bin/hidden/cp -B "$@"
+#}
+#function mv() {
+#  command $HOME/bin/hidden/mv -B "$@"
+#}
+#function rm() {
+#  command $HOME/bin/hidden/rm -B "$@"
+#}
 
 function st() {
   startx >/tmp/startx.log 2>&1
@@ -210,7 +210,7 @@ function man() {
   command man "$@"
 }
 # }}}
-# Perseus {{{
+# Work Laptop {{{
 if [[ "$OSTYPE" == "darwin"* ]]; then
   export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
   export PATH="/usr/local/opt/node@10/bin:$PATH"
@@ -220,4 +220,17 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   # On iterm2 we have to unset LANG because it is set automatically but it breaks our character display
   unset LANG
 fi
+
+function vpn_start() {
+  command openvpn3 session-start --config ~/bin/client.ovpn
+}
+function vpn_stop() {
+  command openvpn3 session-manage --disconnect --config ~/bin/client.ovpn
+}
+function vpn_list() {
+  command openvpn3 sessions-list
+}
+
+export AWS_SDK_LOAD_CONFIG=1
+export AWS_PROFILE=liara-user-prd
 # }}}
